@@ -322,12 +322,12 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT AA.id AS AccountID, AA.name AS AccountName," +
+                        String query = "SELECT AA.id AS AccountID, AA.name AS AccountName, AA.name_2 AS AccountNameArabic," +
                             " SUM(AE.debit) as TotalDebit,SUM(AE.credit) as TotalCredit, SUM(AE.debit)-SUM(AE.credit) AS ClosingBalance" +
                             " FROM acc_entries AE" +
                             " LEFT JOIN acc_accounts AS AA  ON AE.account_id = AA.id" +
                             " WHERE entry_date BETWEEN @from_date AND @to_date"+
-                            " AND AE.branch_id=@branch_id GROUP BY AA.name, AA.id";
+                            " AND AE.branch_id=@branch_id GROUP BY AA.name, AA.name_2, AA.id";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@from_date", from_date);

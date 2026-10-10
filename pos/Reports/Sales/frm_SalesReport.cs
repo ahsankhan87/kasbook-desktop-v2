@@ -32,7 +32,40 @@ namespace pos
         private UserIdentity _currentUser = AppSecurityContext.User;
 
         ProductBLL productsBLL_obj = new ProductBLL();
-                
+
+        // Helper method to map combo box display values to English equivalents
+        private string MapComboDisplayToEnglish(string displayValue, bool isSaleTypeOrAccount)
+        {
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
+            if (!isArabic)
+                return displayValue;
+
+            // Map Arabic values back to English
+            if (isSaleTypeOrAccount)
+            {
+                // For Sale Type combo - Arabic resource values
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "نقداً")
+                    return "Cash";
+                else if (displayValue == "آجل")
+                    return "Credit";
+            }
+            else
+            {
+                // For Sale Account combo - Arabic resource values
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "مبيعات")
+                    return "Sale";
+                else if (displayValue == "استرجاع")
+                    return "Return";
+            }
+
+            return displayValue;
+        }
+
         public frm_SalesReport()
         {
             InitializeComponent();
@@ -93,7 +126,7 @@ namespace pos
             DataTable employees = employeeBLL.GetAll();
             DataRow emptyRow = employees.NewRow();
             emptyRow[0] = 0;              // Set Column Value
-            emptyRow[2] = "All Employee";              // Set Column Value
+            emptyRow[2] = UiMessages.T("All Employee", "جميع الموظفين");              // Set Column Value
             employees.Rows.InsertAt(emptyRow, 0);
 
             cmb_employees.DisplayMember = "first_name";
@@ -110,7 +143,7 @@ namespace pos
             DataTable users = usersBLL.GetAll();
             DataRow emptyRow = users.NewRow();
             emptyRow["id"] = 0;              // Set Column Value (id)
-            emptyRow["name"] = "All Users";    // Set Column Value (name)
+            emptyRow["name"] = UiMessages.T("All Users", "جميع المستخدمين");    // Set Column Value (name)
             users.Rows.InsertAt(emptyRow, 0);
 
             cmb_users.DisplayMember = "name";
@@ -147,9 +180,9 @@ namespace pos
                     DateTime to_date = txt_to_date.Value.Date;
                     int customer_id = _selectedCustomerId;
                     string product_code = _product_code;
-                    string sale_type = cmb_sale_type.SelectedItem.ToString();
+                    string sale_type = MapComboDisplayToEnglish(cmb_sale_type.SelectedItem.ToString(), true);
                     int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
-                    string sale_account = cmb_sale_account.SelectedItem.ToString();
+                    string sale_account = MapComboDisplayToEnglish(cmb_sale_account.SelectedItem.ToString(), false);
                     int branch_id = UsersModal.logged_in_branch_id;
                     bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
                     int user_id = Convert.ToInt16(cmb_users.SelectedValue);         
@@ -247,7 +280,7 @@ namespace pos
                     {
                         DataRow newRow = sales_report_dt.NewRow();
                         // Use named columns instead of ordinal indices for clarity and maintainability
-                        newRow["product_name"] = "Total";
+                        newRow["product_name"] = UiMessages.T("Total", "الإجمالي");
                         newRow["quantity_sold"] = _quantity_sold_total;
                         newRow["unit_price"] = _unit_price_total;
                         newRow["discount_value"] = _discount_value_total;

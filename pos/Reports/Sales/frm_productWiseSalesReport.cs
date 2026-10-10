@@ -18,15 +18,48 @@ namespace pos
     {
         public int _product_id = 0;
         public string _product_name;
-        
+
         ProductBLL productsBLL_obj = new ProductBLL();
-                
+
+        // Helper method to map combo box display values to English equivalents
+        private string MapComboDisplayToEnglish(string displayValue, bool isSaleTypeOrAccount)
+        {
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
+            if (!isArabic)
+                return displayValue;
+
+            // Map Arabic values back to English
+            if (isSaleTypeOrAccount)
+            {
+                // For Sale Type combo
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "نقداً")
+                    return "Cash";
+                else if (displayValue == "آجل")
+                    return "Credit";
+            }
+            else
+            {
+                // For Sale Account combo
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "مبيعات")
+                    return "Sale";
+                else if (displayValue == "استرجاع")
+                    return "Return";
+            }
+
+            return displayValue;
+        }
+
         public frm_productWiseSalesReport()
         {
             InitializeComponent();
-            
+
             //get_products_dropdownlist();
-            
+
         }
 
         private void productWiseSalesReport_Load(object sender, EventArgs e)
@@ -70,14 +103,14 @@ namespace pos
         {
             try
             {
-                
+
                 string from_date = txt_from_date.Value.Date.ToString("yyyy-MM-dd");
                 string to_date = txt_to_date.Value.Date.ToString("yyyy-MM-dd"); ;
                 int customer_id = Convert.ToInt16(cmb_customers.SelectedValue);
                 string product_code = ""; //Convert.ToInt16(cmb_products.SelectedValue);
-                string sale_type = cmb_sale_type.SelectedItem.ToString();
+                string sale_type = MapComboDisplayToEnglish(cmb_sale_type.SelectedItem.ToString(), true);
                 int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
-                string sale_account = cmb_sale_account.SelectedItem.ToString();
+                string sale_account = MapComboDisplayToEnglish(cmb_sale_account.SelectedItem.ToString(), false);
                 int branch_id = UsersModal.logged_in_branch_id;
 
                 SalesReportBLL sale_report_obj = new SalesReportBLL();
@@ -102,7 +135,7 @@ namespace pos
                 }
 
                 DataRow newRow = accounts_dt.NewRow();
-                newRow[1] = "Total";
+                newRow[1] = UiMessages.T("Total", "الإجمالي");
                 //newRow[4] = _quantity_sold_total;
                 //newRow[5] = _unit_price_total;
                 //newRow[6] = _discount_value_total;
@@ -116,7 +149,7 @@ namespace pos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error");
-                
+
             }
         }
         private void CustomizeDataGridView()

@@ -67,7 +67,7 @@ namespace pos.Reports.Financial
         /// </summary>
         protected virtual void DisplayEntityInfo()
         {
-            lblEntityInfo.Text = "Select an entity to display information";
+            lblEntityInfo.Text = UiMessages.T("Select an entity to display information", "اختر كيان لعرض المعلومات");
         }
 
         /// <summary>
@@ -90,13 +90,13 @@ namespace pos.Reports.Financial
             dgvLedger.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvLedger.AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue;
 
-            AddGridColumn("Date", "transaction_date", DataGridViewContentAlignment.MiddleCenter, 80);
-            AddGridColumn("Type", "transaction_type", DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Reference", "reference_no", DataGridViewContentAlignment.MiddleLeft, 100);
-            AddGridColumn("Description", "description", DataGridViewContentAlignment.MiddleLeft, 150);
-            AddGridColumn("Amount", "amount", DataGridViewContentAlignment.MiddleRight, 80);
-            AddGridColumn("Balance", "running_balance", DataGridViewContentAlignment.MiddleRight, 100);
-            AddGridColumn("Status", "invoice_status", DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Date", "التاريخ"), "transaction_date", DataGridViewContentAlignment.MiddleCenter, 80);
+            AddGridColumn(UiMessages.T("Type", "النوع"), "transaction_type", DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Reference", "المرجع"), "reference_no", DataGridViewContentAlignment.MiddleLeft, 100);
+            AddGridColumn(UiMessages.T("Description", "الوصف"), "description", DataGridViewContentAlignment.MiddleLeft, 150);
+            AddGridColumn(UiMessages.T("Amount", "المبلغ"), "amount", DataGridViewContentAlignment.MiddleRight, 80);
+            AddGridColumn(UiMessages.T("Balance", "الرصيد"), "running_balance", DataGridViewContentAlignment.MiddleRight, 100);
+            AddGridColumn(UiMessages.T("Status", "الحالة"), "invoice_status", DataGridViewContentAlignment.MiddleCenter, 80);
         }
 
         /// <summary>
@@ -133,25 +133,32 @@ namespace pos.Reports.Financial
         {
             if (_selectedEntityId == 0)
             {
-                UiMessages.ShowWarning("Please select an entity", "Please select an entity to view ledger");
+                UiMessages.ShowWarning(
+                    UiMessages.T("Please select an entity", "يرجى اختيار كيان"), 
+                    UiMessages.T("Please select an entity to view ledger", "يرجى اختيار كيان لعرض دفتر الأستاذ"));
                 return;
             }
 
             try
             {
-                using (BusyScope.Show(this, "Loading ledger data..."))
+                using (BusyScope.Show(this, UiMessages.T("Loading ledger data...", "جاري تحميل البيانات...")))
                 {
                     _ledgerData = GetLedgerData();
                     _agingData = GetAgingData();
 
                     if (_ledgerData != null && _ledgerData.Rows.Count > 0)
                     {
+                        // Map entity name to Arabic if in ar-SA mode
+                        ApplyEntityNameMapping(_ledgerData);
+
                         dgvLedger.DataSource = _ledgerData;
                         UpdateAgingPanel();
                     }
                     else
                     {
-                        UiMessages.ShowInfo("No data", "No transactions found for the selected period");
+                        UiMessages.ShowInfo(
+                            UiMessages.T("No data", "لا توجد بيانات"), 
+                            UiMessages.T("No transactions found for the selected period", "لم يتم العثور على معاملات للفترة المختارة"));
                         dgvLedger.DataSource = null;
                         ResetAgingPanel();
                     }
@@ -159,7 +166,44 @@ namespace pos.Reports.Financial
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Error loading ledger", ex.Message);
+                UiMessages.ShowError(
+                    UiMessages.T("Error loading ledger", "خطأ في تحميل دفتر الأستاذ"), 
+                    ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Apply entity name mapping (name_2) for ar-SA layout - override in derived classes if needed
+        /// </summary>
+        protected virtual void ApplyEntityNameMapping(DataTable ledgerData)
+        {
+            // Default implementation: only applies if data has entity name columns
+            // Derived classes can override to implement specific mapping logic
+            if (POS.Core.UsersModal.logged_in_lang != "ar-SA" || ledgerData == null)
+            {
+                return;
+            }
+
+            // Check if entity name columns exist (to be populated by derived classes)
+            if (!ledgerData.Columns.Contains("entity_name") && 
+                !ledgerData.Columns.Contains("entity_name_ar"))
+            {
+                return;
+            }
+
+            // Map entity names to Arabic if in ar-SA mode
+            foreach (DataRow row in ledgerData.Rows)
+            {
+                // Try to use entity_name_ar column if it exists
+                if (ledgerData.Columns.Contains("entity_name_ar"))
+                {
+                    object nameArObj = row["entity_name_ar"];
+                    string nameAr = nameArObj == null || nameArObj == DBNull.Value ? string.Empty : Convert.ToString(nameArObj).Trim();
+                    if (!string.IsNullOrWhiteSpace(nameAr) && ledgerData.Columns.Contains("entity_name"))
+                    {
+                        row["entity_name"] = nameAr;
+                    }
+                }
             }
         }
 
@@ -204,10 +248,10 @@ namespace pos.Reports.Financial
                 decimal bucket61_90 = row["bucket_61_90"] != DBNull.Value ? Convert.ToDecimal(row["bucket_61_90"]) : 0;
                 decimal bucket90Plus = row["bucket_90_plus"] != DBNull.Value ? Convert.ToDecimal(row["bucket_90_plus"]) : 0;
 
-                lbl0_30.Text = $"0-30: {bucket0_30:N2}";
-                lbl31_60.Text = $"31-60: {bucket31_60:N2}";
-                lbl61_90.Text = $"61-90: {bucket61_90:N2}";
-                lbl90Plus.Text = $"90+: {bucket90Plus:N2}";
+                lbl0_30.Text = UiMessages.T($"0-30: {bucket0_30:N2}", $"0-30: {bucket0_30:N2}");
+                lbl31_60.Text = UiMessages.T($"31-60: {bucket31_60:N2}", $"31-60: {bucket31_60:N2}");
+                lbl61_90.Text = UiMessages.T($"61-90: {bucket61_90:N2}", $"61-90: {bucket61_90:N2}");
+                lbl90Plus.Text = UiMessages.T($"90+: {bucket90Plus:N2}", $"90+: {bucket90Plus:N2}");
             }
             else
             {
@@ -220,10 +264,10 @@ namespace pos.Reports.Financial
         /// </summary>
         protected virtual void ResetAgingPanel()
         {
-            lbl0_30.Text = "0-30: 0";
-            lbl31_60.Text = "31-60: 0";
-            lbl61_90.Text = "61-90: 0";
-            lbl90Plus.Text = "90+: 0";
+            lbl0_30.Text = UiMessages.T("0-30: 0", "0-30: 0");
+            lbl31_60.Text = UiMessages.T("31-60: 0", "31-60: 0");
+            lbl61_90.Text = UiMessages.T("61-90: 0", "61-90: 0");
+            lbl90Plus.Text = UiMessages.T("90+: 0", "90+: 0");
         }
 
         /// <summary>
@@ -233,7 +277,9 @@ namespace pos.Reports.Financial
         {
             if (dgvLedger.Rows.Count == 0)
             {
-                UiMessages.ShowWarning("No data to print", "Please load data first");
+                UiMessages.ShowWarning(
+                    UiMessages.T("No data to print", "لا توجد بيانات للطباعة"), 
+                    UiMessages.T("Please load data first", "يرجى تحميل البيانات أولاً"));
                 return;
             }
 
@@ -247,7 +293,9 @@ namespace pos.Reports.Financial
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Print error", ex.Message);
+                UiMessages.ShowError(
+                    UiMessages.T("Print error", "خطأ في الطباعة"), 
+                    ex.Message);
             }
         }
 
@@ -274,7 +322,9 @@ namespace pos.Reports.Financial
         {
             if (dgvLedger.Rows.Count == 0)
             {
-                UiMessages.ShowWarning("No data to export", "Please load data first");
+                UiMessages.ShowWarning(
+                    UiMessages.T("No data to export", "لا توجد بيانات للتصدير"), 
+                    UiMessages.T("Please load data first", "يرجى تحميل البيانات أولاً"));
                 return;
             }
 
@@ -282,7 +332,7 @@ namespace pos.Reports.Financial
             {
                 SaveFileDialog sfd = new SaveFileDialog
                 {
-                    Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv",
+                    Filter = UiMessages.T("Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv", "ملفات Excel (*.xlsx)|*.xlsx|ملفات CSV (*.csv)|*.csv"),
                     FileName = $"SubLedger_{DateTime.Now:yyyyMMdd_HHmmss}"
                 };
 
@@ -296,12 +346,16 @@ namespace pos.Reports.Financial
                     {
                         ExportToCsv(sfd.FileName);
                     }
-                    UiMessages.ShowInfo("Success", "Data exported successfully");
+                    UiMessages.ShowInfo(
+                        UiMessages.T("Success", "نجح"), 
+                        UiMessages.T("Data exported successfully", "تم تصدير البيانات بنجاح"));
                 }
             }
             catch (Exception ex)
             {
-                UiMessages.ShowError("Export error", ex.Message);
+                UiMessages.ShowError(
+                    UiMessages.T("Export error", "خطأ في التصدير"), 
+                    ex.Message);
             }
         }
 
@@ -347,7 +401,9 @@ namespace pos.Reports.Financial
         /// </summary>
         protected virtual void OnReceivePaymentClick()
         {
-            UiMessages.ShowInfo("Not implemented", "Payment functionality to be implemented in derived class");
+            UiMessages.ShowInfo(
+                UiMessages.T("Not implemented", "غير مُنفّذ"), 
+                UiMessages.T("Payment functionality to be implemented in derived class", "يجب تنفيذ وظيفة الدفع في الفئة المشتقة"));
         }
     }
 }

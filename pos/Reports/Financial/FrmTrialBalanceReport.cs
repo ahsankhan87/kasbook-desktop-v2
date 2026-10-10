@@ -61,9 +61,16 @@ namespace pos.Reports.Financial
             // Initialize date range combo
             cmbDateRange.Items.AddRange(new string[]
             {
-                "Custom", "Today", "This Week", "Last Week",
-                "This Month", "Last Month", "Last 3 Months", "Last 6 Months",
-                "This Year", "Year to Date (YTD)"
+                UiMessages.T("Custom", "مخصص"), 
+                UiMessages.T("Today", "اليوم"), 
+                UiMessages.T("This Week", "هذا الأسبوع"), 
+                UiMessages.T("Last Week", "الأسبوع الماضي"),
+                UiMessages.T("This Month", "هذا الشهر"), 
+                UiMessages.T("Last Month", "الشهر الماضي"), 
+                UiMessages.T("Last 3 Months", "آخر 3 أشهر"), 
+                UiMessages.T("Last 6 Months", "آخر 6 أشهر"),
+                UiMessages.T("This Year", "هذا العام"), 
+                UiMessages.T("Year to Date (YTD)", "من بداية السنة إلى الآن")
             });
             cmbDateRange.SelectedIndex = 4; // This Month
 
@@ -106,75 +113,84 @@ namespace pos.Reports.Financial
             DateTime today = DateTime.Today;
             DateTime startDate = today;
             DateTime endDate = today;
+            string selected = cmbDateRange.SelectedItem?.ToString() ?? "Custom";
 
-            switch (cmbDateRange.SelectedItem?.ToString() ?? "Custom")
+            // Support both English and Arabic values
+            if (selected == UiMessages.T("Custom", "مخصص") || selected == "Custom")
             {
-                case "Custom":
-                    pnlDatePickers.Visible = true;
-                    return;
-
-                case "Today":
-                    startDate = endDate = today;
-                    break;
-
-                case "This Week":
-                    startDate = today.AddDays(-(int)today.DayOfWeek);
-                    endDate = startDate.AddDays(6);
-                    break;
-
-                case "Last Week":
-                    startDate = today.AddDays(-(int)today.DayOfWeek - 7);
-                    endDate = startDate.AddDays(6);
-                    break;
-
-                case "This Month":
-                    startDate = new DateTime(today.Year, today.Month, 1);
-                    endDate = startDate.AddMonths(1).AddDays(-1);
-                    break;
-
-                case "Last Month":
-                    startDate = new DateTime(today.Year, today.Month, 1).AddMonths(-1);
-                    endDate = startDate.AddMonths(1).AddDays(-1);
-                    break;
-
-                case "Last 3 Months":
-                    startDate = today.AddMonths(-3);
-                    endDate = today;
-                    break;
-
-                case "Last 6 Months":
-                    startDate = today.AddMonths(-6);
-                    endDate = today;
-                    break;
-
-                case "This Year":
-                    startDate = new DateTime(today.Year, 1, 1);
-                    endDate = new DateTime(today.Year, 12, 31);
-                    break;
-
-                case "Year to Date (YTD)":
-                    startDate = new DateTime(today.Year, 1, 1);
-                    endDate = today;
-                    break;
+                pnlDatePickers.Visible = true;
+                return;
+            }
+            else if (selected == UiMessages.T("Today", "اليوم") || selected == "Today")
+            {
+                startDate = endDate = today;
+            }
+            else if (selected == UiMessages.T("This Week", "هذا الأسبوع") || selected == "This Week")
+            {
+                startDate = today.AddDays(-(int)today.DayOfWeek);
+                endDate = startDate.AddDays(6);
+            }
+            else if (selected == UiMessages.T("Last Week", "الأسبوع الماضي") || selected == "Last Week")
+            {
+                startDate = today.AddDays(-(int)today.DayOfWeek - 7);
+                endDate = startDate.AddDays(6);
+            }
+            else if (selected == UiMessages.T("This Month", "هذا الشهر") || selected == "This Month")
+            {
+                startDate = new DateTime(today.Year, today.Month, 1);
+                endDate = startDate.AddMonths(1).AddDays(-1);
+            }
+            else if (selected == UiMessages.T("Last Month", "الشهر الماضي") || selected == "Last Month")
+            {
+                startDate = new DateTime(today.Year, today.Month, 1).AddMonths(-1);
+                endDate = startDate.AddMonths(1).AddDays(-1);
+            }
+            else if (selected == UiMessages.T("Last 3 Months", "آخر 3 أشهر") || selected == "Last 3 Months")
+            {
+                startDate = today.AddMonths(-3);
+                endDate = today;
+            }
+            else if (selected == UiMessages.T("Last 6 Months", "آخر 6 أشهر") || selected == "Last 6 Months")
+            {
+                startDate = today.AddMonths(-6);
+                endDate = today;
+            }
+            else if (selected == UiMessages.T("This Year", "هذا العام") || selected == "This Year")
+            {
+                startDate = new DateTime(today.Year, 1, 1);
+                endDate = new DateTime(today.Year, 12, 31);
+            }
+            else if (selected == UiMessages.T("Year to Date (YTD)", "من بداية السنة إلى الآن") || selected == "Year to Date (YTD)")
+            {
+                startDate = new DateTime(today.Year, 1, 1);
+                endDate = today;
+            }
+            else
+            {
+                // Default to This Month
+                startDate = new DateTime(today.Year, today.Month, 1);
+                endDate = startDate.AddMonths(1).AddDays(-1);
             }
 
             dtpFromDate.Value = startDate;
             dtpToDate.Value = endDate;
-            pnlDatePickers.Visible = (cmbDateRange.SelectedItem?.ToString() ?? "") == "Custom";
+            pnlDatePickers.Visible = (selected == UiMessages.T("Custom", "مخصص") || selected == "Custom");
         }
 
         private void LoadReport()
         {
             try
             {
-                using (BusyScope.Show(this, "Loading Trial Balance Report..."))
+                using (BusyScope.Show(this, UiMessages.T("Loading Trial Balance Report...", "جاري تحميل تقرير ميزان المراجعة...")))
                 {
                     DateTime fromDate = dtpFromDate.Value.Date;
                     DateTime toDate = dtpToDate.Value.Date;
 
                     if (fromDate > toDate)
                     {
-                        UiMessages.ShowWarning("Invalid Date Range", "From date cannot be after To date");
+                        UiMessages.ShowWarning(
+                            UiMessages.T("Invalid Date Range", "نطاق تاريخ غير صحيح"), 
+                            UiMessages.T("From date cannot be after To date", "لا يمكن أن يكون تاريخ البداية بعد تاريخ النهاية"));
                         return;
                     }
 
@@ -183,9 +199,25 @@ namespace pos.Reports.Financial
 
                     if (_reportData == null || _reportData.Rows.Count == 0)
                     {
-                        UiMessages.ShowInfo("No Data", "No trial balance data found for the selected period");
+                        UiMessages.ShowInfo(
+                            UiMessages.T("No Data", "لا توجد بيانات"), 
+                            UiMessages.T("No trial balance data found for the selected period", "لم يتم العثور على بيانات ميزان مراجعة للفترة المختارة"));
                         dgvReport.DataSource = null;
                         return;
+                    }
+
+                    // Replace account names with Arabic names if in ar-SA mode
+                    if (POS.Core.UsersModal.logged_in_lang == "ar-SA")
+                    {
+                        foreach (DataRow row in _reportData.Rows)
+                        {
+                            object nameArabicObj = row["AccountNameArabic"];
+                            string nameArabic = nameArabicObj == null || nameArabicObj == DBNull.Value ? string.Empty : Convert.ToString(nameArabicObj).Trim();
+                            if (!string.IsNullOrWhiteSpace(nameArabic))
+                            {
+                                row["AccountName"] = nameArabic;
+                            }
+                        }
                     }
 
                     // Add totals row
@@ -224,7 +256,7 @@ namespace pos.Reports.Financial
             }
 
             DataRow totalsRow = dataTable.NewRow();
-            totalsRow["AccountName"] = "═══ TOTALS ═══";
+            totalsRow["AccountName"] = UiMessages.T("═══ TOTALS ═══", "═══ الإجمالي ═══");
             totalsRow["TotalDebit"] = totalDebit;
             totalsRow["TotalCredit"] = totalCredit;
             totalsRow["ClosingBalance"] = totalBalance;
@@ -241,14 +273,14 @@ namespace pos.Reports.Financial
             // Configure columns with AutoFit for content-based sizing
             if (dgvReport.Columns.Count > 0)
             {
-                dgvReport.Columns["AccountName"].HeaderText = "Account Name";
+                dgvReport.Columns["AccountName"].HeaderText = UiMessages.T("Account Name", "اسم الحساب");
                 dgvReport.Columns["AccountName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                 dgvReport.Columns["AccountName"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
                 dgvReport.Columns["AccountName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
                 if (dgvReport.Columns.Contains("TotalDebit"))
                 {
-                    dgvReport.Columns["TotalDebit"].HeaderText = "Debit";
+                    dgvReport.Columns["TotalDebit"].HeaderText = UiMessages.T("Debit", "مدين");
                     dgvReport.Columns["TotalDebit"].DefaultCellStyle.Format = "N2";
                     dgvReport.Columns["TotalDebit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dgvReport.Columns["TotalDebit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -256,7 +288,7 @@ namespace pos.Reports.Financial
 
                 if (dgvReport.Columns.Contains("TotalCredit"))
                 {
-                    dgvReport.Columns["TotalCredit"].HeaderText = "Credit";
+                    dgvReport.Columns["TotalCredit"].HeaderText = UiMessages.T("Credit", "دائن");
                     dgvReport.Columns["TotalCredit"].DefaultCellStyle.Format = "N2";
                     dgvReport.Columns["TotalCredit"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dgvReport.Columns["TotalCredit"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -264,16 +296,16 @@ namespace pos.Reports.Financial
 
                 if (dgvReport.Columns.Contains("ClosingBalance"))
                 {
-                    dgvReport.Columns["ClosingBalance"].HeaderText = "Balance";
+                    dgvReport.Columns["ClosingBalance"].HeaderText = UiMessages.T("Balance", "الرصيد");
                     dgvReport.Columns["ClosingBalance"].DefaultCellStyle.Format = "N2";
                     dgvReport.Columns["ClosingBalance"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                     dgvReport.Columns["ClosingBalance"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 }
 
-                // Hide ID columns
+                // Hide ID and Arabic name columns
                 foreach (DataGridViewColumn col in dgvReport.Columns)
                 {
-                    if (col.Name.Contains("ID") || col.Name.Contains("Code"))
+                    if (col.Name.Contains("ID") || col.Name.Contains("Code") || col.Name.Contains("Arabic"))
                         col.Visible = false;
                 }
             }
@@ -284,9 +316,11 @@ namespace pos.Reports.Financial
 
         private void FormatTotalsRow()
         {
+            string totalsText = UiMessages.T("═══ TOTALS ═══", "═══ الإجمالي ═══");
             foreach (DataGridViewRow row in dgvReport.Rows)
             {
-                if (row.Cells["AccountName"].Value?.ToString().Contains("TOTALS") == true)
+                if (row.Cells["AccountName"].Value?.ToString().Contains("TOTALS") == true || 
+                    row.Cells["AccountName"].Value?.ToString() == totalsText)
                 {
                     row.DefaultCellStyle.BackColor = Color.FromArgb(41, 128, 185);
                     row.DefaultCellStyle.ForeColor = Color.White;

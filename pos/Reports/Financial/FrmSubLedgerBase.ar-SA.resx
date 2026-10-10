@@ -118,6 +118,115 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>928, 15</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 32</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>دفتر الأستاذ المساعد</value>
+  </data>
+  <data name="btnLoad.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnLoad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="btnLoad.Text" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="lblToDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>558, 23</value>
+  </data>
+  <data name="lblToDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="lblToDate.Text" xml:space="preserve">
+    <value>إلى التاريخ:</value>
+  </data>
+  <data name="lblFromDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>786, 23</value>
+  </data>
+  <data name="lblFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="lblFromDate.Text" xml:space="preserve">
+    <value>من التاريخ:</value>
+  </data>
+  <data name="dtpToDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 20</value>
+  </data>
+  <data name="dtpFromDate.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>639, 20</value>
+  </data>
+  <data name="cmbEntity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbEntity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>864, 20</value>
+  </data>
+  <data name="lblEntity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblEntity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1096, 23</value>
+  </data>
+  <data name="lblEntity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="lblEntity.Text" xml:space="preserve">
+    <value>الكيان:</value>
+  </data>
+  <data name="lblEntityInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblEntityInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1050, 23</value>
+  </data>
+  <data name="lblEntityInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>91, 17</value>
+  </data>
+  <data name="lblEntityInfo.Text" xml:space="preserve">
+    <value>معلومات الكيان</value>
+  </data>
+  <data name="lblAging.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblAging.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1000, 18</value>
+  </data>
+  <data name="lblAging.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 23</value>
+  </data>
+  <data name="lblAging.Text" xml:space="preserve">
+    <value>تحليل العمر الزمني</value>
+  </data>
+  <data name="btnReceivePayment.Text" xml:space="preserve">
+    <value>استقبال الدفع</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
@@ -127,47 +236,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>دفتر الأستاذ المساعد</value>
-  </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>دفتر الأستاذ المساعد</value>
-  </data>
-  <data name="lblEntity.Text" xml:space="preserve">
-    <value>الكيان:</value>
-  </data>
-  <data name="lblFromDate.Text" xml:space="preserve">
-    <value>من التاريخ:</value>
-  </data>
-  <data name="lblToDate.Text" xml:space="preserve">
-    <value>إلى التاريخ:</value>
-  </data>
-  <data name="btnLoad.Text" xml:space="preserve">
-    <value>تحميل</value>
-  </data>
-  <data name="lblEntityInfo.Text" xml:space="preserve">
-    <value>معلومات الكيان</value>
-  </data>
-  <data name="lblAging.Text" xml:space="preserve">
-    <value>تحليل العمر الزمني</value>
-  </data>
-  <data name="lbl0_30.Text" xml:space="preserve">
-    <value>0-30: 0</value>
-  </data>
-  <data name="lbl31_60.Text" xml:space="preserve">
-    <value>31-60: 0</value>
-  </data>
-  <data name="lbl61_90.Text" xml:space="preserve">
-    <value>61-90: 0</value>
-  </data>
-  <data name="lbl90Plus.Text" xml:space="preserve">
-    <value>90+: 0</value>
-  </data>
-  <data name="btnPrint.Text" xml:space="preserve">
-    <value>طباعة</value>
-  </data>
-  <data name="btnExport.Text" xml:space="preserve">
-    <value>تصدير</value>
-  </data>
-  <data name="btnReceivePayment.Text" xml:space="preserve">
-    <value>استقبال الدفع</value>
   </data>
 </root>

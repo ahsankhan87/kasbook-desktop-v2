@@ -130,7 +130,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>472, 28</value>
+    <value>413, 28</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 28</value>
@@ -160,7 +160,7 @@
     <value>Segoe UI, 12pt, style=Bold</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>444, 4</value>
+    <value>388, 4</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 28</value>
@@ -190,13 +190,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>900, 6</value>
+    <value>788, 6</value>
   </data>
   <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="btn_refresh.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -220,13 +220,13 @@
     <value>Top, Right</value>
   </data>
   <data name="btn_print.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1004, 6</value>
+    <value>878, 6</value>
   </data>
   <data name="btn_print.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
   <data name="btn_print.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 27</value>
+    <value>88, 27</value>
   </data>
   <data name="btn_print.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -256,7 +256,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1115, 60</value>
+    <value>976, 60</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -271,7 +271,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="id.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -313,7 +313,7 @@
     <value>6</value>
   </data>
   <data name="invoice_no.Width" type="System.Int32, mscorlib">
-    <value>107</value>
+    <value>106</value>
   </data>
   <metadata name="customer_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -337,7 +337,7 @@
     <value>6</value>
   </data>
   <data name="product_code.Width" type="System.Int32, mscorlib">
-    <value>123</value>
+    <value>112</value>
   </data>
   <metadata name="product_name.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -370,7 +370,7 @@
     <value>6</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>101</value>
+    <value>87</value>
   </data>
   <metadata name="discount_value.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -382,7 +382,7 @@
     <value>6</value>
   </data>
   <data name="discount_value.Width" type="System.Int32, mscorlib">
-    <value>92</value>
+    <value>91</value>
   </data>
   <metadata name="vat.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -394,7 +394,7 @@
     <value>6</value>
   </data>
   <data name="vat.Width" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>61</value>
   </data>
   <metadata name="total.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -406,7 +406,7 @@
     <value>6</value>
   </data>
   <data name="total.Width" type="System.Int32, mscorlib">
-    <value>69</value>
+    <value>67</value>
   </data>
   <metadata name="sale_date.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -433,7 +433,7 @@
     <value>51</value>
   </data>
   <data name="grid_sales_report.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1115, 539</value>
+    <value>976, 539</value>
   </data>
   <data name="grid_sales_report.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -460,7 +460,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1115, 539</value>
+    <value>976, 539</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -475,16 +475,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>7, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1115, 599</value>
+    <value>976, 599</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -494,12 +494,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Daily Sales Report</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;id.Name" xml:space="preserve">
     <value>id</value>
@@ -512,6 +506,12 @@
   </data>
   <data name="&gt;&gt;invoice_no.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;copyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customer_name.Name" xml:space="preserve">
     <value>customer_name</value>

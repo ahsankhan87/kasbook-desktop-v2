@@ -20,5 +20,18 @@ namespace pos.Reports.Sales
             // Placeholder: if you have a returns table, query by date range via DLL. For now, return return sales items for one invoice is supported; we need DLL support for range.
             return new DataTable();
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frm_ReturnsRefundsReport
+            // 
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "frm_ReturnsRefundsReport";
+            this.Controls.SetChildIndex(this.Grid, 0);
+            this.ResumeLayout(false);
+
+        }
     }
 }

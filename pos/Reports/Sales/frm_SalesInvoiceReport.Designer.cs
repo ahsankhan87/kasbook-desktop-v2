@@ -28,14 +28,15 @@ namespace pos.Reports.Sales
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_SalesInvoiceReport));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmb_payment_method = new System.Windows.Forms.ComboBox();
             this.cmb_users = new System.Windows.Forms.ComboBox();
@@ -85,6 +86,7 @@ namespace pos.Reports.Sales
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.cmb_payment_method);
             this.panel1.Controls.Add(this.cmb_users);
             this.panel1.Controls.Add(this.label10);
@@ -110,310 +112,177 @@ namespace pos.Reports.Sales
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1517, 148);
-            this.panel1.TabIndex = 0;
             // 
             // cmb_payment_method
             // 
+            resources.ApplyResources(this.cmb_payment_method, "cmb_payment_method");
             this.cmb_payment_method.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_payment_method.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_payment_method.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_payment_method.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.cmb_payment_method.FormattingEnabled = true;
-            this.cmb_payment_method.Location = new System.Drawing.Point(135, 106);
-            this.cmb_payment_method.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_payment_method.Name = "cmb_payment_method";
-            this.cmb_payment_method.Size = new System.Drawing.Size(209, 28);
-            this.cmb_payment_method.TabIndex = 55;
             // 
             // cmb_users
             // 
+            resources.ApplyResources(this.cmb_users, "cmb_users");
             this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_users.FormattingEnabled = true;
-            this.cmb_users.Location = new System.Drawing.Point(761, 74);
-            this.cmb_users.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_users.Name = "cmb_users";
-            this.cmb_users.Size = new System.Drawing.Size(209, 24);
-            this.cmb_users.TabIndex = 53;
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label10.Location = new System.Drawing.Point(676, 81);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label10, "label10");
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 17);
-            this.label10.TabIndex = 54;
-            this.label10.Text = "Users:";
             // 
             // txt_search
             // 
-            this.txt_search.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_search.Location = new System.Drawing.Point(761, 42);
-            this.txt_search.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txt_search, "txt_search");
             this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(209, 29);
-            this.txt_search.TabIndex = 50;
             // 
             // chk_ShowZatcaInvoice
             // 
-            this.chk_ShowZatcaInvoice.AutoSize = true;
-            this.chk_ShowZatcaInvoice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_ShowZatcaInvoice.Location = new System.Drawing.Point(761, 109);
-            this.chk_ShowZatcaInvoice.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chk_ShowZatcaInvoice, "chk_ShowZatcaInvoice");
             this.chk_ShowZatcaInvoice.Name = "chk_ShowZatcaInvoice";
-            this.chk_ShowZatcaInvoice.Size = new System.Drawing.Size(107, 24);
-            this.chk_ShowZatcaInvoice.TabIndex = 49;
-            this.chk_ShowZatcaInvoice.Text = "Skip ZATCA";
             this.chk_ShowZatcaInvoice.UseVisualStyleBackColor = true;
             // 
             // txtCustomerSearch
             // 
-            this.txtCustomerSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerSearch.Location = new System.Drawing.Point(455, 10);
-            this.txtCustomerSearch.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txtCustomerSearch, "txtCustomerSearch");
             this.txtCustomerSearch.Name = "txtCustomerSearch";
-            this.txtCustomerSearch.Size = new System.Drawing.Size(209, 29);
-            this.txtCustomerSearch.TabIndex = 48;
             this.txtCustomerSearch.TextChanged += new System.EventHandler(this.txtCustomerSearch_TextChanged_1);
             // 
             // CmbCondition
             // 
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CmbCondition.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CmbCondition.FormattingEnabled = true;
-            this.CmbCondition.Location = new System.Drawing.Point(135, 10);
-            this.CmbCondition.Margin = new System.Windows.Forms.Padding(4);
             this.CmbCondition.Name = "CmbCondition";
-            this.CmbCondition.Size = new System.Drawing.Size(209, 29);
-            this.CmbCondition.TabIndex = 47;
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(675, 48);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(56, 20);
-            this.label9.TabIndex = 46;
-            this.label9.Text = "Search:";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(675, 15);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(78, 20);
-            this.label7.TabIndex = 46;
-            this.label7.Text = "Employee:";
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_employees.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_employees.FormattingEnabled = true;
-            this.cmb_employees.Location = new System.Drawing.Point(761, 10);
-            this.cmb_employees.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_employees.Name = "cmb_employees";
-            this.cmb_employees.Size = new System.Drawing.Size(209, 29);
-            this.cmb_employees.TabIndex = 45;
             // 
             // btn_print
             // 
-            this.btn_print.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_print.Location = new System.Drawing.Point(993, 55);
-            this.btn_print.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btn_print, "btn_print");
             this.btn_print.Name = "btn_print";
-            this.btn_print.Size = new System.Drawing.Size(146, 34);
-            this.btn_print.TabIndex = 44;
-            this.btn_print.Text = "Print";
             this.btn_print.UseVisualStyleBackColor = true;
             this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
             // btn_export
             // 
-            this.btn_export.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_export.Location = new System.Drawing.Point(993, 98);
-            this.btn_export.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btn_export, "btn_export");
             this.btn_export.Name = "btn_export";
-            this.btn_export.Size = new System.Drawing.Size(146, 34);
-            this.btn_export.TabIndex = 43;
-            this.btn_export.Text = "Export";
             this.btn_export.UseVisualStyleBackColor = true;
             this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
             // 
             // btn_search
             // 
-            this.btn_search.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_search.Location = new System.Drawing.Point(993, 12);
-            this.btn_search.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btn_search, "btn_search");
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(146, 34);
-            this.btn_search.TabIndex = 42;
-            this.btn_search.Text = "Search (F3)";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // cmb_sale_account
             // 
+            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_sale_account.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_sale_account.FormattingEnabled = true;
             this.cmb_sale_account.Items.AddRange(new object[] {
-            "All",
-            "Sale",
-            "Return"});
-            this.cmb_sale_account.Location = new System.Drawing.Point(455, 74);
-            this.cmb_sale_account.Margin = new System.Windows.Forms.Padding(4);
+            resources.GetString("cmb_sale_account.Items"),
+            resources.GetString("cmb_sale_account.Items1"),
+            resources.GetString("cmb_sale_account.Items2")});
             this.cmb_sale_account.Name = "cmb_sale_account";
-            this.cmb_sale_account.Size = new System.Drawing.Size(209, 29);
-            this.cmb_sale_account.TabIndex = 41;
             // 
             // cmb_sale_type
             // 
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_sale_type.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmb_sale_type.FormattingEnabled = true;
             this.cmb_sale_type.Items.AddRange(new object[] {
-            "All",
-            "Cash",
-            "Credit"});
-            this.cmb_sale_type.Location = new System.Drawing.Point(455, 42);
-            this.cmb_sale_type.Margin = new System.Windows.Forms.Padding(4);
+            resources.GetString("cmb_sale_type.Items"),
+            resources.GetString("cmb_sale_type.Items1"),
+            resources.GetString("cmb_sale_type.Items2")});
             this.cmb_sale_type.Name = "cmb_sale_type";
-            this.cmb_sale_type.Size = new System.Drawing.Size(209, 29);
-            this.cmb_sale_type.TabIndex = 40;
             // 
             // txt_to_date
             // 
-            this.txt_to_date.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.txt_to_date, "txt_to_date");
             this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_to_date.Location = new System.Drawing.Point(135, 74);
-            this.txt_to_date.Margin = new System.Windows.Forms.Padding(4);
             this.txt_to_date.Name = "txt_to_date";
-            this.txt_to_date.Size = new System.Drawing.Size(209, 29);
-            this.txt_to_date.TabIndex = 39;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(13, 108);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 20);
-            this.label11.TabIndex = 38;
-            this.label11.Text = "Pay Method:";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(352, 77);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 20);
-            this.label6.TabIndex = 38;
-            this.label6.Text = "Account:";
             // 
             // txt_from_date
             // 
-            this.txt_from_date.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.txt_from_date, "txt_from_date");
             this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txt_from_date.Location = new System.Drawing.Point(135, 42);
-            this.txt_from_date.Margin = new System.Windows.Forms.Padding(4);
             this.txt_from_date.Name = "txt_from_date";
-            this.txt_from_date.Size = new System.Drawing.Size(209, 29);
-            this.txt_from_date.TabIndex = 37;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 76);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 20);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "To Date:";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(352, 47);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 20);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Sale Type:";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(13, 12);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label8, "label8");
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 20);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "Quick Condition:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(352, 17);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 20);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Customer:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 44);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 20);
-            this.label1.TabIndex = 32;
-            this.label1.Text = "From Date:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(766, 113);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 20);
-            this.label4.TabIndex = 31;
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Controls.Add(this.grid_sales_invoice_report);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 148);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1517, 652);
-            this.panel2.TabIndex = 1;
             // 
             // grid_sales_invoice_report
             // 
+            resources.ApplyResources(this.grid_sales_invoice_report, "grid_sales_invoice_report");
             this.grid_sales_invoice_report.AllowUserToAddRows = false;
             this.grid_sales_invoice_report.AllowUserToDeleteRows = false;
             this.grid_sales_invoice_report.AllowUserToOrderColumns = true;
@@ -434,23 +303,16 @@ namespace pos.Reports.Sales
             this.total,
             this.total_with_vat,
             this.profit});
-            this.grid_sales_invoice_report.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grid_sales_invoice_report.Location = new System.Drawing.Point(0, 0);
-            this.grid_sales_invoice_report.Margin = new System.Windows.Forms.Padding(4);
             this.grid_sales_invoice_report.Name = "grid_sales_invoice_report";
             this.grid_sales_invoice_report.ReadOnly = true;
-            this.grid_sales_invoice_report.RowHeadersWidth = 51;
             this.grid_sales_invoice_report.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_sales_invoice_report.Size = new System.Drawing.Size(1517, 652);
-            this.grid_sales_invoice_report.TabIndex = 0;
             this.grid_sales_invoice_report.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_sales_invoice_report_CellDoubleClick);
             // 
             // id
             // 
             this.id.DataPropertyName = "id";
             this.id.FillWeight = 30F;
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 6;
+            resources.ApplyResources(this.id, "id");
             this.id.Name = "id";
             this.id.ReadOnly = true;
             // 
@@ -458,8 +320,7 @@ namespace pos.Reports.Sales
             // 
             this.sale_date.DataPropertyName = "sale_date";
             this.sale_date.FillWeight = 70F;
-            this.sale_date.HeaderText = "Date";
-            this.sale_date.MinimumWidth = 6;
+            resources.ApplyResources(this.sale_date, "sale_date");
             this.sale_date.Name = "sale_date";
             this.sale_date.ReadOnly = true;
             // 
@@ -467,8 +328,7 @@ namespace pos.Reports.Sales
             // 
             this.invoice_no.DataPropertyName = "invoice_no";
             this.invoice_no.FillWeight = 90F;
-            this.invoice_no.HeaderText = "Invoice #";
-            this.invoice_no.MinimumWidth = 6;
+            resources.ApplyResources(this.invoice_no, "invoice_no");
             this.invoice_no.Name = "invoice_no";
             this.invoice_no.ReadOnly = true;
             // 
@@ -477,8 +337,7 @@ namespace pos.Reports.Sales
             this.customer_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.customer_name.DataPropertyName = "customer_name";
             this.customer_name.FillWeight = 150F;
-            this.customer_name.HeaderText = "Customer";
-            this.customer_name.MinimumWidth = 6;
+            resources.ApplyResources(this.customer_name, "customer_name");
             this.customer_name.Name = "customer_name";
             this.customer_name.ReadOnly = true;
             // 
@@ -486,8 +345,7 @@ namespace pos.Reports.Sales
             // 
             this.sale_type.DataPropertyName = "sale_type";
             this.sale_type.FillWeight = 50F;
-            this.sale_type.HeaderText = "Type";
-            this.sale_type.MinimumWidth = 6;
+            resources.ApplyResources(this.sale_type, "sale_type");
             this.sale_type.Name = "sale_type";
             this.sale_type.ReadOnly = true;
             // 
@@ -495,119 +353,107 @@ namespace pos.Reports.Sales
             // 
             this.payment_method.DataPropertyName = "payment_method";
             this.payment_method.FillWeight = 50F;
-            this.payment_method.HeaderText = "Method";
-            this.payment_method.MinimumWidth = 6;
+            resources.ApplyResources(this.payment_method, "payment_method");
             this.payment_method.Name = "payment_method";
             this.payment_method.ReadOnly = true;
             // 
             // total_items
             // 
             this.total_items.DataPropertyName = "total_items";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.total_items.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.total_items.DefaultCellStyle = dataGridViewCellStyle1;
             this.total_items.FillWeight = 50F;
-            this.total_items.HeaderText = "Items";
-            this.total_items.MinimumWidth = 6;
+            resources.ApplyResources(this.total_items, "total_items");
             this.total_items.Name = "total_items";
             this.total_items.ReadOnly = true;
             // 
             // cost_total
             // 
             this.cost_total.DataPropertyName = "cost_total";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.cost_total.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.cost_total.DefaultCellStyle = dataGridViewCellStyle2;
             this.cost_total.FillWeight = 70F;
-            this.cost_total.HeaderText = "Cost Total";
-            this.cost_total.MinimumWidth = 6;
+            resources.ApplyResources(this.cost_total, "cost_total");
             this.cost_total.Name = "cost_total";
             this.cost_total.ReadOnly = true;
             // 
             // subtotal
             // 
             this.subtotal.DataPropertyName = "subtotal";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N2";
-            this.subtotal.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            this.subtotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.subtotal.FillWeight = 80F;
-            this.subtotal.HeaderText = "Subtotal";
-            this.subtotal.MinimumWidth = 6;
+            resources.ApplyResources(this.subtotal, "subtotal");
             this.subtotal.Name = "subtotal";
             this.subtotal.ReadOnly = true;
             // 
             // discount_value
             // 
             this.discount_value.DataPropertyName = "discount_value";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N2";
-            this.discount_value.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            this.discount_value.DefaultCellStyle = dataGridViewCellStyle4;
             this.discount_value.FillWeight = 70F;
-            this.discount_value.HeaderText = "Discount";
-            this.discount_value.MinimumWidth = 6;
+            resources.ApplyResources(this.discount_value, "discount_value");
             this.discount_value.Name = "discount_value";
             this.discount_value.ReadOnly = true;
             // 
             // vat
             // 
             this.vat.DataPropertyName = "vat";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "N2";
-            this.vat.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            this.vat.DefaultCellStyle = dataGridViewCellStyle5;
             this.vat.FillWeight = 60F;
-            this.vat.HeaderText = "VAT";
-            this.vat.MinimumWidth = 6;
+            resources.ApplyResources(this.vat, "vat");
             this.vat.Name = "vat";
             this.vat.ReadOnly = true;
             // 
             // total
             // 
             this.total.DataPropertyName = "total";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "N2";
-            this.total.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.total.DefaultCellStyle = dataGridViewCellStyle6;
             this.total.FillWeight = 80F;
-            this.total.HeaderText = "Total";
-            this.total.MinimumWidth = 6;
+            resources.ApplyResources(this.total, "total");
             this.total.Name = "total";
             this.total.ReadOnly = true;
             // 
             // total_with_vat
             // 
             this.total_with_vat.DataPropertyName = "total_with_vat";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "N2";
-            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.total_with_vat.DefaultCellStyle = dataGridViewCellStyle7;
             this.total_with_vat.FillWeight = 80F;
-            this.total_with_vat.HeaderText = "Total (VAT)";
-            this.total_with_vat.MinimumWidth = 6;
+            resources.ApplyResources(this.total_with_vat, "total_with_vat");
             this.total_with_vat.Name = "total_with_vat";
             this.total_with_vat.ReadOnly = true;
             // 
             // profit
             // 
             this.profit.DataPropertyName = "profit";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N2";
-            this.profit.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            this.profit.DefaultCellStyle = dataGridViewCellStyle8;
             this.profit.FillWeight = 70F;
-            this.profit.HeaderText = "Profit";
-            this.profit.MinimumWidth = 6;
+            resources.ApplyResources(this.profit, "profit");
             this.profit.Name = "profit";
             this.profit.ReadOnly = true;
             // 
             // frm_SalesInvoiceReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1517, 800);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_SalesInvoiceReport";
             this.ShowIcon = false;
-            this.Text = "Sales Invoice Report";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_SalesInvoiceReport_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frm_SalesInvoiceReport_KeyDown);

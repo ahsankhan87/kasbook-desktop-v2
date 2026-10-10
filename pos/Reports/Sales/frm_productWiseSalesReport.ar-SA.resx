@@ -291,4 +291,7 @@
   <data name="$this.Text" xml:space="preserve">
     <value>تقرير المبيعات حسب المنتج</value>
   </data>
+  <data name="Total" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
 </root>

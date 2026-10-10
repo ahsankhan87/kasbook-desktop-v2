@@ -31,6 +31,54 @@ namespace pos.Reports.Sales
 
         ProductBLL productsBLL_obj = new ProductBLL();
 
+        // Helper method to map combo box display values to English equivalents
+        private string MapComboDisplayToEnglish(string displayValue, bool isSaleTypeOrAccount)
+        {
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
+            if (!isArabic)
+                return displayValue;
+
+            // Map Arabic values back to English
+            if (isSaleTypeOrAccount)
+            {
+                // For Sale Type combo - Arabic resource values
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "نقداً")
+                    return "Cash";
+                else if (displayValue == "آجل")
+                    return "Credit";
+            }
+            else
+            {
+                // For Sale Account combo - Arabic resource values
+                if (displayValue == "الكل")
+                    return "All";
+                else if (displayValue == "مبيعات")
+                    return "Sale";
+                else if (displayValue == "استرجاع")
+                    return "Return";
+            }
+
+            return displayValue;
+        }
+
+        // Helper method to map payment method display values (runtime localized "All" from UiMessages)
+        private string MapPaymentMethodDisplayToEnglish(string displayValue)
+        {
+            bool isArabic = string.Equals(UsersModal.logged_in_lang, "ar-SA", StringComparison.OrdinalIgnoreCase);
+
+            if (!isArabic)
+                return displayValue;
+
+            // Runtime value from UiMessages.T("All", "الكل")
+            if (displayValue == "الكل")
+                return "All";
+
+            return displayValue;
+        }
+
         public frm_SalesInvoiceReport()
         {
             InitializeComponent();
@@ -83,10 +131,10 @@ namespace pos.Reports.Sales
 
             PaymentMethodBLL paymentMethodBLL_obj = new PaymentMethodBLL();
             DataTable dt = paymentMethodBLL_obj.GetAll();
-            
+
             DataRow emptyRow = dt.NewRow();
             emptyRow["id"] = 0;              // Set Column Value (id)
-            emptyRow["description"] = "All";    // Set Column Value (description)
+            emptyRow["description"] = UiMessages.T("All", "الكل");    // Set Column Value (description)
             dt.Rows.InsertAt(emptyRow, 0);
 
             cmb_payment_method.DisplayMember = "description";
@@ -102,7 +150,7 @@ namespace pos.Reports.Sales
             DataTable users = usersBLL.GetAll();
             DataRow emptyRow = users.NewRow();
             emptyRow["id"] = 0;              // Set Column Value (id)
-            emptyRow["name"] = "All Users";    // Set Column Value (name)
+            emptyRow["name"] = UiMessages.T("All Users", "جميع المستخدمين");    // Set Column Value (name)
             users.Rows.InsertAt(emptyRow, 0);
 
             cmb_users.DisplayMember = "name";
@@ -118,7 +166,7 @@ namespace pos.Reports.Sales
             DataTable employees = employeeBLL.GetAll();
             DataRow emptyRow = employees.NewRow();
             emptyRow[0] = 0;
-            emptyRow[2] = "All Employee";
+            emptyRow[2] = UiMessages.T("All Employee", "جميع الموظفين");
             employees.Rows.InsertAt(emptyRow, 0);
 
             cmb_employees.DisplayMember = "first_name";
@@ -136,9 +184,9 @@ namespace pos.Reports.Sales
                     DateTime to_date = txt_to_date.Value.Date;
                     int customer_id = _selectedCustomerId;
                     string product_code = _product_code;
-                    string sale_type = cmb_sale_type.SelectedItem.ToString();
+                    string sale_type = MapComboDisplayToEnglish(cmb_sale_type.SelectedItem.ToString(), true);
                     int employee_id = Convert.ToInt16(cmb_employees.SelectedValue);
-                    string sale_account = cmb_sale_account.SelectedItem.ToString();
+                    string sale_account = MapComboDisplayToEnglish(cmb_sale_account.SelectedItem.ToString(), false);
                     int branch_id = UsersModal.logged_in_branch_id;
                     bool showZatcaSkipInvoice = chk_ShowZatcaInvoice.Checked;
                     int user_id = Convert.ToInt16(cmb_users.SelectedValue);
@@ -227,7 +275,7 @@ namespace pos.Reports.Sales
                     if (sales_invoice_report_dt.Rows.Count > 0)
                     {
                         DataRow newRow = sales_invoice_report_dt.NewRow();
-                        newRow["invoice_no"] = "Total";
+                        newRow["invoice_no"] = UiMessages.T("Total", "الإجمالي");
                         newRow["total_items"] = _total_items_sum;
                         newRow["subtotal"] = _subtotal_sum;
                         newRow["discount_value"] = _discount_value_sum;

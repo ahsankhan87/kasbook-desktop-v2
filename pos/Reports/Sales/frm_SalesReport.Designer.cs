@@ -40,6 +40,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cmb_users = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.chk_ShowZatcaInvoice = new System.Windows.Forms.CheckBox();
             this.txtCustomerSearch = new System.Windows.Forms.TextBox();
@@ -78,8 +80,6 @@
             this.profit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.profit_percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cost_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cmb_users = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid_sales_report)).BeginInit();
@@ -92,6 +92,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.cmb_users);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.txt_search);
@@ -114,9 +115,21 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label4);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // cmb_users
+            // 
+            resources.ApplyResources(this.cmb_users, "cmb_users");
+            this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmb_users.FormattingEnabled = true;
+            this.cmb_users.Name = "cmb_users";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
             // 
             // txt_search
             // 
@@ -136,9 +149,9 @@
             // 
             // CmbCondition
             // 
+            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CmbCondition.FormattingEnabled = true;
-            resources.ApplyResources(this.CmbCondition, "CmbCondition");
             this.CmbCondition.Name = "CmbCondition";
             this.CmbCondition.SelectedIndexChanged += new System.EventHandler(this.CmbCondition_SelectedIndexChanged);
             // 
@@ -149,10 +162,10 @@
             // 
             // cmb_employees
             // 
+            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_employees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_employees.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_employees, "cmb_employees");
             this.cmb_employees.Name = "cmb_employees";
             // 
             // btn_print
@@ -178,30 +191,30 @@
             // 
             // cmb_sale_account
             // 
+            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_account.FormattingEnabled = true;
             this.cmb_sale_account.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_account.Items"),
             resources.GetString("cmb_sale_account.Items1"),
             resources.GetString("cmb_sale_account.Items2")});
-            resources.ApplyResources(this.cmb_sale_account, "cmb_sale_account");
             this.cmb_sale_account.Name = "cmb_sale_account";
             // 
             // cmb_sale_type
             // 
+            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_sale_type.FormattingEnabled = true;
             this.cmb_sale_type.Items.AddRange(new object[] {
             resources.GetString("cmb_sale_type.Items"),
             resources.GetString("cmb_sale_type.Items1"),
             resources.GetString("cmb_sale_type.Items2")});
-            resources.ApplyResources(this.cmb_sale_type, "cmb_sale_type");
             this.cmb_sale_type.Name = "cmb_sale_type";
             // 
             // txt_to_date
             // 
-            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_to_date, "txt_to_date");
+            this.txt_to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_to_date.Name = "txt_to_date";
             // 
             // label6
@@ -211,8 +224,8 @@
             // 
             // txt_from_date
             // 
-            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             resources.ApplyResources(this.txt_from_date, "txt_from_date");
+            this.txt_from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txt_from_date.Name = "txt_from_date";
             // 
             // label2
@@ -242,16 +255,16 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_sales_report);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_sales_report);
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -447,19 +460,6 @@
             resources.ApplyResources(this.cost_total, "cost_total");
             this.cost_total.Name = "cost_total";
             this.cost_total.ReadOnly = true;
-            // 
-            // cmb_users
-            // 
-            this.cmb_users.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmb_users.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmb_users.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_users, "cmb_users");
-            this.cmb_users.Name = "cmb_users";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
             // 
             // frm_SalesReport
             // 

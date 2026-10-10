@@ -1263,9 +1263,6 @@
     <Compile Include="Reports\Sales\frm_daily_salesReport.Designer.cs">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Sales\frm_PaymentMixReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Reports\Sales\frm_PromotionsDiscountsReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1295,9 +1292,6 @@
     </Compile>
     <Compile Include="Reports\Sales\frm_SalesInvoiceReport.Designer.cs">
       <DependentUpon>frm_SalesInvoiceReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\Sales\frm_SalesRegisterReport.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Sales\invoice_dataset.cs">
       <DependentUpon>invoice_dataset.xsd</DependentUpon>
@@ -2652,6 +2646,16 @@
     <EmbeddedResource Include="Reports\Dashboard\frm_branchWiseSummary.resx">
       <DependentUpon>frm_branchWiseSummary.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\FrmSubLedgerBase.ar-SA.resx">
+      <DependentUpon>FrmSubLedgerBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\FrmSubLedgerBase.resx">
+      <DependentUpon>FrmSubLedgerBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Financial\FrmTrialBalanceReport.ar-SA.resx">
+      <DependentUpon>FrmTrialBalanceReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Financial\FrmTrialBalanceReport.resx">
       <DependentUpon>FrmTrialBalanceReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -2736,14 +2740,25 @@
     <EmbeddedResource Include="Reports\Purchases\Report Viewer\frm_purchase_report_viewer.resx">
       <DependentUpon>frm_purchase_report_viewer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_categoryWiseSalesReport.ar-SA.resx">
+      <DependentUpon>frm_categoryWiseSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_categoryWiseSalesReport.resx">
       <DependentUpon>frm_categoryWiseSalesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_customerWiseSalesReport.ar-SA.resx">
+      <DependentUpon>frm_customerWiseSalesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_productWiseSalesReport.ar-SA.resx">
+      <DependentUpon>frm_productWiseSalesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_productWiseSalesReport.resx">
       <DependentUpon>frm_productWiseSalesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_customerWiseSalesReport.resx">
       <DependentUpon>frm_customerWiseSalesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_daily_salesReport.ar-SA.resx">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>
@@ -2754,15 +2769,28 @@
     <EmbeddedResource Include="Reports\Sales\frm_PromotionsDiscountsReport.resx">
       <DependentUpon>frm_PromotionsDiscountsReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_ReturnsRefundsReport.resx">
+      <DependentUpon>frm_ReturnsRefundsReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_SaleProductDetail.ar-SA.resx">
+      <DependentUpon>frm_SaleProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_SaleProductDetail.resx">
+      <DependentUpon>frm_SaleProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesByCategoryReport.resx">
       <DependentUpon>frm_SalesByCategoryReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales\frm_SalesInvoiceReport.ar-SA.resx">
+      <DependentUpon>frm_SalesInvoiceReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesInvoiceReport.resx">
       <DependentUpon>frm_SalesInvoiceReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.ar-SA.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_SalesReport.resx">
       <DependentUpon>frm_SalesReport.cs</DependentUpon>

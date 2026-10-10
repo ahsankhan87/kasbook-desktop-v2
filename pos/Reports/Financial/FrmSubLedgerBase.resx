@@ -118,8 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1167, 681</value>
+  <data name="lbl61_90.Location" type="System.Drawing.Point, System.Drawing">
+    <value>443, 18</value>
   </data>
   <data name="&gt;&gt;btnReceivePayment.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -147,14 +147,14 @@
   <data name="lblAging.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblEntity.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="lblAging.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 10pt, style=Bold</value>
   </data>
   <data name="btnExport.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
-  <data name="&gt;&gt;cmbEntity.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="lblAging.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="pnlGrid.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -174,32 +174,23 @@
   <data name="dgvLedger.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
-  <data name="pnlEntitySelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
-  </data>
   <data name="&gt;&gt;dgvLedger.Parent" xml:space="preserve">
     <value>pnlGrid</value>
   </data>
   <data name="lblEntity.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;lbl90Plus.Parent" xml:space="preserve">
+    <value>pnlAging</value>
+  </data>
   <data name="cmbEntity.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
-  </data>
-  <data name="pnlGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lbl90Plus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="lbl61_90.Text" xml:space="preserve">
     <value>61-90: 0</value>
   </data>
-  <data name="lbl61_90.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 18</value>
-  </data>
-  <data name="&gt;&gt;lbl90Plus.Parent" xml:space="preserve">
-    <value>pnlAging</value>
+  <data name="&gt;&gt;lbl31_60.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;pnlEntitySelector.Name" xml:space="preserve">
     <value>pnlEntitySelector</value>
@@ -228,8 +219,8 @@
   <data name="&gt;&gt;btnPrint.Name" xml:space="preserve">
     <value>btnPrint</value>
   </data>
-  <data name="&gt;&gt;lbl31_60.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl0_30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 18</value>
   </data>
   <data name="&gt;&gt;pnlGrid.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -246,8 +237,8 @@
   <data name="lblTitle.Text" xml:space="preserve">
     <value>Sub Ledger</value>
   </data>
-  <data name="&gt;&gt;lblToDate.Parent" xml:space="preserve">
-    <value>pnlEntitySelector</value>
+  <data name="cmbEntity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="pnlInfoCard.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 136</value>
@@ -270,12 +261,6 @@
   <data name="&gt;&gt;dtpFromDate.Name" xml:space="preserve">
     <value>dtpFromDate</value>
   </data>
-  <data name="&gt;&gt;btnReceivePayment.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblAging.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="dtpFromDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
@@ -297,8 +282,8 @@
   <data name="lbl31_60.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
   </data>
-  <data name="&gt;&gt;lblFromDate.Name" xml:space="preserve">
-    <value>lblFromDate</value>
+  <data name="cmbEntity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 24</value>
   </data>
   <data name="&gt;&gt;lblToDate.Name" xml:space="preserve">
     <value>lblToDate</value>
@@ -309,6 +294,9 @@
   <data name="lbl61_90.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="pnlAging.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -318,32 +306,29 @@
   <data name="lbl31_60.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 15</value>
-  </data>
   <data name="pnlFooter.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 619</value>
   </data>
   <data name="&gt;&gt;pnlEntitySelector.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmbEntity.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl90Plus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="dgvLedger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="dtpFromDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 24</value>
-  </data>
-  <data name="lblAging.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 10pt, style=Bold</value>
+  <data name="lblToDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>560, 18</value>
   </data>
   <data name="&gt;&gt;btnReceivePayment.Name" xml:space="preserve">
     <value>btnReceivePayment</value>
   </data>
-  <data name="pnlHeader.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;btnReceivePayment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1167, 681</value>
   </data>
   <data name="lblEntityInfo.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 17</value>
@@ -363,8 +348,8 @@
   <data name="&gt;&gt;dtpToDate.Parent" xml:space="preserve">
     <value>pnlEntitySelector</value>
   </data>
-  <data name="&gt;&gt;pnlHeader.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;cmbEntity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pnlEntitySelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 62</value>
@@ -387,8 +372,8 @@
   <data name="lblEntity.Text" xml:space="preserve">
     <value>Entity:</value>
   </data>
-  <data name="lblEntityInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
+  <data name="&gt;&gt;pnlHeader.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;pnlAging.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -402,11 +387,11 @@
   <data name="pnlGrid.Size" type="System.Drawing.Size, System.Drawing">
     <value>1167, 347</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Sub Ledger</value>
+  <data name="&gt;&gt;lblAging.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="cmbEntity.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="dtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>414, 15</value>
   </data>
   <data name="&gt;&gt;btnLoad.Parent" xml:space="preserve">
     <value>pnlEntitySelector</value>
@@ -432,8 +417,8 @@
   <data name="lblToDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cmbEntity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 24</value>
+  <data name="pnlEntitySelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 16</value>
@@ -450,11 +435,17 @@
   <data name="&gt;&gt;lblEntity.Parent" xml:space="preserve">
     <value>pnlEntitySelector</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Sub Ledger</value>
+  </data>
   <data name="&gt;&gt;lblAging.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pnlAging.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lbl31_60.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnExport.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -464,9 +455,6 @@
   </data>
   <data name="&gt;&gt;lblToDate.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="lblEntityInfo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;cmbEntity.Parent" xml:space="preserve">
     <value>pnlEntitySelector</value>
@@ -498,6 +486,9 @@
   <data name="&gt;&gt;pnlFooter.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="lblEntityInfo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
   <data name="&gt;&gt;pnlGrid.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
@@ -509,6 +500,9 @@
   </data>
   <data name="lbl90Plus.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblFromDate.Name" xml:space="preserve">
+    <value>lblFromDate</value>
   </data>
   <data name="cmbEntity.Location" type="System.Drawing.Point, System.Drawing">
     <value>88, 15</value>
@@ -528,9 +522,6 @@
   <data name="btnLoad.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 28</value>
   </data>
-  <data name="&gt;&gt;lbl31_60.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lblEntity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -543,8 +534,8 @@
   <data name="lbl61_90.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="pnlAging.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="lblEntityInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="btnExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 28</value>
@@ -566,6 +557,9 @@
   </data>
   <data name="&gt;&gt;lblEntityInfo.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="pnlHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="pnlEntitySelector.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -603,8 +597,8 @@
   <data name="&gt;&gt;dgvLedger.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblEntityInfo.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;cmbEntity.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="lbl90Plus.Location" type="System.Drawing.Point, System.Drawing">
     <value>595, 18</value>
@@ -624,8 +618,14 @@
   <data name="lblToDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
+  <data name="dtpFromDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 24</value>
+  </data>
   <data name="btnPrint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lbl61_90.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnExport.Name" xml:space="preserve">
     <value>btnExport</value>
@@ -633,11 +633,11 @@
   <data name="pnlInfoCard.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="btnLoad.Text" xml:space="preserve">
-    <value>Load</value>
+  <data name="&gt;&gt;lblEntity.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="dtpToDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="pnlGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;btnExport.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -708,8 +708,8 @@
   <data name="&gt;&gt;pnlFooter.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="lbl0_30.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 18</value>
+  <data name="btnReceivePayment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="btnLoad.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -738,9 +738,6 @@
   <data name="&gt;&gt;lbl31_60.Parent" xml:space="preserve">
     <value>pnlAging</value>
   </data>
-  <data name="lblToDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>560, 18</value>
-  </data>
   <data name="&gt;&gt;lbl0_30.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -753,8 +750,8 @@
   <data name="pnlAging.Size" type="System.Drawing.Size, System.Drawing">
     <value>1167, 62</value>
   </data>
-  <data name="&gt;&gt;lblAging.Parent" xml:space="preserve">
-    <value>pnlAging</value>
+  <data name="&gt;&gt;lblEntityInfo.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btnPrint.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 28</value>
@@ -762,8 +759,8 @@
   <data name="&gt;&gt;lblEntity.Name" xml:space="preserve">
     <value>lblEntity</value>
   </data>
-  <data name="lbl90Plus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 17</value>
+  <data name="&gt;&gt;lblAging.Parent" xml:space="preserve">
+    <value>pnlAging</value>
   </data>
   <data name="&gt;&gt;pnlGrid.Name" xml:space="preserve">
     <value>pnlGrid</value>
@@ -771,8 +768,8 @@
   <data name="lblEntityInfo.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 18</value>
   </data>
-  <data name="&gt;&gt;lbl61_90.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblToDate.Parent" xml:space="preserve">
+    <value>pnlEntitySelector</value>
   </data>
   <data name="lblFromDate.Text" xml:space="preserve">
     <value>From Date:</value>
@@ -783,14 +780,17 @@
   <data name="pnlAging.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
-  <data name="lblAging.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btnLoad.Text" xml:space="preserve">
+    <value>Load</value>
   </data>
   <data name="btnReceivePayment.Location" type="System.Drawing.Point, System.Drawing">
     <value>210, 15</value>
   </data>
   <data name="btnPrint.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 15</value>
+  </data>
+  <data name="lbl90Plus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 17</value>
   </data>
   <data name="&gt;&gt;pnlEntitySelector.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -804,7 +804,7 @@
   <data name="&gt;&gt;pnlFooter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnReceivePayment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="dtpToDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="&gt;&gt;lblAging.Name" xml:space="preserve">
@@ -824,8 +824,5 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ar-SA</value>
   </metadata>
 </root>
