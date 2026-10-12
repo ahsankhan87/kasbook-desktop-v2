@@ -1,0 +1,1833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cardPaid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>576, 4</value>
+  </data>
+  <data name="lblInvoicesValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbCustom.Text" xml:space="preserve">
+    <value>Custom Range</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cardTotalSales.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cardPaid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="cardInvoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 4</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="tslRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="&gt;&gt;lblTopCustomers.Name" xml:space="preserve">
+    <value>lblTopCustomers</value>
+  </data>
+  <data name="&gt;&gt;chartCategory.Name" xml:space="preserve">
+    <value>chartCategory</value>
+  </data>
+  <data name="lblPaidTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 23</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTotalSalesTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblFrom.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblRecentInvoices.Parent" xml:space="preserve">
+    <value>panelRecentInvoices</value>
+  </data>
+  <data name="chartMonthlySales.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="dtpTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblPeriodTitle.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Name" xml:space="preserve">
+    <value>splitCharts</value>
+  </data>
+  <data name="rbYear.Text" xml:space="preserve">
+    <value>This Year</value>
+  </data>
+  <data name="&gt;&gt;rbQuarter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelKpis.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="cardTotalSales" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cardInvoices" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="cardPaid" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="cardOutstanding" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="cardAvgInvoice" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,20,Percent,20,Percent,20,Percent,20,Percent,20" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="lblCategoryChart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt</value>
+  </data>
+  <data name="lblRecentInvoices.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="splitCharts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 256</value>
+  </data>
+  <data name="lblOutstandingValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="&gt;&gt;rbCustom.Name" xml:space="preserve">
+    <value>rbCustom</value>
+  </data>
+  <data name="lblRecentInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>562, 32</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
+    <value>lblFrom</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTrend.Name" xml:space="preserve">
+    <value>lblTotalSalesTrend</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel1.Name" xml:space="preserve">
+    <value>splitCharts.Panel1</value>
+  </data>
+  <data name="lblTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="gridRecentInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>562, 208</value>
+  </data>
+  <data name="lblPaidTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="splitBottom.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;panelRecentInvoices.Parent" xml:space="preserve">
+    <value>splitBottom.Panel2</value>
+  </data>
+  <data name="lblFrom.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flowPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblRecentInvoices.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;cardInvoices.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="rbToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 21</value>
+  </data>
+  <data name="&gt;&gt;panelTopCustomers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbCustom.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesValue.Name" xml:space="preserve">
+    <value>lblInvoicesValue</value>
+  </data>
+  <data name="lblAvgInvoiceValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblPeriodTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="colInvoiceNo.HeaderText" xml:space="preserve">
+    <value>Invoice No</value>
+  </data>
+  <data name="&gt;&gt;rbYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPaidValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblInvoicesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblInvoicesValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTopCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="lblTotalSalesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 23</value>
+  </data>
+  <data name="chartCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 44</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="&gt;&gt;cardOutstanding.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="lblTo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cardAvgInvoice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStrip.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="rbToday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="gridTopCustomers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dtpTo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblPeriodTitle.Name" xml:space="preserve">
+    <value>lblPeriodTitle</value>
+  </data>
+  <data name="&gt;&gt;lblTopCustomers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelMonthlyChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="colInvoiceCustomer.HeaderText" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="lblMonthlyChart.Text" xml:space="preserve">
+    <value>Monthly Sales (Current Year)</value>
+  </data>
+  <data name="lblOutstandingSub.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Name" xml:space="preserve">
+    <value>splitBottom</value>
+  </data>
+  <data name="chartMonthlySales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 44</value>
+  </data>
+  <data name="lblPeriodTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt</value>
+  </data>
+  <data name="lblOutstandingValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;panelPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chartMonthlySales.Parent" xml:space="preserve">
+    <value>panelMonthlyChart</value>
+  </data>
+  <data name="&gt;&gt;gridRecentInvoices.Parent" xml:space="preserve">
+    <value>panelRecentInvoices</value>
+  </data>
+  <data name="lblTotalSalesTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 121</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>939, 49</value>
+  </data>
+  <data name="panelMonthlyChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="colInvoiceNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rbYear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonthlyChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblPeriodTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelKpis.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chartCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 200</value>
+  </data>
+  <data name="rbYear.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cardInvoices.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="colInvoiceStatus.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="panelPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblMonthlyChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="&gt;&gt;panelCategoryChart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 21</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel2.Name" xml:space="preserve">
+    <value>splitCharts.Panel2</value>
+  </data>
+  <data name="cardTotalSales.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;panelPeriod.Name" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="rbToday.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblOutstandingValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt</value>
+  </data>
+  <data name="lblCategoryChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbMonth.Text" xml:space="preserve">
+    <value>This Month</value>
+  </data>
+  <data name="panelCategoryChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="panelMonthlyChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>863, 256</value>
+  </data>
+  <data name="&gt;&gt;statusStrip.Name" xml:space="preserve">
+    <value>statusStrip</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel1.Parent" xml:space="preserve">
+    <value>splitCharts</value>
+  </data>
+  <data name="&gt;&gt;panelMonthlyChart.Parent" xml:space="preserve">
+    <value>splitCharts.Panel1</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingSub.Name" xml:space="preserve">
+    <value>lblOutstandingSub</value>
+  </data>
+  <data name="&gt;&gt;rbWeek.Name" xml:space="preserve">
+    <value>rbWeek</value>
+  </data>
+  <data name="lblRecentInvoices.Text" xml:space="preserve">
+    <value>Recent Invoices</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flowPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>856, 33</value>
+  </data>
+  <data name="lblPeriodTitle.Text" xml:space="preserve">
+    <value>Select Period</value>
+  </data>
+  <data name="rbWeek.Text" xml:space="preserve">
+    <value>This Week</value>
+  </data>
+  <data name="&gt;&gt;lblPaidTitle.Name" xml:space="preserve">
+    <value>lblPaidTitle</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cardPaid.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblInvoicesValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAvgInvoiceValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="chartCategory.Text" xml:space="preserve">
+    <value>chart2</value>
+  </data>
+  <data name="lblTopCustomers.Text" xml:space="preserve">
+    <value>Top 10 Customers</value>
+  </data>
+  <data name="rbQuarter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 4</value>
+  </data>
+  <data name="lblInvoicesValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTrend.Parent" xml:space="preserve">
+    <value>cardTotalSales</value>
+  </data>
+  <data name="colCustomerOutstanding.HeaderText" xml:space="preserve">
+    <value>Outstanding</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1458, 972</value>
+  </data>
+  <data name="lblTotalSalesTrend.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="panelTopCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;rbToday.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="colCustomerShare.HeaderText" xml:space="preserve">
+    <value>% of Total</value>
+  </data>
+  <data name="&gt;&gt;chartMonthlySales.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelKpis.ColumnCount" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 15pt</value>
+  </data>
+  <data name="gridTopCustomers.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryChart.Name" xml:space="preserve">
+    <value>lblCategoryChart</value>
+  </data>
+  <data name="cardOutstanding.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;rbMonth.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="&gt;&gt;rbToday.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="cardInvoices.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;flowPeriod.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="colCustomerName.HeaderText" xml:space="preserve">
+    <value>Customer Name</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Parent" xml:space="preserve">
+    <value>panelMonthlyChart</value>
+  </data>
+  <data name="&gt;&gt;flowPeriod.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceCustomer.Name" xml:space="preserve">
+    <value>colInvoiceCustomer</value>
+  </data>
+  <data name="rbMonth.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingSub.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblRecentInvoices.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt</value>
+  </data>
+  <data name="&gt;&gt;rbQuarter.Name" xml:space="preserve">
+    <value>rbQuarter</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelRecentInvoices.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="statusStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 16, 0</value>
+  </data>
+  <data name="colCustomerRank.HeaderText" xml:space="preserve">
+    <value>Rank</value>
+  </data>
+  <data name="lblOutstandingSub.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="panelRoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1458, 972</value>
+  </data>
+  <data name="&gt;&gt;lblPaidValue.Name" xml:space="preserve">
+    <value>lblPaidValue</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chartMonthlySales.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;panelMonthlyChart.Name" xml:space="preserve">
+    <value>panelMonthlyChart</value>
+  </data>
+  <data name="lblOutstandingTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="colInvoiceAmount.HeaderText" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="panelKpis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 70</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="&gt;&gt;cardAvgInvoice.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cardPaid.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblTopCustomers.Parent" xml:space="preserve">
+    <value>panelTopCustomers</value>
+  </data>
+  <data name="panelRoot.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>14, 15, 14, 15</value>
+  </data>
+  <data name="panelTopCustomers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelMonthlyChart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelRoot.Name" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="lblTotalSalesTrend.Text" xml:space="preserve">
+    <value>▲ +0.00% vs last month</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTrend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="flowPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 43</value>
+  </data>
+  <data name="tslLastRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="lblTotalSalesTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;rbToday.Name" xml:space="preserve">
+    <value>rbToday</value>
+  </data>
+  <data name="gridRecentInvoices.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rbCustom.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rbWeek.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesTitle.Parent" xml:space="preserve">
+    <value>cardInvoices</value>
+  </data>
+  <data name="splitBottom.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelCategoryChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;colCustomerName.Name" xml:space="preserve">
+    <value>colCustomerName</value>
+  </data>
+  <data name="colCustomerTotal.HeaderText" xml:space="preserve">
+    <value>Total Sales</value>
+  </data>
+  <data name="splitCharts.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="colCustomerOutstanding.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;chartCategory.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelPeriod.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="cardTotalSales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 241</value>
+  </data>
+  <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceStatus.Name" xml:space="preserve">
+    <value>colInvoiceStatus</value>
+  </data>
+  <data name="cardTotalSales.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblMonthlyChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="panelTopCustomers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lblTotalSalesValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbCustom.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;chartCategory.Parent" xml:space="preserve">
+    <value>panelCategoryChart</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbToday.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="panelKpis.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="chartCategory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesValue.Parent" xml:space="preserve">
+    <value>cardTotalSales</value>
+  </data>
+  <data name="splitBottom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 667</value>
+  </data>
+  <data name="&gt;&gt;tslRefresh.Name" xml:space="preserve">
+    <value>tslRefresh</value>
+  </data>
+  <data name="lblTopCustomers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblAvgInvoiceValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="splitBottom.SplitterDistance" type="System.Int32, mscorlib">
+    <value>839</value>
+  </data>
+  <data name="panelPeriod.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTitle.Name" xml:space="preserve">
+    <value>lblTotalSalesTitle</value>
+  </data>
+  <data name="&gt;&gt;rbYear.Name" xml:space="preserve">
+    <value>rbYear</value>
+  </data>
+  <data name="colInvoiceCustomer.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryChart.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;colCustomerShare.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="panelPeriod.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="colCustomerShare.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cardInvoices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1128, 49</value>
+  </data>
+  <data name="&gt;&gt;panelRoot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel2.Parent" xml:space="preserve">
+    <value>splitBottom</value>
+  </data>
+  <data name="lblPeriodTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 23</value>
+  </data>
+  <data name="&gt;&gt;statusStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOutstandingTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 23</value>
+  </data>
+  <data name="lblInvoicesValue.Text" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelCategoryChart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="rbCustom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>488, 4</value>
+  </data>
+  <data name="rbYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>396, 4</value>
+  </data>
+  <data name="lblPaidValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="&gt;&gt;flowPeriod.Name" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="lblOutstandingSub.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 121</value>
+  </data>
+  <data name="cardInvoices.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panelRecentInvoices.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gridTopCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>815, 208</value>
+  </data>
+  <data name="&gt;&gt;rbYear.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblPeriodTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbQuarter.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="cardOutstanding.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;rbYear.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="gridRecentInvoices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblCategoryChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;panelCategoryChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Name" xml:space="preserve">
+    <value>dtpFrom</value>
+  </data>
+  <data name="panelPeriod.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="splitBottom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;colCustomerTotal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel2.Parent" xml:space="preserve">
+    <value>splitCharts</value>
+  </data>
+  <data name="&gt;&gt;cardPaid.Name" xml:space="preserve">
+    <value>cardPaid</value>
+  </data>
+  <data name="rbQuarter.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingTitle.Name" xml:space="preserve">
+    <value>lblOutstandingTitle</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceValue.Name" xml:space="preserve">
+    <value>lblAvgInvoiceValue</value>
+  </data>
+  <data name="&gt;&gt;rbToday.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalSalesValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblAvgInvoiceValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceCustomer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="colCustomerRank.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Name" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="lblInvoicesTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rbWeek.Parent" xml:space="preserve">
+    <value>flowPeriod</value>
+  </data>
+  <data name="splitBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 264</value>
+  </data>
+  <data name="dtpFrom.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="flowPeriod.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblMonthlyChart.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblOutstandingSub.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel1.Name" xml:space="preserve">
+    <value>splitBottom.Panel1</value>
+  </data>
+  <data name="panelRecentInvoices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblPeriodTitle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblPaidTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="panelMonthlyChart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="rbCustom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelRecentInvoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblPaidValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="cardInvoices.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rbQuarter.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblInvoicesTitle.Text" xml:space="preserve">
+    <value>Total Invoices</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingValue.Parent" xml:space="preserve">
+    <value>cardOutstanding</value>
+  </data>
+  <data name="&gt;&gt;lblMonthlyChart.Name" xml:space="preserve">
+    <value>lblMonthlyChart</value>
+  </data>
+  <data name="lblTopCustomers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel1.Parent" xml:space="preserve">
+    <value>splitBottom</value>
+  </data>
+  <data name="splitCharts.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;colCustomerName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="&gt;&gt;panelRoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardPaid.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="&gt;&gt;lblRecentInvoices.Name" xml:space="preserve">
+    <value>lblRecentInvoices</value>
+  </data>
+  <data name="lblTopCustomers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingTitle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cardAvgInvoice.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;panelTopCustomers.Parent" xml:space="preserve">
+    <value>splitBottom.Panel1</value>
+  </data>
+  <data name="gridTopCustomers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 55</value>
+  </data>
+  <data name="lblTotalSalesTitle.Text" xml:space="preserve">
+    <value>Total Sales (This Month)</value>
+  </data>
+  <data name="gridTopCustomers.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;tslLastRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cardPaid.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="&gt;&gt;cardTotalSales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPaidTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;chartCategory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesValue.Name" xml:space="preserve">
+    <value>lblTotalSalesValue</value>
+  </data>
+  <data name="panelRecentInvoices.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceValue.Parent" xml:space="preserve">
+    <value>cardAvgInvoice</value>
+  </data>
+  <data name="panelRoot.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gridRecentInvoices.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="chartMonthlySales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>839, 200</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitCharts.SplitterWidth" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;gridTopCustomers.Parent" xml:space="preserve">
+    <value>panelTopCustomers</value>
+  </data>
+  <data name="lblMonthlyChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>839, 32</value>
+  </data>
+  <data name="lblTotalSalesValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;colCustomerRank.Name" xml:space="preserve">
+    <value>colCustomerRank</value>
+  </data>
+  <data name="rbMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;colCustomerOutstanding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gridRecentInvoices.Name" xml:space="preserve">
+    <value>gridRecentInvoices</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
+  </data>
+  <data name="splitCharts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 411</value>
+  </data>
+  <data name="lblPaidValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="&gt;&gt;rbWeek.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblCategoryChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 92</value>
+  </data>
+  <data name="panelRoot.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblPaidValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblTotalSalesTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 20</value>
+  </data>
+  <data name="lblRecentInvoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="&gt;&gt;lblRecentInvoices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardTotalSales.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cardTotalSales.Name" xml:space="preserve">
+    <value>cardTotalSales</value>
+  </data>
+  <data name="colCustomerName.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesValue.Parent" xml:space="preserve">
+    <value>cardInvoices</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceTitle.Name" xml:space="preserve">
+    <value>lblAvgInvoiceTitle</value>
+  </data>
+  <data name="&gt;&gt;rbMonth.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblPaidTitle.Text" xml:space="preserve">
+    <value>Paid Amount</value>
+  </data>
+  <data name="lblTotalSalesTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="chartMonthlySales.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbWeek.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 4</value>
+  </data>
+  <data name="panelTopCustomers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="&gt;&gt;cardPaid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOutstandingSub.Text" xml:space="preserve">
+    <value>Over 30d: 0.00</value>
+  </data>
+  <data name="chartCategory.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;cardInvoices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInvoicesTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chartMonthlySales.Name" xml:space="preserve">
+    <value>chartMonthlySales</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblCategoryChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 32</value>
+  </data>
+  <data name="&gt;&gt;panelMonthlyChart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;flowPeriod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 21</value>
+  </data>
+  <data name="cardPaid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 17</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_sales_dashboard</value>
+  </data>
+  <data name="&gt;&gt;lblPaidTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbWeek.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingSub.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAvgInvoiceValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTotalSalesValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="panelTopCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>839, 264</value>
+  </data>
+  <data name="lblPaidTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="panelCategoryChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>562, 256</value>
+  </data>
+  <data name="cardPaid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 241</value>
+  </data>
+  <data name="rbCustom.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;panelPeriod.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panelTopCustomers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbQuarter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="statusStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rbWeek.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblPeriodTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cardAvgInvoice.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTrend.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblOutstandingSub.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="gridTopCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 44</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Text" xml:space="preserve">
+    <value>Average Invoice Value</value>
+  </data>
+  <data name="&gt;&gt;colCustomerRank.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="rbToday.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;cardTotalSales.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cardAvgInvoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1148, 4</value>
+  </data>
+  <data name="colInvoiceAmount.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cardInvoices.Name" xml:space="preserve">
+    <value>cardInvoices</value>
+  </data>
+  <data name="lblInvoicesValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt</value>
+  </data>
+  <data name="&gt;&gt;rbCustom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOutstandingValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOutstandingTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="lblPaidValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbWeek.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;gridTopCustomers.Name" xml:space="preserve">
+    <value>gridTopCustomers</value>
+  </data>
+  <data name="&gt;&gt;lblAvgInvoiceTitle.Parent" xml:space="preserve">
+    <value>cardAvgInvoice</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblTotalSalesTrend.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="tslLastRefresh.Text" xml:space="preserve">
+    <value>Last refresh: --</value>
+  </data>
+  <data name="panelMonthlyChart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
+    <value>lblTitle</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceAmount.Name" xml:space="preserve">
+    <value>colInvoiceAmount</value>
+  </data>
+  <data name="&gt;&gt;lblPaidValue.Parent" xml:space="preserve">
+    <value>cardPaid</value>
+  </data>
+  <data name="panelKpis.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;chartMonthlySales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
+  </data>
+  <data name="lblInvoicesTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="statusStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 931</value>
+  </data>
+  <data name="&gt;&gt;panelTopCustomers.Name" xml:space="preserve">
+    <value>panelTopCustomers</value>
+  </data>
+  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblCategoryChart.Text" xml:space="preserve">
+    <value>Sales by Category</value>
+  </data>
+  <data name="chartCategory.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 21</value>
+  </data>
+  <data name="lblTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;lblTopCustomers.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblTotalSalesValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="splitCharts.SplitterDistance" type="System.Int32, mscorlib">
+    <value>863</value>
+  </data>
+  <data name="lblPeriodTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblPaidTitle.Parent" xml:space="preserve">
+    <value>cardPaid</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceNo.Name" xml:space="preserve">
+    <value>colInvoiceNo</value>
+  </data>
+  <data name="&gt;&gt;rbMonth.Name" xml:space="preserve">
+    <value>rbMonth</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Name" xml:space="preserve">
+    <value>dtpTo</value>
+  </data>
+  <data name="lblOutstandingValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblOutstandingTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="panelCategoryChart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cardAvgInvoice.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>12, 12, 12, 12</value>
+  </data>
+  <data name="lblAvgInvoiceValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt</value>
+  </data>
+  <data name="lblOutstandingValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="lblOutstandingValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tslRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="gridRecentInvoices.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTopCustomers.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 10pt</value>
+  </data>
+  <data name="colInvoiceStatus.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;gridTopCustomers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardOutstanding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 241</value>
+  </data>
+  <data name="lblAvgInvoiceValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 69</value>
+  </data>
+  <data name="lblTotalSalesValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt</value>
+  </data>
+  <data name="&gt;&gt;panelCategoryChart.Parent" xml:space="preserve">
+    <value>splitCharts.Panel2</value>
+  </data>
+  <data name="panelRoot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="lblTopCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>815, 32</value>
+  </data>
+  <data name="rbYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Sales Dashboard</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
+    <value>lblTo</value>
+  </data>
+  <data name="panelPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 319</value>
+  </data>
+  <data name="rbMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingValue.Name" xml:space="preserve">
+    <value>lblOutstandingValue</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="colCustomerTotal.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="cardOutstanding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>862, 4</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 23</value>
+  </data>
+  <data name="&gt;&gt;dtpFrom.Parent" xml:space="preserve">
+    <value>panelPeriod</value>
+  </data>
+  <data name="&gt;&gt;cardAvgInvoice.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="splitCharts.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="&gt;&gt;panelCategoryChart.Name" xml:space="preserve">
+    <value>panelCategoryChart</value>
+  </data>
+  <data name="&gt;&gt;cardOutstanding.Name" xml:space="preserve">
+    <value>cardOutstanding</value>
+  </data>
+  <data name="lblInvoicesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 23</value>
+  </data>
+  <data name="&gt;&gt;tslLastRefresh.Name" xml:space="preserve">
+    <value>tslLastRefresh</value>
+  </data>
+  <data name="chartMonthlySales.Text" xml:space="preserve">
+    <value>chart1</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="rbQuarter.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="panelKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 249</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblRecentInvoices.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;panelRecentInvoices.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;colInvoiceAmount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cardInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 241</value>
+  </data>
+  <data name="panelMonthlyChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;rbWeek.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTotalSalesTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="cardTotalSales.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="rbQuarter.Text" xml:space="preserve">
+    <value>This Quarter</value>
+  </data>
+  <data name="panelCategoryChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblTotalSalesTrend.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesValue.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblPaidValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="lblCategoryChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="&gt;&gt;gridTopCustomers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="panelRoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="lblInvoicesTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblPaidValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI Semibold, 18pt</value>
+  </data>
+  <data name="lblPaidTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="&gt;&gt;colCustomerOutstanding.Name" xml:space="preserve">
+    <value>colCustomerOutstanding</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1102, 54</value>
+  </data>
+  <data name="cardAvgInvoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 241</value>
+  </data>
+  <data name="&gt;&gt;panelKpis.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="&gt;&gt;cardOutstanding.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblPaidValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOutstandingTitle.Text" xml:space="preserve">
+    <value>Outstanding / Receivable</value>
+  </data>
+  <data name="cardOutstanding.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="rbCustom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>897, 54</value>
+  </data>
+  <data name="splitBottom.SplitterWidth" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="&gt;&gt;lblTotalSalesTitle.Parent" xml:space="preserve">
+    <value>cardTotalSales</value>
+  </data>
+  <data name="rbToday.Text" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 24</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryChart.Parent" xml:space="preserve">
+    <value>panelCategoryChart</value>
+  </data>
+  <data name="lblInvoicesValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 41</value>
+  </data>
+  <data name="&gt;&gt;cardTotalSales.Parent" xml:space="preserve">
+    <value>panelKpis</value>
+  </data>
+  <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 15</value>
+  </data>
+  <data name="&gt;&gt;statusStrip.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;panelRoot.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="rbMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 4</value>
+  </data>
+  <data name="statusStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 26</value>
+  </data>
+  <data name="lblOutstandingTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblOutstandingTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelRecentInvoices.Name" xml:space="preserve">
+    <value>panelRecentInvoices</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblMonthlyChart.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tslRefresh.Text" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblTitle.Parent" xml:space="preserve">
+    <value>panelRoot</value>
+  </data>
+  <data name="&gt;&gt;rbMonth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpTo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;gridRecentInvoices.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="panelRecentInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 264</value>
+  </data>
+  <data name="&gt;&gt;lblInvoicesTitle.Name" xml:space="preserve">
+    <value>lblInvoicesTitle</value>
+  </data>
+  <data name="lblTotalSalesTrend.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colCustomerShare.Name" xml:space="preserve">
+    <value>colCustomerShare</value>
+  </data>
+  <data name="cardAvgInvoice.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;cardOutstanding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingTitle.Parent" xml:space="preserve">
+    <value>cardOutstanding</value>
+  </data>
+  <data name="&gt;&gt;gridRecentInvoices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dtpFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 24</value>
+  </data>
+  <data name="&gt;&gt;lblOutstandingSub.Parent" xml:space="preserve">
+    <value>cardOutstanding</value>
+  </data>
+  <data name="lblTitle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="cardOutstanding.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="panelKpis.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblTitle.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="lblRecentInvoices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;panelRecentInvoices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;dtpTo.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gridRecentInvoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 44</value>
+  </data>
+  <data name="lblTotalSalesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="&gt;&gt;cardAvgInvoice.Name" xml:space="preserve">
+    <value>cardAvgInvoice</value>
+  </data>
+  <data name="lblPaidTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Sales Dashboard</value>
+  </data>
+  <data name="lblOutstandingSub.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;splitCharts.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="statusStrip.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;colCustomerTotal.Name" xml:space="preserve">
+    <value>colCustomerTotal</value>
+  </data>
+  <data name="&gt;&gt;splitBottom.Panel2.Name" xml:space="preserve">
+    <value>splitBottom.Panel2</value>
+  </data>
+  <data name="lblTotalSalesValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
+  </data>
+  <data name="&gt;&gt;panelTopCustomers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>ar-SA</value>
+  </metadata>
+</root>
