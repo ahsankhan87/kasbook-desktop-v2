@@ -33,10 +33,10 @@ namespace pos.Reports.Banks
             DateTime start_date = UsersModal.fy_from_date.Date;
             DateTime end_date = UsersModal.fy_to_date.Date;
 
-            LoadReport(_bankID, txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString(), false);
+            LoadReport(_bankID, txt_from_date.Value, txt_to_date.Value, false);
 
         }
-        public void LoadReport(int bankId, string fromDate, string toDate, bool _isPrint)
+        public void LoadReport(int bankId, DateTime fromDate, DateTime toDate, bool _isPrint)
         {
             // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
@@ -58,8 +58,8 @@ namespace pos.Reports.Banks
 
             // Set the parameter value
             reportDoc.SetParameterValue("bank_id", bankId);
-            reportDoc.SetParameterValue("start_date", fromDate);
-            reportDoc.SetParameterValue("end_date", toDate);
+            reportDoc.SetParameterValue("start_date", fromDate.ToString("yyyy-MM-dd"));
+            reportDoc.SetParameterValue("end_date", toDate.ToString("yyyy-MM-dd"));
 
             // Set the report source for the CrystalReportViewer
             crystalReportViewer1.ReportSource = reportDoc;

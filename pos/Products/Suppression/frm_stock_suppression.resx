@@ -117,4 +117,679 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="grpOldPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 15</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkTransferHistory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;chkTransferAssemblies.Name" xml:space="preserve">
+    <value>chkTransferAssemblies</value>
+  </data>
+  <data name="&gt;&gt;txtNewPartCode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkResetReorder.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 139</value>
+  </data>
+  <data name="&gt;&gt;txtCompany.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOldCaption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 22</value>
+  </data>
+  <data name="chkTransferStock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 23</value>
+  </data>
+  <data name="&gt;&gt;chkTransferBackOrders.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;btnSelectNewPart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkTransferAssemblies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 21</value>
+  </data>
+  <data name="btnSelectOldPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>382, 41</value>
+  </data>
+  <data name="&gt;&gt;chkResetReorder.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnSupersede.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 33</value>
+  </data>
+  <data name="&gt;&gt;txtNewPartCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAlreadySupersededTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkTransferHistory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 101</value>
+  </data>
+  <data name="chkTransferStock.Text" xml:space="preserve">
+    <value>Transfer stock</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="chkTransferPartDescription.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;txtOldPartCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpNewPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 436</value>
+  </data>
+  <data name="txtCompany.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;btnSelectCompany.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtNewPartCode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpNewPart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnSelectOldPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;chkTransferHistory.Name" xml:space="preserve">
+    <value>chkTransferHistory</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPartDescription.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOldPart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="grpOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;lblOldCaption.Name" xml:space="preserve">
+    <value>lblOldCaption</value>
+  </data>
+  <data name="lblAlreadySupersededTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="btnSelectCompany.Text" xml:space="preserve">
+    <value>Load Branches</value>
+  </data>
+  <data name="&gt;&gt;lblAlreadySupersededTo.Parent" xml:space="preserve">
+    <value>grpOldPart</value>
+  </data>
+  <data name="chkTransferBackOrders.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 21</value>
+  </data>
+  <data name="&gt;&gt;btnSelectOldPart.Name" xml:space="preserve">
+    <value>btnSelectOldPart</value>
+  </data>
+  <data name="&gt;&gt;txtNewPartCode.Name" xml:space="preserve">
+    <value>txtNewPartCode</value>
+  </data>
+  <data name="txtOldPartCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 43</value>
+  </data>
+  <data name="&gt;&gt;lblBranchSummary.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;chkTransferHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnSelectCompany.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnSelectOldPart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 30</value>
+  </data>
+  <data name="&gt;&gt;lblOldCaption.Parent" xml:space="preserve">
+    <value>grpOldPart</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPartDescription.Name" xml:space="preserve">
+    <value>chkTransferPartDescription</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Name" xml:space="preserve">
+    <value>btnHelp</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>frm_stock_suppression</value>
+  </data>
+  <data name="chkTransferAssemblies.Text" xml:space="preserve">
+    <value>Transfer assemblies/kits</value>
+  </data>
+  <data name="chkZeroDemand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 127</value>
+  </data>
+  <data name="chkResetReorder.Text" xml:space="preserve">
+    <value>Reset re-order on old part</value>
+  </data>
+  <data name="&gt;&gt;grpNewPart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkResetReorder.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPurchaseOrders.Name" xml:space="preserve">
+    <value>chkTransferPurchaseOrders</value>
+  </data>
+  <data name="&gt;&gt;chkTransferBackOrders.Name" xml:space="preserve">
+    <value>chkTransferBackOrders</value>
+  </data>
+  <data name="chkTransferBackOrders.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkTransferBackOrders.Text" xml:space="preserve">
+    <value>Transfer back orders</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnSupersede.Name" xml:space="preserve">
+    <value>btnSupersede</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="lblBranchSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>116, 17</value>
+  </data>
+  <data name="chkZeroDemand.Text" xml:space="preserve">
+    <value>Zero demand quantity old part</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="lblOldCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnSelectCompany.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 28</value>
+  </data>
+  <data name="txtNewPartCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkTransferStock.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;txtNewPartCode.Parent" xml:space="preserve">
+    <value>grpNewPart</value>
+  </data>
+  <data name="&gt;&gt;chkTransferAssemblies.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>527, 578</value>
+  </data>
+  <data name="chkTransferAssemblies.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="chkTransferPartDescription.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblBranchSummary.Name" xml:space="preserve">
+    <value>lblBranchSummary</value>
+  </data>
+  <data name="lblBranchSummary.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
+  </data>
+  <data name="chkTransferHistory.Text" xml:space="preserve">
+    <value>Transfer history</value>
+  </data>
+  <data name="btnHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 533</value>
+  </data>
+  <data name="&gt;&gt;btnSelectOldPart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkTransferAssemblies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtCompany.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPurchaseOrders.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="chkTransferStock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 21</value>
+  </data>
+  <data name="&gt;&gt;chkZeroDemand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkTransferHistory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 21</value>
+  </data>
+  <data name="grpOldPart.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkResetReorder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkResetReorder.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblBranchSummary.Text" xml:space="preserve">
+    <value>0 branch selected</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Stock Suppressions</value>
+  </data>
+  <data name="&gt;&gt;grpOldPart.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblBranchSummary.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="grpOldPart.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="txtOldPartCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;btnSelectOldPart.Parent" xml:space="preserve">
+    <value>grpOldPart</value>
+  </data>
+  <data name="chkTransferBackOrders.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 75</value>
+  </data>
+  <data name="grpOldPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;txtOldPartCode.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnSelectCompany.Name" xml:space="preserve">
+    <value>btnSelectCompany</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
+  </data>
+  <data name="&gt;&gt;btnSelectCompany.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="txtCompany.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblAlreadySupersededTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
+  <data name="grpNewPart.Text" xml:space="preserve">
+    <value>New part number</value>
+  </data>
+  <data name="&gt;&gt;chkTransferStock.Name" xml:space="preserve">
+    <value>chkTransferStock</value>
+  </data>
+  <data name="txtCompany.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 244</value>
+  </data>
+  <data name="&gt;&gt;txtOldPartCode.Name" xml:space="preserve">
+    <value>txtOldPartCode</value>
+  </data>
+  <data name="&gt;&gt;chkTransferHistory.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;btnSelectNewPart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkTransferPartDescription.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnSelectNewPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnSelectNewPart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>382, 32</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 21</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnSelectCompany.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblBranchSummary.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chkTransferStock.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblOldCaption.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;chkTransferAssemblies.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkTransferStock.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblOldCaption.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkTransferPartDescription.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 21</value>
+  </data>
+  <data name="btnSupersede.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="txtOldPartCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 24</value>
+  </data>
+  <data name="txtCompany.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 24</value>
+  </data>
+  <data name="&gt;&gt;chkZeroDemand.Name" xml:space="preserve">
+    <value>chkZeroDemand</value>
+  </data>
+  <data name="grpNewPart.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 533</value>
+  </data>
+  <data name="btnSelectOldPart.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Name" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkTransferBackOrders.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="chkTransferBackOrders.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="chkZeroDemand.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;chkTransferStock.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkZeroDemand.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPurchaseOrders.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnCancel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkTransferPartDescription.Text" xml:space="preserve">
+    <value>Transfer part description</value>
+  </data>
+  <data name="chkTransferBackOrders.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;grpNewPart.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpNewPart.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 49</value>
+  </data>
+  <data name="chkTransferAssemblies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 205</value>
+  </data>
+  <data name="chkZeroDemand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 21</value>
+  </data>
+  <data name="&gt;&gt;chkTransferHistory.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;grpNewPart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 33</value>
+  </data>
+  <data name="&gt;&gt;grpOldPart.Name" xml:space="preserve">
+    <value>grpOldPart</value>
+  </data>
+  <data name="&gt;&gt;chkTransferBackOrders.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnHelp.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpNewPart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>498, 85</value>
+  </data>
+  <data name="lblBranchSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 272</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkResetReorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="chkTransferHistory.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="grpOldPart.Text" xml:space="preserve">
+    <value>Old part number</value>
+  </data>
+  <data name="lblAlreadySupersededTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblBranchSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;chkZeroDemand.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="chkTransferAssemblies.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblAlreadySupersededTo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.Text" xml:space="preserve">
+    <value>Transfer purchase order</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPartDescription.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblBranchSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="btnSelectOldPart.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="&gt;&gt;chkResetReorder.Name" xml:space="preserve">
+    <value>chkResetReorder</value>
+  </data>
+  <data name="&gt;&gt;btnSupersede.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtCompany.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;txtOldPartCode.Parent" xml:space="preserve">
+    <value>grpOldPart</value>
+  </data>
+  <data name="chkTransferPartDescription.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 179</value>
+  </data>
+  <data name="btnSupersede.Text" xml:space="preserve">
+    <value>Supersede</value>
+  </data>
+  <data name="btnSupersede.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="btnSelectNewPart.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblOldCaption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 17</value>
+  </data>
+  <data name="&gt;&gt;grpOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="chkResetReorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 21</value>
+  </data>
+  <data name="&gt;&gt;btnSelectNewPart.Parent" xml:space="preserve">
+    <value>grpNewPart</value>
+  </data>
+  <data name="&gt;&gt;grpOldPart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblAlreadySupersededTo.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>498, 289</value>
+  </data>
+  <data name="&gt;&gt;txtCompany.Name" xml:space="preserve">
+    <value>txtCompany</value>
+  </data>
+  <data name="&gt;&gt;btnSelectOldPart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblOldCaption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblAlreadySupersededTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 89</value>
+  </data>
+  <data name="txtOldPartCode.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;chkZeroDemand.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="chkResetReorder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 153</value>
+  </data>
+  <data name="grpOldPart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>498, 117</value>
+  </data>
+  <data name="&gt;&gt;grpNewPart.Name" xml:space="preserve">
+    <value>grpNewPart</value>
+  </data>
+  <data name="btnHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="txtNewPartCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 34</value>
+  </data>
+  <data name="btnHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 33</value>
+  </data>
+  <data name="&gt;&gt;lblOldCaption.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnSupersede.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 533</value>
+  </data>
+  <data name="btnSelectNewPart.Text" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="btnSelectCompany.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="btnSelectCompany.Location" type="System.Drawing.Point, System.Drawing">
+    <value>350, 241</value>
+  </data>
+  <data name="chkTransferStock.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkTransferAssemblies.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;btnSelectNewPart.Name" xml:space="preserve">
+    <value>btnSelectNewPart</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPartDescription.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkZeroDemand.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="chkTransferHistory.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnSupersede.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblAlreadySupersededTo.Name" xml:space="preserve">
+    <value>lblAlreadySupersededTo</value>
+  </data>
+  <data name="&gt;&gt;btnSupersede.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="chkTransferPurchaseOrders.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="btnSelectNewPart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 30</value>
+  </data>
+  <data name="&gt;&gt;chkTransferStock.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="txtNewPartCode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>360, 24</value>
+  </data>
+  <data name="btnHelp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="&gt;&gt;chkTransferPurchaseOrders.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

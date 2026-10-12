@@ -100,7 +100,7 @@
             this.grid_units.AllowUserToDeleteRows = false;
             this.grid_units.AllowUserToOrderColumns = true;
             resources.ApplyResources(this.grid_units, "grid_units");
-            this.grid_units.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grid_units.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.None;
             this.grid_units.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_units.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,

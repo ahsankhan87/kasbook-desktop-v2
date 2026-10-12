@@ -50,7 +50,7 @@ namespace pos.Suppliers.Supplier_Ledger_Report
             CmbCondition.SelectedIndex = 0;
         }
 
-        public void LoadReport(string supplier_id, string fromDate, string toDate, bool _isPrint)
+        public void LoadReport(string supplier_id, DateTime fromDate, DateTime toDate, bool _isPrint)
         {
             // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
@@ -72,8 +72,8 @@ namespace pos.Suppliers.Supplier_Ledger_Report
 
             // Set the parameter value
             reportDoc.SetParameterValue("supplier_id", supplier_id);
-            reportDoc.SetParameterValue("start_date", fromDate);
-            reportDoc.SetParameterValue("end_date", toDate);
+            reportDoc.SetParameterValue("start_date", fromDate.ToString("yyyy-MM-dd"));
+            reportDoc.SetParameterValue("end_date", toDate.ToString("yyyy-MM-dd"));
 
             // Set the report source for the CrystalReportViewer
             crystalReportViewer1.ReportSource = reportDoc;
@@ -181,7 +181,7 @@ namespace pos.Suppliers.Supplier_Ledger_Report
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
-            LoadReport(_supplier_id, txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString(), false);
+            LoadReport(_supplier_id, txt_from_date.Value, txt_to_date.Value, false);
         }
 
         private void FrmSupplierLedgerReport_KeyDown(object sender, KeyEventArgs e)

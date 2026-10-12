@@ -22,11 +22,42 @@ namespace pos
             InitializeComponent();
         }
 
+        private void AutoResizeColumns()
+        {
+            // Manually resize columns instead of using AutoSizeColumnsMode.Fill
+            // to avoid initialization and resize conflicts with WinForms
+            try
+            {
+                if (grid_units.Rows.Count == 0)
+                    return;
+
+                int totalWidth = grid_units.ClientSize.Width;
+                int totalColumnCount = grid_units.Columns.Count;
+
+                if (totalColumnCount == 0 || totalWidth <= 0)
+                    return;
+
+                // Set a base width for each column
+                int baseWidth = totalWidth / totalColumnCount;
+
+                grid_units.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
+                foreach (DataGridViewColumn column in grid_units.Columns)
+                {
+                    column.Width = baseWidth;
+                }
+            }
+            catch
+            {
+                // Silently ignore any sizing errors
+            }
+        }
 
         public void frm_units_Load(object sender, EventArgs e)
         {
             AppTheme.Apply(this);
             StyleForm();
+
             load_units_grid();
         }
 
@@ -50,6 +81,9 @@ namespace pos
                     String keyword = "id,name,date_created";
                     String table = "pos_units";
                     grid_units.DataSource = objBLL.GetRecord(keyword, table);
+
+                    // Manually resize columns after data is loaded
+                    AutoResizeColumns();
                 }
             }
             catch (Exception ex)
@@ -166,6 +200,9 @@ namespace pos
                     UnitsBLL objBLL = new UnitsBLL();
                     String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_units.DataSource = objBLL.SearchRecord(condition);
+
+                    // Manually resize columns after search results are loaded
+                    AutoResizeColumns();
                 }
             }
             catch (Exception ex)

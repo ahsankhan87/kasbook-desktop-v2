@@ -117,33 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="first_name.HeaderText" xml:space="preserve">
+  <data name="colCustomerCode.HeaderText" xml:space="preserve">
+    <value>رقم العميل</value>
+  </data>
+  <data name="colCustomerName.HeaderText" xml:space="preserve">
+    <value>اسم العميل</value>
+  </data>
+  <data name="colArea.HeaderText" xml:space="preserve">
+    <value>المنطقة</value>
+  </data>
+  <data name="colPhone.HeaderText" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="colTotalSales.HeaderText" xml:space="preserve">
+    <value>إجمالي المبيعات</value>
+  </data>
+  <data name="colOutstanding.HeaderText" xml:space="preserve">
+    <value>المستحق</value>
+  </data>
+  <data name="colCreditLimit.HeaderText" xml:space="preserve">
+    <value>حد الائتمان</value>
+  </data>
+  <data name="colCreditUsed.HeaderText" xml:space="preserve">
+    <value>الائتمان المستخدم %</value>
+  </data>
+  <data name="colLastTransaction.HeaderText" xml:space="preserve">
+    <value>تاريخ آخر معاملة</value>
+  </data>
+  <data name="colStatus.HeaderText" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="colFirstName.HeaderText" xml:space="preserve">
     <value>الاسم الأول</value>
   </data>
-  <data name="last_name.HeaderText" xml:space="preserve">
-    <value>الكنية</value>
+  <data name="colLastName.HeaderText" xml:space="preserve">
+    <value>الاسم الأخير</value>
   </data>
-  <data name="email.HeaderText" xml:space="preserve">
-    <value>البريد الإلكتروني</value>
-  </data>
-  <data name="vat_no.HeaderText" xml:space="preserve">
-    <value>الرقم الضريبي</value>
-  </data>
-  <data name="contact_no.HeaderText" xml:space="preserve">
-    <value>رقم الاتصال</value>
-  </data>
-  <data name="address.HeaderText" xml:space="preserve">
-    <value>عنوان</value>
-  </data>
-  <data name="date_created.HeaderText" xml:space="preserve">
-    <value>تاريخ الإنشاء</value>
-  </data>
-  <data name="btn_detail.HeaderText" xml:space="preserve">
-    <value>التفاصيل</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="grid_customers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 62</value>
+  <data name="colAddress.HeaderText" xml:space="preserve">
+    <value>العنوان</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="grid_customers.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -152,107 +163,181 @@
   <data name="grid_customers.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="grid_customers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1227, 765</value>
+    <value>948, 539</value>
+  </data>
+  <data name="splitMain.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="btnReceivePayment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 500</value>
+  </data>
+  <data name="btnReceivePayment.Text" xml:space="preserve">
+    <value>استقبال دفعة</value>
+  </data>
+  <data name="btnNewInvoice.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 466</value>
+  </data>
+  <data name="btnNewInvoice.Text" xml:space="preserve">
+    <value>فاتورة جديدة</value>
+  </data>
+  <data name="btnViewProfile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 432</value>
+  </data>
+  <data name="btnViewProfile.Text" xml:space="preserve">
+    <value>عرض الملف الشخصي</value>
+  </data>
+  <data name="lblTransactions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 20</value>
+  </data>
+  <data name="lblTransactions.Text" xml:space="preserve">
+    <value>آخر 5 معاملات</value>
+  </data>
+  <data name="lblCreditAvailableTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 17</value>
+  </data>
+  <data name="lblCreditAvailableTitle.Text" xml:space="preserve">
+    <value>المتاح</value>
+  </data>
+  <data name="lblCreditUsedTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 17</value>
+  </data>
+  <data name="lblCreditUsedTitle.Text" xml:space="preserve">
+    <value>المستخدم</value>
+  </data>
+  <data name="lblCreditLimitTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 17</value>
+  </data>
+  <data name="lblCreditLimitTitle.Text" xml:space="preserve">
+    <value>الحد</value>
+  </data>
+  <data name="lblOutstandingTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 17</value>
+  </data>
+  <data name="lblOutstandingTitle.Text" xml:space="preserve">
+    <value>المستحق</value>
+  </data>
+  <data name="lblPaidTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="lblPaidTitle.Text" xml:space="preserve">
+    <value>المدفوع</value>
+  </data>
+  <data name="lblTotalSalesDetailTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 17</value>
+  </data>
+  <data name="lblTotalSalesDetailTitle.Text" xml:space="preserve">
+    <value>إجمالي المبيعات</value>
+  </data>
+  <data name="pnlDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>280, 539</value>
+  </data>
+  <data name="splitMain.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="splitMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1232, 539</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitMain.SplitterDistance" type="System.Int32, mscorlib">
+    <value>948</value>
+  </data>
+  <data name="lblTotalCustomersTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 20</value>
+  </data>
+  <data name="lblTotalCustomersTitle.Text" xml:space="preserve">
+    <value>إجمالي العملاء</value>
+  </data>
+  <data name="cardTotalCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>903, 3</value>
+  </data>
+  <data name="cardTotalCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 86</value>
+  </data>
+  <data name="lblReceivablesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 20</value>
+  </data>
+  <data name="lblReceivablesTitle.Text" xml:space="preserve">
+    <value>إجمالي المستحقات</value>
+  </data>
+  <data name="cardReceivables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>603, 3</value>
+  </data>
+  <data name="cardReceivables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 86</value>
+  </data>
+  <data name="lblOverdueTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 20</value>
+  </data>
+  <data name="lblOverdueTitle.Text" xml:space="preserve">
+    <value>متأخر (&gt;30 يوم)</value>
+  </data>
+  <data name="cardOverdue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 3</value>
+  </data>
+  <data name="cardOverdue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 86</value>
+  </data>
+  <data name="lblNewCustomersTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 11</value>
+  </data>
+  <data name="lblNewCustomersTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="lblNewCustomersTitle.Text" xml:space="preserve">
+    <value>عملاء جدد هذا الشهر</value>
+  </data>
+  <data name="cardNewCustomers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="cardNewCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 86</value>
+  </data>
+  <data name="tableKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 92</value>
+  </data>
+  <data name="lblFilterStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="lblFilterStatus.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="lblFilterArea.Location" type="System.Drawing.Point, System.Drawing">
+    <value>628, 20</value>
+  </data>
+  <data name="lblFilterArea.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 17</value>
+  </data>
+  <data name="lblFilterArea.Text" xml:space="preserve">
+    <value>المنطقة/المحافظة</value>
+  </data>
+  <data name="lblFilterSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 17</value>
+  </data>
+  <data name="lblFilterSearch.Text" xml:space="preserve">
+    <value>بحث</value>
   </data>
   <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>735, 20</value>
+    <value>71, 16</value>
   </data>
   <data name="txt_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 26</value>
+    <value>408, 24</value>
   </data>
-  <data name="btn_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1154, 17</value>
+  <data name="pnlFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1200, 58</value>
   </data>
-  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 32</value>
   </data>
-  <data name="btn_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 35</value>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>ملخص لوحة العملاء</value>
   </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <data name="btn_refresh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>386, 17</value>
-  </data>
-  <data name="btn_refresh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="btn_refresh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 35</value>
-  </data>
-  <data name="btn_refresh.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
-  <data name="btn_delete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 17</value>
-  </data>
-  <data name="btn_delete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="btn_delete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 35</value>
-  </data>
-  <data name="btn_delete.Text" xml:space="preserve">
-    <value>حذف</value>
-  </data>
-  <data name="btn_update.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 17</value>
-  </data>
-  <data name="btn_update.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="btn_update.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 35</value>
-  </data>
-  <data name="btn_update.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
-  <data name="btn_new.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 17</value>
-  </data>
-  <data name="btn_new.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="btn_new.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 35</value>
-  </data>
-  <data name="btn_new.Text" xml:space="preserve">
-    <value>اضف جديد</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 88</value>
-  </data>
-  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 831</value>
-  </data>
-  <data name="lbl_customers_title.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1084, 28</value>
-  </data>
-  <data name="lbl_customers_title.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 0, 4, 0</value>
-  </data>
-  <data name="lbl_customers_title.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 29</value>
-  </data>
-  <data name="lbl_customers_title.Text" xml:space="preserve">
-    <value>إدارة العملاء</value>
-  </data>
-  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1232, 78</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>9, 20</value>
+  <data name="pnlTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1232, 210</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1232, 749</value>
@@ -281,13 +366,9 @@
         AAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>

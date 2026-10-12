@@ -28,6 +28,7 @@ namespace pos.Products.Suppression
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_stock_suppression));
             this.grpOldPart = new System.Windows.Forms.GroupBox();
             this.btnSelectOldPart = new System.Windows.Forms.Button();
             this.txtOldPartCode = new System.Windows.Forms.TextBox();
@@ -58,59 +59,40 @@ namespace pos.Products.Suppression
             // 
             // grpOldPart
             // 
+            resources.ApplyResources(this.grpOldPart, "grpOldPart");
             this.grpOldPart.Controls.Add(this.btnSelectOldPart);
             this.grpOldPart.Controls.Add(this.txtOldPartCode);
             this.grpOldPart.Controls.Add(this.lblAlreadySupersededTo);
             this.grpOldPart.Controls.Add(this.lblOldCaption);
-            this.grpOldPart.Location = new System.Drawing.Point(14, 15);
-            this.grpOldPart.Margin = new System.Windows.Forms.Padding(4);
             this.grpOldPart.Name = "grpOldPart";
-            this.grpOldPart.Padding = new System.Windows.Forms.Padding(4);
-            this.grpOldPart.Size = new System.Drawing.Size(498, 117);
-            this.grpOldPart.TabIndex = 0;
             this.grpOldPart.TabStop = false;
-            this.grpOldPart.Text = "Old part number";
             // 
             // btnSelectOldPart
             // 
-            this.btnSelectOldPart.Location = new System.Drawing.Point(382, 41);
-            this.btnSelectOldPart.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnSelectOldPart, "btnSelectOldPart");
             this.btnSelectOldPart.Name = "btnSelectOldPart";
-            this.btnSelectOldPart.Size = new System.Drawing.Size(103, 30);
-            this.btnSelectOldPart.TabIndex = 1;
-            this.btnSelectOldPart.Text = "Search";
             this.btnSelectOldPart.UseVisualStyleBackColor = true;
             this.btnSelectOldPart.Click += new System.EventHandler(this.btnSelectOldPart_Click);
             // 
             // txtOldPartCode
             // 
-            this.txtOldPartCode.Location = new System.Drawing.Point(14, 43);
-            this.txtOldPartCode.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txtOldPartCode, "txtOldPartCode");
             this.txtOldPartCode.Name = "txtOldPartCode";
             this.txtOldPartCode.ReadOnly = true;
-            this.txtOldPartCode.Size = new System.Drawing.Size(360, 24);
-            this.txtOldPartCode.TabIndex = 0;
             // 
             // lblAlreadySupersededTo
             // 
-            this.lblAlreadySupersededTo.AutoSize = true;
-            this.lblAlreadySupersededTo.Location = new System.Drawing.Point(14, 89);
-            this.lblAlreadySupersededTo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblAlreadySupersededTo, "lblAlreadySupersededTo");
             this.lblAlreadySupersededTo.Name = "lblAlreadySupersededTo";
-            this.lblAlreadySupersededTo.Size = new System.Drawing.Size(0, 17);
-            this.lblAlreadySupersededTo.TabIndex = 3;
             // 
             // lblOldCaption
             // 
-            this.lblOldCaption.AutoSize = true;
-            this.lblOldCaption.Location = new System.Drawing.Point(14, 22);
-            this.lblOldCaption.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblOldCaption, "lblOldCaption");
             this.lblOldCaption.Name = "lblOldCaption";
-            this.lblOldCaption.Size = new System.Drawing.Size(0, 17);
-            this.lblOldCaption.TabIndex = 2;
             // 
             // grpOptions
             // 
+            resources.ApplyResources(this.grpOptions, "grpOptions");
             this.grpOptions.Controls.Add(this.chkTransferAssemblies);
             this.grpOptions.Controls.Add(this.chkTransferPartDescription);
             this.grpOptions.Controls.Add(this.chkResetReorder);
@@ -122,220 +104,134 @@ namespace pos.Products.Suppression
             this.grpOptions.Controls.Add(this.btnSelectCompany);
             this.grpOptions.Controls.Add(this.txtCompany);
             this.grpOptions.Controls.Add(this.lblBranchSummary);
-            this.grpOptions.Location = new System.Drawing.Point(14, 139);
-            this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
             this.grpOptions.Name = "grpOptions";
-            this.grpOptions.Padding = new System.Windows.Forms.Padding(4);
-            this.grpOptions.Size = new System.Drawing.Size(498, 289);
-            this.grpOptions.TabIndex = 1;
             this.grpOptions.TabStop = false;
-            this.grpOptions.Text = "Options";
             // 
             // chkTransferAssemblies
             // 
-            this.chkTransferAssemblies.AutoSize = true;
-            this.chkTransferAssemblies.Location = new System.Drawing.Point(18, 205);
-            this.chkTransferAssemblies.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferAssemblies, "chkTransferAssemblies");
             this.chkTransferAssemblies.Name = "chkTransferAssemblies";
-            this.chkTransferAssemblies.Size = new System.Drawing.Size(172, 21);
-            this.chkTransferAssemblies.TabIndex = 7;
-            this.chkTransferAssemblies.Text = "Transfer assemblies/kits";
             this.chkTransferAssemblies.UseVisualStyleBackColor = true;
             // 
             // chkTransferPartDescription
             // 
-            this.chkTransferPartDescription.AutoSize = true;
-            this.chkTransferPartDescription.Location = new System.Drawing.Point(18, 179);
-            this.chkTransferPartDescription.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferPartDescription, "chkTransferPartDescription");
             this.chkTransferPartDescription.Name = "chkTransferPartDescription";
-            this.chkTransferPartDescription.Size = new System.Drawing.Size(179, 21);
-            this.chkTransferPartDescription.TabIndex = 6;
-            this.chkTransferPartDescription.Text = "Transfer part description";
             this.chkTransferPartDescription.UseVisualStyleBackColor = true;
             // 
             // chkResetReorder
             // 
-            this.chkResetReorder.AutoSize = true;
-            this.chkResetReorder.Location = new System.Drawing.Point(18, 153);
-            this.chkResetReorder.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkResetReorder, "chkResetReorder");
             this.chkResetReorder.Name = "chkResetReorder";
-            this.chkResetReorder.Size = new System.Drawing.Size(189, 21);
-            this.chkResetReorder.TabIndex = 5;
-            this.chkResetReorder.Text = "Reset re-order on old part";
             this.chkResetReorder.UseVisualStyleBackColor = true;
             // 
             // chkZeroDemand
             // 
-            this.chkZeroDemand.AutoSize = true;
-            this.chkZeroDemand.Location = new System.Drawing.Point(18, 127);
-            this.chkZeroDemand.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkZeroDemand, "chkZeroDemand");
             this.chkZeroDemand.Name = "chkZeroDemand";
-            this.chkZeroDemand.Size = new System.Drawing.Size(218, 21);
-            this.chkZeroDemand.TabIndex = 4;
-            this.chkZeroDemand.Text = "Zero demand quantity old part";
             this.chkZeroDemand.UseVisualStyleBackColor = true;
             // 
             // chkTransferHistory
             // 
-            this.chkTransferHistory.AutoSize = true;
-            this.chkTransferHistory.Location = new System.Drawing.Point(18, 101);
-            this.chkTransferHistory.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferHistory, "chkTransferHistory");
             this.chkTransferHistory.Name = "chkTransferHistory";
-            this.chkTransferHistory.Size = new System.Drawing.Size(126, 21);
-            this.chkTransferHistory.TabIndex = 3;
-            this.chkTransferHistory.Text = "Transfer history";
             this.chkTransferHistory.UseVisualStyleBackColor = true;
             // 
             // chkTransferBackOrders
             // 
-            this.chkTransferBackOrders.AutoSize = true;
-            this.chkTransferBackOrders.Location = new System.Drawing.Point(18, 75);
-            this.chkTransferBackOrders.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferBackOrders, "chkTransferBackOrders");
             this.chkTransferBackOrders.Name = "chkTransferBackOrders";
-            this.chkTransferBackOrders.Size = new System.Drawing.Size(156, 21);
-            this.chkTransferBackOrders.TabIndex = 2;
-            this.chkTransferBackOrders.Text = "Transfer back orders";
             this.chkTransferBackOrders.UseVisualStyleBackColor = true;
             // 
             // chkTransferPurchaseOrders
             // 
-            this.chkTransferPurchaseOrders.AutoSize = true;
-            this.chkTransferPurchaseOrders.Location = new System.Drawing.Point(18, 49);
-            this.chkTransferPurchaseOrders.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferPurchaseOrders, "chkTransferPurchaseOrders");
             this.chkTransferPurchaseOrders.Name = "chkTransferPurchaseOrders";
-            this.chkTransferPurchaseOrders.Size = new System.Drawing.Size(177, 21);
-            this.chkTransferPurchaseOrders.TabIndex = 1;
-            this.chkTransferPurchaseOrders.Text = "Transfer purchase order";
             this.chkTransferPurchaseOrders.UseVisualStyleBackColor = true;
             // 
             // chkTransferStock
             // 
-            this.chkTransferStock.AutoSize = true;
-            this.chkTransferStock.Location = new System.Drawing.Point(18, 23);
-            this.chkTransferStock.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.chkTransferStock, "chkTransferStock");
             this.chkTransferStock.Name = "chkTransferStock";
-            this.chkTransferStock.Size = new System.Drawing.Size(117, 21);
-            this.chkTransferStock.TabIndex = 0;
-            this.chkTransferStock.Text = "Transfer stock";
             this.chkTransferStock.UseVisualStyleBackColor = true;
             // 
             // btnSelectCompany
             // 
-            this.btnSelectCompany.Location = new System.Drawing.Point(350, 241);
-            this.btnSelectCompany.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnSelectCompany, "btnSelectCompany");
             this.btnSelectCompany.Name = "btnSelectCompany";
-            this.btnSelectCompany.Size = new System.Drawing.Size(135, 28);
-            this.btnSelectCompany.TabIndex = 10;
-            this.btnSelectCompany.Text = "Load Branches";
             this.btnSelectCompany.UseVisualStyleBackColor = true;
             this.btnSelectCompany.Click += new System.EventHandler(this.btnSelectCompany_Click);
             // 
             // txtCompany
             // 
-            this.txtCompany.Location = new System.Drawing.Point(18, 244);
-            this.txtCompany.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txtCompany, "txtCompany");
             this.txtCompany.Name = "txtCompany";
             this.txtCompany.ReadOnly = true;
-            this.txtCompany.Size = new System.Drawing.Size(324, 24);
-            this.txtCompany.TabIndex = 9;
             // 
             // lblBranchSummary
             // 
-            this.lblBranchSummary.AutoSize = true;
-            this.lblBranchSummary.Location = new System.Drawing.Point(14, 272);
-            this.lblBranchSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            resources.ApplyResources(this.lblBranchSummary, "lblBranchSummary");
             this.lblBranchSummary.Name = "lblBranchSummary";
-            this.lblBranchSummary.Size = new System.Drawing.Size(116, 17);
-            this.lblBranchSummary.TabIndex = 8;
-            this.lblBranchSummary.Text = "0 branch selected";
             // 
             // grpNewPart
             // 
+            resources.ApplyResources(this.grpNewPart, "grpNewPart");
             this.grpNewPart.Controls.Add(this.btnSelectNewPart);
             this.grpNewPart.Controls.Add(this.txtNewPartCode);
-            this.grpNewPart.Location = new System.Drawing.Point(14, 436);
-            this.grpNewPart.Margin = new System.Windows.Forms.Padding(4);
             this.grpNewPart.Name = "grpNewPart";
-            this.grpNewPart.Padding = new System.Windows.Forms.Padding(4);
-            this.grpNewPart.Size = new System.Drawing.Size(498, 85);
-            this.grpNewPart.TabIndex = 2;
             this.grpNewPart.TabStop = false;
-            this.grpNewPart.Text = "New part number";
             // 
             // btnSelectNewPart
             // 
-            this.btnSelectNewPart.Location = new System.Drawing.Point(382, 32);
-            this.btnSelectNewPart.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnSelectNewPart, "btnSelectNewPart");
             this.btnSelectNewPart.Name = "btnSelectNewPart";
-            this.btnSelectNewPart.Size = new System.Drawing.Size(103, 30);
-            this.btnSelectNewPart.TabIndex = 1;
-            this.btnSelectNewPart.Text = "Search";
             this.btnSelectNewPart.UseVisualStyleBackColor = true;
             this.btnSelectNewPart.Click += new System.EventHandler(this.btnSelectNewPart_Click);
             // 
             // txtNewPartCode
             // 
-            this.txtNewPartCode.Location = new System.Drawing.Point(14, 34);
-            this.txtNewPartCode.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.txtNewPartCode, "txtNewPartCode");
             this.txtNewPartCode.Name = "txtNewPartCode";
             this.txtNewPartCode.ReadOnly = true;
-            this.txtNewPartCode.Size = new System.Drawing.Size(360, 24);
-            this.txtNewPartCode.TabIndex = 0;
             // 
             // btnCancel
             // 
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(14, 533);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(93, 33);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(114, 533);
-            this.btnHelp.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnHelp, "btnHelp");
             this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(93, 33);
-            this.btnHelp.TabIndex = 4;
-            this.btnHelp.Text = "Help";
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
             // btnSupersede
             // 
-            this.btnSupersede.Location = new System.Drawing.Point(419, 533);
-            this.btnSupersede.Margin = new System.Windows.Forms.Padding(4);
+            resources.ApplyResources(this.btnSupersede, "btnSupersede");
             this.btnSupersede.Name = "btnSupersede";
-            this.btnSupersede.Size = new System.Drawing.Size(93, 33);
-            this.btnSupersede.TabIndex = 5;
-            this.btnSupersede.Text = "Supersede";
             this.btnSupersede.UseVisualStyleBackColor = true;
             this.btnSupersede.Click += new System.EventHandler(this.btnSupersede_Click);
             // 
             // frm_stock_suppression
             // 
             this.AcceptButton = this.btnSupersede;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(527, 578);
             this.Controls.Add(this.btnSupersede);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.grpNewPart);
             this.Controls.Add(this.grpOptions);
             this.Controls.Add(this.grpOldPart);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frm_stock_suppression";
             this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Stock Suppressions";
             this.Load += new System.EventHandler(this.frm_stock_suppression_Load);
             this.grpOldPart.ResumeLayout(false);
             this.grpOldPart.PerformLayout();

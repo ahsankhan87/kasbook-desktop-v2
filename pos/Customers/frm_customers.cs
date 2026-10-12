@@ -33,7 +33,7 @@ namespace pos
 
         public void frm_customers_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+            //AppTheme.Apply(this);
             ApplyDashboardTheme();
             InitializeFilters();
             LoadDashboard();
@@ -111,11 +111,11 @@ namespace pos
         private void InitializeFilters()
         {
             cmbStatus.Items.Clear();
-            cmbStatus.Items.AddRange(new object[] { "All", "Active", "Inactive", "Overdue" });
+            cmbStatus.Items.AddRange(new object[] { UiMessages.T("All", "الكل"), UiMessages.T("Active", "نشط"), UiMessages.T("Inactive", "غير نشط"), UiMessages.T("Overdue", "متأخر") });
             cmbStatus.SelectedIndex = 0;
 
             cmbArea.Items.Clear();
-            cmbArea.Items.Add("All Areas");
+            cmbArea.Items.Add(UiMessages.T("All Areas", "كل المناطق"));
             cmbArea.SelectedIndex = 0;
         }
 
@@ -207,8 +207,12 @@ namespace pos
             if (_dashboardView == null) return;
 
             string text = (txt_search.Text ?? string.Empty).Trim().Replace("'", "''");
-            string area = cmbArea.SelectedItem == null ? "All Areas" : cmbArea.SelectedItem.ToString().Replace("'", "''");
-            string status = cmbStatus.SelectedItem == null ? "All" : cmbStatus.SelectedItem.ToString();
+            string areaDisplay = cmbArea.SelectedItem == null ? UiMessages.T("All Areas", "كل المناطق").ToString() : cmbArea.SelectedItem.ToString();
+            string statusDisplay = cmbStatus.SelectedItem == null ? UiMessages.T("All", "الكل").ToString() : cmbStatus.SelectedItem.ToString();
+
+            // Convert display values to database keys
+            string areaKey = GetAreaDatabaseKey(areaDisplay);
+            string statusKey = GetStatusDatabaseKey(statusDisplay);
 
             string filter = string.Empty;
 
@@ -217,16 +221,16 @@ namespace pos
                 filter = "(customer_name LIKE '%" + text + "%' OR customer_code LIKE '%" + text + "%')";
             }
 
-            if (!string.Equals(area, "All Areas", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(areaKey, "ALL_AREAS", StringComparison.OrdinalIgnoreCase))
             {
                 if (filter.Length > 0) filter += " AND ";
-                filter += "area = '" + area + "'";
+                filter += "area = '" + areaKey.Replace("'", "''") + "'";
             }
 
-            if (!string.Equals(status, "All", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(statusKey, "All", StringComparison.OrdinalIgnoreCase))
             {
                 if (filter.Length > 0) filter += " AND ";
-                filter += "status_text = '" + status.Replace("'", "''") + "'";
+                filter += "status_text = '" + statusKey.Replace("'", "''") + "'";
             }
 
             _dashboardView.RowFilter = filter;
@@ -238,6 +242,52 @@ namespace pos
                 ResetDetails();
                 ToggleDetailsPanel(false);
             }
+        }
+
+        private string GetStatusDatabaseKey(string displayValue)
+        {
+            // Map UI display values (Arabic or English) to database keys (English only)
+            if (string.IsNullOrWhiteSpace(displayValue))
+                return "All";
+
+            string normalized = displayValue.Trim();
+
+            // Check for known values (bilingual)
+            if (normalized.Equals(UiMessages.T("All", "الكل"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("All", StringComparison.OrdinalIgnoreCase))
+                return "All";
+
+            if (normalized.Equals(UiMessages.T("Active", "نشط"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Active", StringComparison.OrdinalIgnoreCase))
+                return "Active";
+
+            if (normalized.Equals(UiMessages.T("Inactive", "غير نشط"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Inactive", StringComparison.OrdinalIgnoreCase))
+                return "Inactive";
+
+            if (normalized.Equals(UiMessages.T("Overdue", "متأخر"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Overdue", StringComparison.OrdinalIgnoreCase))
+                return "Overdue";
+
+            // Default to the value as-is (for any custom values)
+            return normalized;
+        }
+
+        private string GetAreaDatabaseKey(string displayValue)
+        {
+            // Map UI display values (Arabic or English) to database keys
+            if (string.IsNullOrWhiteSpace(displayValue))
+                return "ALL_AREAS";
+
+            string normalized = displayValue.Trim();
+
+            // Check for "All Areas" / "كل المناطق"
+            if (normalized.Equals(UiMessages.T("All Areas", "كل المناطق"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("All Areas", StringComparison.OrdinalIgnoreCase))
+                return "ALL_AREAS";
+
+            // For custom area values, return as-is (they're fetched from data, not hardcoded)
+            return normalized;
         }
 
         private void UpdateRowNumbers(DataTable current)
@@ -266,7 +316,7 @@ namespace pos
             lblReceivablesValue.Text = receivables.ToString("N2");
             lblOverdueValue.Text = overdue.ToString("N2");
             lblNewCustomersValue.Text = newThisMonth.ToString("N0");
-            lblNewCustomersTrend.Text = (trend >= 0 ? "▲ " : "▼ ") + Math.Abs(trend).ToString("N0") + " vs PM";
+            lblNewCustomersTrend.Text = UiMessages.T((trend >= 0 ? "▲ " : "▼ ") + Math.Abs(trend).ToString("N0") + " vs PM", (trend >= 0 ? "▲ " : "▼ ") + Math.Abs(trend).ToString("N0") + " مقابل الشهر السابق");
             lblNewCustomersTrend.ForeColor = trend >= 0 ? _okGreen : _overdueRed;
         }
 
@@ -373,18 +423,18 @@ namespace pos
                 }
 
                 if (lstTransactions.Items.Count == 0)
-                    lstTransactions.Items.Add("No transactions");
+                    lstTransactions.Items.Add(UiMessages.T("No transactions", "لا توجد معاملات"));
             }
             catch
             {
-                lstTransactions.Items.Add("Unable to load transactions");
+                lstTransactions.Items.Add(UiMessages.T("Unable to load transactions", "لا يمكن تحميل المعاملات"));
             }
         }
 
         private void ResetDetails()
         {
             _selectedCustomerId = 0;
-            lblCustomerHeader.Text = "Select customer";
+            lblCustomerHeader.Text = UiMessages.T("Select customer", "اختر عميل");
             _avatarInitials = "?";
             panelAvatar.Invalidate();
 

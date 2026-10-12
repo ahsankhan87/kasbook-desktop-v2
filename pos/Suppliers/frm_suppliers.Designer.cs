@@ -102,11 +102,11 @@
             // 
             // pnlTop
             // 
+            resources.ApplyResources(this.pnlTop, "pnlTop");
             this.pnlTop.BackColor = System.Drawing.Color.White;
             this.pnlTop.Controls.Add(this.tableKpis);
             this.pnlTop.Controls.Add(this.pnlFilters);
             this.pnlTop.Controls.Add(this.lblTitle);
-            resources.ApplyResources(this.pnlTop, "pnlTop");
             this.pnlTop.Name = "pnlTop";
             // 
             // tableKpis
@@ -120,10 +120,10 @@
             // 
             // cardTotalSuppliers
             // 
+            resources.ApplyResources(this.cardTotalSuppliers, "cardTotalSuppliers");
             this.cardTotalSuppliers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardTotalSuppliers.Controls.Add(this.lblTotalSuppliersValue);
             this.cardTotalSuppliers.Controls.Add(this.lblTotalSuppliersTitle);
-            resources.ApplyResources(this.cardTotalSuppliers, "cardTotalSuppliers");
             this.cardTotalSuppliers.Name = "cardTotalSuppliers";
             // 
             // lblTotalSuppliersValue
@@ -138,10 +138,10 @@
             // 
             // cardTotalPayables
             // 
+            resources.ApplyResources(this.cardTotalPayables, "cardTotalPayables");
             this.cardTotalPayables.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardTotalPayables.Controls.Add(this.lblTotalPayablesValue);
             this.cardTotalPayables.Controls.Add(this.lblTotalPayablesTitle);
-            resources.ApplyResources(this.cardTotalPayables, "cardTotalPayables");
             this.cardTotalPayables.Name = "cardTotalPayables";
             // 
             // lblTotalPayablesValue
@@ -156,10 +156,10 @@
             // 
             // cardOverduePayables
             // 
+            resources.ApplyResources(this.cardOverduePayables, "cardOverduePayables");
             this.cardOverduePayables.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardOverduePayables.Controls.Add(this.lblOverduePayablesValue);
             this.cardOverduePayables.Controls.Add(this.lblOverduePayablesTitle);
-            resources.ApplyResources(this.cardOverduePayables, "cardOverduePayables");
             this.cardOverduePayables.Name = "cardOverduePayables";
             // 
             // lblOverduePayablesValue
@@ -175,11 +175,11 @@
             // 
             // cardThisMonth
             // 
+            resources.ApplyResources(this.cardThisMonth, "cardThisMonth");
             this.cardThisMonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardThisMonth.Controls.Add(this.lblThisMonthValue);
             this.cardThisMonth.Controls.Add(this.lblThisMonthTitle);
             this.cardThisMonth.Controls.Add(this.lblThisMonthTrend);
-            resources.ApplyResources(this.cardThisMonth, "cardThisMonth");
             this.cardThisMonth.Name = "cardThisMonth";
             // 
             // lblThisMonthValue
@@ -199,13 +199,13 @@
             // 
             // pnlFilters
             // 
+            resources.ApplyResources(this.pnlFilters, "pnlFilters");
             this.pnlFilters.Controls.Add(this.lblFilterStatus);
             this.pnlFilters.Controls.Add(this.cmbStatus);
             this.pnlFilters.Controls.Add(this.lblFilterCategory);
             this.pnlFilters.Controls.Add(this.cmbCategory);
             this.pnlFilters.Controls.Add(this.lblFilterSearch);
             this.pnlFilters.Controls.Add(this.txt_search);
-            resources.ApplyResources(this.pnlFilters, "pnlFilters");
             this.pnlFilters.Name = "pnlFilters";
             // 
             // lblFilterStatus
@@ -215,9 +215,9 @@
             // 
             // cmbStatus
             // 
+            resources.ApplyResources(this.cmbStatus, "cmbStatus");
             this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbStatus, "cmbStatus");
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
             // 
@@ -228,9 +228,9 @@
             // 
             // cmbCategory
             // 
+            resources.ApplyResources(this.cmbCategory, "cmbCategory");
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.FormattingEnabled = true;
-            resources.ApplyResources(this.cmbCategory, "cmbCategory");
             this.cmbCategory.Name = "cmbCategory";
             this.cmbCategory.SelectedIndexChanged += new System.EventHandler(this.cmbCategory_SelectedIndexChanged);
             // 
@@ -258,14 +258,17 @@
             // 
             // splitMain.Panel1
             // 
+            resources.ApplyResources(this.splitMain.Panel1, "splitMain.Panel1");
             this.splitMain.Panel1.Controls.Add(this.grid_suppliers);
             // 
             // splitMain.Panel2
             // 
+            resources.ApplyResources(this.splitMain.Panel2, "splitMain.Panel2");
             this.splitMain.Panel2.Controls.Add(this.pnlDetails);
             // 
             // grid_suppliers
             // 
+            resources.ApplyResources(this.grid_suppliers, "grid_suppliers");
             this.grid_suppliers.AllowUserToAddRows = false;
             this.grid_suppliers.AllowUserToDeleteRows = false;
             this.grid_suppliers.AllowUserToOrderColumns = true;
@@ -288,7 +291,6 @@
             this.colCreditLimit,
             this.colTotalPaid,
             this.colIsOverdue});
-            resources.ApplyResources(this.grid_suppliers, "grid_suppliers");
             this.grid_suppliers.MultiSelect = false;
             this.grid_suppliers.Name = "grid_suppliers";
             this.grid_suppliers.ReadOnly = true;
@@ -424,6 +426,7 @@
             // 
             // pnlDetails
             // 
+            resources.ApplyResources(this.pnlDetails, "pnlDetails");
             this.pnlDetails.BackColor = System.Drawing.Color.White;
             this.pnlDetails.Controls.Add(this.btnMakePayment);
             this.pnlDetails.Controls.Add(this.btnNewBill);
@@ -445,7 +448,6 @@
             this.pnlDetails.Controls.Add(this.lblPhoneValue);
             this.pnlDetails.Controls.Add(this.panelAvatar);
             this.pnlDetails.Controls.Add(this.lblSupplierHeader);
-            resources.ApplyResources(this.pnlDetails, "pnlDetails");
             this.pnlDetails.Name = "pnlDetails";
             // 
             // btnMakePayment
@@ -471,8 +473,8 @@
             // 
             // lstBills
             // 
-            this.lstBills.FormattingEnabled = true;
             resources.ApplyResources(this.lstBills, "lstBills");
+            this.lstBills.FormattingEnabled = true;
             this.lstBills.Name = "lstBills";
             // 
             // lblBills
@@ -532,20 +534,20 @@
             // 
             // lblCategoryValue
             // 
-            this.lblCategoryValue.AutoEllipsis = true;
             resources.ApplyResources(this.lblCategoryValue, "lblCategoryValue");
+            this.lblCategoryValue.AutoEllipsis = true;
             this.lblCategoryValue.Name = "lblCategoryValue";
             // 
             // lblAddressValue
             // 
-            this.lblAddressValue.AutoEllipsis = true;
             resources.ApplyResources(this.lblAddressValue, "lblAddressValue");
+            this.lblAddressValue.AutoEllipsis = true;
             this.lblAddressValue.Name = "lblAddressValue";
             // 
             // lblPhoneValue
             // 
-            this.lblPhoneValue.AutoEllipsis = true;
             resources.ApplyResources(this.lblPhoneValue, "lblPhoneValue");
+            this.lblPhoneValue.AutoEllipsis = true;
             this.lblPhoneValue.Name = "lblPhoneValue";
             // 
             // panelAvatar
@@ -556,15 +558,15 @@
             // 
             // lblSupplierHeader
             // 
-            this.lblSupplierHeader.AutoEllipsis = true;
             resources.ApplyResources(this.lblSupplierHeader, "lblSupplierHeader");
+            this.lblSupplierHeader.AutoEllipsis = true;
             this.lblSupplierHeader.Name = "lblSupplierHeader";
             // 
             // pnlBottom
             // 
+            resources.ApplyResources(this.pnlBottom, "pnlBottom");
             this.pnlBottom.BackColor = System.Drawing.Color.White;
             this.pnlBottom.Controls.Add(this.lblBottomSummary);
-            resources.ApplyResources(this.pnlBottom, "pnlBottom");
             this.pnlBottom.Name = "pnlBottom";
             // 
             // lblBottomSummary

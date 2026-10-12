@@ -28,6 +28,7 @@ namespace pos.Reports.Products.Inventory
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmNonMovingItemsReport));
             this.pnlFilters = new System.Windows.Forms.Panel();
             this.lblDaysThreshold = new System.Windows.Forms.Label();
             this.nudDaysThreshold = new System.Windows.Forms.NumericUpDown();
@@ -75,26 +76,17 @@ namespace pos.Reports.Products.Inventory
             this.pnlFilters.Controls.Add(this.btnExport);
             this.pnlFilters.Controls.Add(this.btnPrint);
             this.pnlFilters.Controls.Add(this.btnClear);
-            this.pnlFilters.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilters.Location = new System.Drawing.Point(0, 0);
-            this.pnlFilters.Margin = new System.Windows.Forms.Padding(3, 3, 3, 8);
+            resources.ApplyResources(this.pnlFilters, "pnlFilters");
             this.pnlFilters.Name = "pnlFilters";
-            this.pnlFilters.Padding = new System.Windows.Forms.Padding(12);
-            this.pnlFilters.Size = new System.Drawing.Size(1200, 140);
-            this.pnlFilters.TabIndex = 0;
             // 
             // lblDaysThreshold
             // 
-            this.lblDaysThreshold.AutoSize = true;
-            this.lblDaysThreshold.Location = new System.Drawing.Point(12, 15);
+            resources.ApplyResources(this.lblDaysThreshold, "lblDaysThreshold");
             this.lblDaysThreshold.Name = "lblDaysThreshold";
-            this.lblDaysThreshold.Size = new System.Drawing.Size(101, 21);
-            this.lblDaysThreshold.TabIndex = 0;
-            this.lblDaysThreshold.Text = "No Sales For:";
             // 
             // nudDaysThreshold
             // 
-            this.nudDaysThreshold.Location = new System.Drawing.Point(149, 12);
+            resources.ApplyResources(this.nudDaysThreshold, "nudDaysThreshold");
             this.nudDaysThreshold.Maximum = new decimal(new int[] {
             1095,
             0,
@@ -106,8 +98,6 @@ namespace pos.Reports.Products.Inventory
             0,
             0});
             this.nudDaysThreshold.Name = "nudDaysThreshold";
-            this.nudDaysThreshold.Size = new System.Drawing.Size(80, 29);
-            this.nudDaysThreshold.TabIndex = 1;
             this.nudDaysThreshold.Value = new decimal(new int[] {
             90,
             0,
@@ -116,24 +106,18 @@ namespace pos.Reports.Products.Inventory
             // 
             // lblMinQty
             // 
-            this.lblMinQty.AutoSize = true;
-            this.lblMinQty.Location = new System.Drawing.Point(12, 50);
+            resources.ApplyResources(this.lblMinQty, "lblMinQty");
             this.lblMinQty.Name = "lblMinQty";
-            this.lblMinQty.Size = new System.Drawing.Size(135, 21);
-            this.lblMinQty.TabIndex = 2;
-            this.lblMinQty.Text = "Min Qty On Hand:";
             // 
             // nudMinQty
             // 
-            this.nudMinQty.Location = new System.Drawing.Point(149, 47);
+            resources.ApplyResources(this.nudMinQty, "nudMinQty");
             this.nudMinQty.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.nudMinQty.Name = "nudMinQty";
-            this.nudMinQty.Size = new System.Drawing.Size(80, 29);
-            this.nudMinQty.TabIndex = 3;
             this.nudMinQty.Value = new decimal(new int[] {
             1,
             0,
@@ -142,69 +126,47 @@ namespace pos.Reports.Products.Inventory
             // 
             // lblCategory
             // 
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(244, 15);
+            resources.ApplyResources(this.lblCategory, "lblCategory");
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(76, 21);
-            this.lblCategory.TabIndex = 4;
-            this.lblCategory.Text = "Category:";
             // 
             // cmbCategory
             // 
             this.cmbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategory.FormattingEnabled = true;
-            this.cmbCategory.Location = new System.Drawing.Point(319, 12);
+            resources.ApplyResources(this.cmbCategory, "cmbCategory");
             this.cmbCategory.Name = "cmbCategory";
-            this.cmbCategory.Size = new System.Drawing.Size(140, 29);
-            this.cmbCategory.TabIndex = 5;
             // 
             // lblBrand
             // 
-            this.lblBrand.AutoSize = true;
-            this.lblBrand.Location = new System.Drawing.Point(474, 15);
+            resources.ApplyResources(this.lblBrand, "lblBrand");
             this.lblBrand.Name = "lblBrand";
-            this.lblBrand.Size = new System.Drawing.Size(54, 21);
-            this.lblBrand.TabIndex = 6;
-            this.lblBrand.Text = "Brand:";
             // 
             // cmbBrand
             // 
             this.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBrand.FormattingEnabled = true;
-            this.cmbBrand.Location = new System.Drawing.Point(529, 12);
+            resources.ApplyResources(this.cmbBrand, "cmbBrand");
             this.cmbBrand.Name = "cmbBrand";
-            this.cmbBrand.Size = new System.Drawing.Size(140, 29);
-            this.cmbBrand.TabIndex = 7;
             // 
             // lblLocation
             // 
-            this.lblLocation.AutoSize = true;
-            this.lblLocation.Location = new System.Drawing.Point(684, 15);
+            resources.ApplyResources(this.lblLocation, "lblLocation");
             this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(72, 21);
-            this.lblLocation.TabIndex = 8;
-            this.lblLocation.Text = "Location:";
             // 
             // cmbLocation
             // 
             this.cmbLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLocation.FormattingEnabled = true;
-            this.cmbLocation.Location = new System.Drawing.Point(757, 12);
+            resources.ApplyResources(this.cmbLocation, "cmbLocation");
             this.cmbLocation.Name = "cmbLocation";
-            this.cmbLocation.Size = new System.Drawing.Size(140, 29);
-            this.cmbLocation.TabIndex = 9;
             // 
             // btnLoad
             // 
             this.btnLoad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(212)))));
             this.btnLoad.FlatAppearance.BorderSize = 0;
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnLoad, "btnLoad");
             this.btnLoad.ForeColor = System.Drawing.Color.White;
-            this.btnLoad.Location = new System.Drawing.Point(244, 50);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(90, 32);
-            this.btnLoad.TabIndex = 10;
-            this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = false;
             this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
@@ -212,13 +174,9 @@ namespace pos.Reports.Products.Inventory
             // 
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(136)))));
             this.btnExport.FlatAppearance.BorderSize = 0;
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnExport, "btnExport");
             this.btnExport.ForeColor = System.Drawing.Color.White;
-            this.btnExport.Location = new System.Drawing.Point(340, 50);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(90, 32);
-            this.btnExport.TabIndex = 11;
-            this.btnExport.Text = "Export CSV";
             this.btnExport.UseVisualStyleBackColor = false;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
@@ -226,13 +184,9 @@ namespace pos.Reports.Products.Inventory
             // 
             this.btnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(136)))));
             this.btnPrint.FlatAppearance.BorderSize = 0;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnPrint, "btnPrint");
             this.btnPrint.ForeColor = System.Drawing.Color.White;
-            this.btnPrint.Location = new System.Drawing.Point(436, 50);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(90, 32);
-            this.btnPrint.TabIndex = 12;
-            this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = false;
             this.btnPrint.Click += new System.EventHandler(this.BtnPrint_Click);
             // 
@@ -240,13 +194,9 @@ namespace pos.Reports.Products.Inventory
             // 
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnClear, "btnClear");
             this.btnClear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(49)))), ((int)(((byte)(48)))));
-            this.btnClear.Location = new System.Drawing.Point(532, 50);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(90, 32);
-            this.btnClear.TabIndex = 13;
-            this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
@@ -257,14 +207,10 @@ namespace pos.Reports.Products.Inventory
             this.dgvReport.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvReport.BackgroundColor = System.Drawing.Color.White;
             this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvReport.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvReport.Location = new System.Drawing.Point(0, 140);
+            resources.ApplyResources(this.dgvReport, "dgvReport");
             this.dgvReport.Name = "dgvReport";
             this.dgvReport.ReadOnly = true;
-            this.dgvReport.RowHeadersWidth = 40;
             this.dgvReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReport.Size = new System.Drawing.Size(1200, 256);
-            this.dgvReport.TabIndex = 1;
             // 
             // pnlSummary
             // 
@@ -273,77 +219,49 @@ namespace pos.Reports.Products.Inventory
             this.pnlSummary.Controls.Add(this.lblTotalItems);
             this.pnlSummary.Controls.Add(this.lblTotalValue);
             this.pnlSummary.Controls.Add(this.lblDormantDays);
-            this.pnlSummary.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlSummary.Location = new System.Drawing.Point(0, 396);
+            resources.ApplyResources(this.pnlSummary, "pnlSummary");
             this.pnlSummary.Name = "pnlSummary";
-            this.pnlSummary.Padding = new System.Windows.Forms.Padding(12);
-            this.pnlSummary.Size = new System.Drawing.Size(1200, 60);
-            this.pnlSummary.TabIndex = 2;
             // 
             // lblTotalItems
             // 
-            this.lblTotalItems.AutoSize = true;
-            this.lblTotalItems.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            resources.ApplyResources(this.lblTotalItems, "lblTotalItems");
             this.lblTotalItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(49)))), ((int)(((byte)(48)))));
-            this.lblTotalItems.Location = new System.Drawing.Point(12, 12);
             this.lblTotalItems.Name = "lblTotalItems";
-            this.lblTotalItems.Size = new System.Drawing.Size(111, 23);
-            this.lblTotalItems.TabIndex = 0;
-            this.lblTotalItems.Text = "Total Items: 0";
             // 
             // lblTotalValue
             // 
-            this.lblTotalValue.AutoSize = true;
-            this.lblTotalValue.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            resources.ApplyResources(this.lblTotalValue, "lblTotalValue");
             this.lblTotalValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(49)))), ((int)(((byte)(48)))));
-            this.lblTotalValue.Location = new System.Drawing.Point(350, 12);
             this.lblTotalValue.Name = "lblTotalValue";
-            this.lblTotalValue.Size = new System.Drawing.Size(111, 23);
-            this.lblTotalValue.TabIndex = 1;
-            this.lblTotalValue.Text = "Total Value: 0";
             // 
             // lblDormantDays
             // 
-            this.lblDormantDays.AutoSize = true;
-            this.lblDormantDays.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            resources.ApplyResources(this.lblDormantDays, "lblDormantDays");
             this.lblDormantDays.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(49)))), ((int)(((byte)(48)))));
-            this.lblDormantDays.Location = new System.Drawing.Point(700, 12);
             this.lblDormantDays.Name = "lblDormantDays";
-            this.lblDormantDays.Size = new System.Drawing.Size(173, 23);
-            this.lblDormantDays.TabIndex = 2;
-            this.lblDormantDays.Text = "Avg Days Dormant: 0";
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 456);
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1200, 26);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // lblStatus
             // 
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(50, 20);
-            this.lblStatus.Text = "Ready";
+            resources.ApplyResources(this.lblStatus, "lblStatus");
             // 
             // FrmNonMovingItemsReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 482);
             this.Controls.Add(this.dgvReport);
             this.Controls.Add(this.pnlFilters);
             this.Controls.Add(this.pnlSummary);
             this.Controls.Add(this.statusStrip1);
-            this.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.MinimumSize = new System.Drawing.Size(1000, 400);
             this.Name = "FrmNonMovingItemsReport";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Non-Moving Items Report";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmNonMovingItemsReport_Load);
             this.pnlFilters.ResumeLayout(false);

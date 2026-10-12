@@ -43,7 +43,7 @@ namespace pos.Sales
 
         private void frm_sales_dashboard_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+            //AppTheme.Apply(this);
             BackColor = _pageBg;
             panelRoot.BackColor = _pageBg;
 
@@ -64,7 +64,7 @@ namespace pos.Sales
         {
             _lblSalesRep = new Label
             {
-                Text = "Sales Rep",
+                Text = UiMessages.T("Sales Rep", "ممثل المبيعات"),
                 AutoSize = true,
                 Visible = false,
                 BackColor = Color.Transparent,
@@ -82,7 +82,7 @@ namespace pos.Sales
 
             _btnExport = new Button
             {
-                Text = "Export Dashboard",
+                Text = UiMessages.T("Export Dashboard", "تصدير لوحة البيانات"),
                 Width = 130,
                 Height = 28,
                 BackColor = _primaryBlue,
@@ -371,7 +371,7 @@ namespace pos.Sales
                     _cachedRecent = _dashboardBll.GetRecentInvoices(_fromDate, _toDate, 8, _selectedSalesRepId, _selectedMonth, _selectedCategory, null);
                     BindRecentInvoices(_cachedRecent);
 
-                    tslLastRefresh.Text = "Last refresh: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    tslLastRefresh.Text = UiMessages.T("Last refresh: ", "آخر تحديث: ") + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 }
             }
             catch (Exception ex)
@@ -385,11 +385,11 @@ namespace pos.Sales
             if (dt == null || dt.Rows.Count == 0)
             {
                 lblTotalSalesValue.Text = 0m.ToString("N2");
-                lblTotalSalesTrend.Text = "▲ +0.00% vs last month";
+                lblTotalSalesTrend.Text = UiMessages.T("▲ +0.00% vs last month", "▲ +0.00% مقابل الشهر السابق");
                 lblInvoicesValue.Text = "0";
                 lblPaidValue.Text = 0m.ToString("N2");
                 lblOutstandingValue.Text = 0m.ToString("N2");
-                lblOutstandingSub.Text = "Over 30d: 0.00";
+                lblOutstandingSub.Text = UiMessages.T("Over 30d: 0.00", "متأخر عن 30 يوم: 0.00");
                 lblAvgInvoiceValue.Text = 0m.ToString("N2");
                 return;
             }
@@ -408,13 +408,15 @@ namespace pos.Sales
             string arrow = trend >= 0 ? "▲" : "▼";
 
             lblTotalSalesValue.Text = totalSales.ToString("N2");
-            lblTotalSalesTrend.Text = string.Format("{0} {1}{2:N2}% vs last month", arrow, trend >= 0 ? "+" : string.Empty, trend);
+            lblTotalSalesTrend.Text = UiMessages.T(
+                string.Format("{0} {1}{2:N2}% vs last month", arrow, trend >= 0 ? "+" : string.Empty, trend),
+                string.Format("{0} {1}{2:N2}% مقابل الشهر السابق", arrow, trend >= 0 ? "+" : string.Empty, trend));
             lblTotalSalesTrend.ForeColor = trend >= 0 ? Color.SeaGreen : Color.Firebrick;
 
             lblInvoicesValue.Text = invoices.ToString("N0");
             lblPaidValue.Text = paid.ToString("N2");
             lblOutstandingValue.Text = receivable.ToString("N2");
-            lblOutstandingSub.Text = "Over 30d: " + over30.ToString("N2");
+            lblOutstandingSub.Text = UiMessages.T("Over 30d: ", "متأخر عن 30 يوم: ") + over30.ToString("N2");
             lblOutstandingValue.ForeColor = over30 > 0 ? Color.OrangeRed : AppTheme.TextPrimary;
             lblAvgInvoiceValue.Text = avg.ToString("N2");
         }
@@ -545,14 +547,14 @@ namespace pos.Sales
             foreach (DataRow row in dt.Rows) totalAmount += ToDecimal(row["amount"]);
 
             Panel body;
-            using (Form popup = CreatePopupForm("Category: " + categoryName, out body))
+            using (Form popup = CreatePopupForm(UiMessages.T("Category: ", "الفئة: ") + categoryName, out body))
             {
                 Label summary = new Label
                 {
                     Dock = DockStyle.Top,
                     Height = 28,
                     Padding = new Padding(8, 6, 8, 6),
-                    Text = "Invoices: " + dt.Rows.Count.ToString("N0") + "   Total: " + totalAmount.ToString("N2")
+                    Text = UiMessages.T("Invoices: ", "الفواتير: ") + dt.Rows.Count.ToString("N0") + UiMessages.T("   Total: ", "   الإجمالي: ") + totalAmount.ToString("N2")
                 };
 
                 DataGridView grid = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill };
@@ -573,13 +575,13 @@ namespace pos.Sales
             DataTable trend = _dashboardBll.GetCustomerMonthlyTrend(customerId, DateTime.Today.Year, _selectedSalesRepId);
 
             Panel body;
-            using (Form popup = CreatePopupForm("Customer Summary", out body))
+            using (Form popup = CreatePopupForm(UiMessages.T("Customer Summary", "ملخص العميل"), out body))
             {
                 Label info = new Label { Dock = DockStyle.Top, Height = 42, Padding = new Padding(8, 4, 8, 4) };
                 if (summaryDt.Rows.Count > 0)
                 {
                     DataRow r = summaryDt.Rows[0];
-                    info.Text = string.Format("{0}\r\nTotal: {1:N2}   Outstanding: {2:N2}", Convert.ToString(r["customer_name"]), ToDecimal(r["total_sales"]), ToDecimal(r["outstanding"]));
+                    info.Text = string.Format("{0}\r\n{1} {2:N2}   {3} {4:N2}", Convert.ToString(r["customer_name"]), UiMessages.T("Total:", "الإجمالي:"), ToDecimal(r["total_sales"]), UiMessages.T("Outstanding:", "المستحق:"), ToDecimal(r["outstanding"]));
                 }
 
                 SplitContainer split = new SplitContainer { Dock = DockStyle.Fill, Orientation = Orientation.Horizontal, SplitterDistance = 200 };
@@ -610,7 +612,7 @@ namespace pos.Sales
             DataTable dt = _dashboardBll.GetReceivables(_fromDate, _toDate, true, _selectedSalesRepId);
 
             Panel body;
-            using (Form popup = CreatePopupForm("Outstanding Receivables (Overdue)", out body))
+            using (Form popup = CreatePopupForm(UiMessages.T("Outstanding Receivables (Overdue)", "الحسابات المستحقة (المتأخرة)"), out body))
             {
                 DataGridView grid = new DataGridView { Dock = DockStyle.Fill, ReadOnly = true, AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill };
                 ConfigureGrid(grid);
@@ -647,7 +649,7 @@ namespace pos.Sales
             };
             Button close = new Button
             {
-                Text = "X",
+                Text = "✕",
                 ForeColor = Color.White,
                 BackColor = _primaryBlue,
                 FlatStyle = FlatStyle.Flat,

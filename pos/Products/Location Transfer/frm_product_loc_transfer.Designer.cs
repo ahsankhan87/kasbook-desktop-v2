@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_product_loc_transfer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.grid_search_products = new System.Windows.Forms.DataGridView();
@@ -118,8 +118,8 @@
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.qty, "qty");
             this.qty.Name = "qty";
             // 

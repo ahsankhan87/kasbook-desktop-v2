@@ -42,7 +42,7 @@ namespace pos.Customers.Customer_Ledger_Report
             CmbCondition.SelectedIndex = 0;
         }
 
-        public void LoadReport(string customer_id, string fromDate, string toDate, bool _isPrint)
+        public void LoadReport(string customer_id, DateTime fromDate, DateTime toDate, bool _isPrint)
         {
             // Create an instance of your report
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
@@ -64,8 +64,8 @@ namespace pos.Customers.Customer_Ledger_Report
 
             // Set the parameter value
             reportDoc.SetParameterValue("customer_id", customer_id);
-            reportDoc.SetParameterValue("start_date", fromDate);
-            reportDoc.SetParameterValue("end_date", toDate);
+            reportDoc.SetParameterValue("start_date", fromDate.ToString("yyyy-MM-dd"));
+            reportDoc.SetParameterValue("end_date",  toDate.ToString("yyyy-MM-dd"));
 
             // Set the report source for the CrystalReportViewer
             crystalReportViewer1.ReportSource = reportDoc;
@@ -194,7 +194,7 @@ namespace pos.Customers.Customer_Ledger_Report
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
-            LoadReport(_customer_id, txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString(), false);
+            LoadReport(_customer_id, txt_from_date.Value, txt_to_date.Value, false);
         }
     }
 }

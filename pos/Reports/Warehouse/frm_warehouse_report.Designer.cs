@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_warehouse_report));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lb_category = new System.Windows.Forms.ListBox();
             this.lb_locations = new System.Windows.Forms.ListBox();
@@ -68,6 +68,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Controls.Add(this.lb_category);
             this.panel1.Controls.Add(this.lb_locations);
             this.panel1.Controls.Add(this.lb_brands);
@@ -81,7 +82,6 @@
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // lb_category
@@ -137,13 +137,13 @@
             // 
             // cmb_item_type
             // 
+            resources.ApplyResources(this.cmb_item_type, "cmb_item_type");
             this.cmb_item_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_item_type.FormattingEnabled = true;
             this.cmb_item_type.Items.AddRange(new object[] {
             resources.GetString("cmb_item_type.Items"),
             resources.GetString("cmb_item_type.Items1"),
             resources.GetString("cmb_item_type.Items2")});
-            resources.ApplyResources(this.cmb_item_type, "cmb_item_type");
             this.cmb_item_type.Name = "cmb_item_type";
             // 
             // label2
@@ -153,10 +153,10 @@
             // 
             // cmb_units
             // 
+            resources.ApplyResources(this.cmb_units, "cmb_units");
             this.cmb_units.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmb_units.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmb_units.FormattingEnabled = true;
-            resources.ApplyResources(this.cmb_units, "cmb_units");
             this.cmb_units.Name = "cmb_units";
             // 
             // label5
@@ -176,16 +176,16 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.grid_sales_report);
             resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Controls.Add(this.grid_sales_report);
             this.panel2.Name = "panel2";
             // 
             // grid_sales_report
             // 
+            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AllowUserToAddRows = false;
             this.grid_sales_report.AllowUserToDeleteRows = false;
             this.grid_sales_report.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_sales_report, "grid_sales_report");
             this.grid_sales_report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_sales_report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_sales_report.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -265,10 +265,10 @@
             // 
             this.qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.qty.DataPropertyName = "qty";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.qty.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.qty.DefaultCellStyle = dataGridViewCellStyle9;
             resources.ApplyResources(this.qty, "qty");
             this.qty.Name = "qty";
             this.qty.ReadOnly = true;
@@ -284,9 +284,9 @@
             // 
             this.cost_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cost_price.DataPropertyName = "cost_price";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            this.cost_price.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            this.cost_price.DefaultCellStyle = dataGridViewCellStyle10;
             resources.ApplyResources(this.cost_price, "cost_price");
             this.cost_price.Name = "cost_price";
             this.cost_price.ReadOnly = true;
@@ -295,9 +295,9 @@
             // 
             this.unit_price.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.unit_price.DataPropertyName = "unit_price";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            this.unit_price.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N2";
+            this.unit_price.DefaultCellStyle = dataGridViewCellStyle11;
             resources.ApplyResources(this.unit_price, "unit_price");
             this.unit_price.Name = "unit_price";
             this.unit_price.ReadOnly = true;
@@ -306,9 +306,9 @@
             // 
             this.total_cost.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.total_cost.DataPropertyName = "total_cost";
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.total_cost.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.total_cost.DefaultCellStyle = dataGridViewCellStyle12;
             resources.ApplyResources(this.total_cost, "total_cost");
             this.total_cost.Name = "total_cost";
             this.total_cost.ReadOnly = true;

@@ -2006,6 +2006,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Customers\frm_customers.ar-SA.resx">
       <DependentUpon>frm_customers.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Customers\frm_customer_detail.ar-SA.resx">
       <DependentUpon>frm_customer_detail.cs</DependentUpon>
@@ -2489,9 +2490,24 @@
     <EmbeddedResource Include="Products\Location Transfer\frm_product_loc_transfer.resx">
       <DependentUpon>frm_product_loc_transfer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression.ar-SA.resx">
+      <DependentUpon>frm_stock_suppression.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Products\Suppression\frm_stock_suppression.resx">
       <DependentUpon>frm_stock_suppression.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression_companies.ar-SA.resx">
+      <DependentUpon>frm_stock_suppression_companies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression_companies.resx">
+      <DependentUpon>frm_stock_suppression_companies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression_stock_records.ar-SA.resx">
+      <DependentUpon>frm_stock_suppression_stock_records.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\Suppression\frm_stock_suppression_stock_records.resx">
+      <DependentUpon>frm_stock_suppression_stock_records.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Purchase Orders\frm_all_purchases_orders.ar-SA.resx">
       <DependentUpon>frm_all_purchases_orders.cs</DependentUpon>
@@ -2693,14 +2709,27 @@
     <EmbeddedResource Include="Reports\Products\frm_products_report.resx">
       <DependentUpon>frm_products_report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmInventoryReport.ar-SA.resx">
+      <DependentUpon>FrmInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\Inventory\FrmInventoryReport.resx">
       <DependentUpon>FrmInventoryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmLowStockReport.ar-SA.resx">
+      <DependentUpon>FrmLowStockReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\Inventory\FrmLowStockReport.resx">
       <DependentUpon>FrmLowStockReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmMovingItemsReport.ar-SA.resx">
+      <DependentUpon>FrmMovingItemsReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\Inventory\FrmMovingItemsReport.resx">
       <DependentUpon>FrmMovingItemsReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Products\Inventory\FrmNonMovingItemsReport.ar-SA.resx">
+      <DependentUpon>FrmNonMovingItemsReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Products\Inventory\FrmNonMovingItemsReport.resx">
       <DependentUpon>FrmNonMovingItemsReport.cs</DependentUpon>
@@ -2865,6 +2894,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_sales_invoice.resx">
       <DependentUpon>frm_sales_invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_sales_dashboard.ar-SA.resx">
+      <DependentUpon>frm_sales_dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sales\frm_sales_dashboard.resx">
+      <DependentUpon>frm_sales_dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sales\frm_sales_excel_import.resx">
       <DependentUpon>frm_sales_excel_import.cs</DependentUpon>

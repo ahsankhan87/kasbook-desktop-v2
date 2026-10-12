@@ -1,141 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-	<xsd:element name="root" msdata:IsDataSet="true">
-	  <xsd:complexType>
-		<xsd:choice maxOccurs="unbounded">
-		  <xsd:element name="metadata">
-			<xsd:complexType>
-			  <xsd:sequence>
-				<xsd:element name="value" type="xsd:string" minOccurs="0" />
-			  </xsd:sequence>
-			  <xsd:attribute name="name" use="required" type="xsd:string" />
-			  <xsd:attribute name="type" type="xsd:string" />
-			  <xsd:attribute name="mimetype" type="xsd:string" />
-			  <xsd:attribute ref="xml:space" />
-			</xsd:complexType>
-		  </xsd:element>
-		  <xsd:element name="assembly">
-			<xsd:complexType>
-			  <xsd:attribute name="alias" type="xsd:string" />
-			  <xsd:attribute name="name" type="xsd:string" />
-			</xsd:complexType>
-		  </xsd:element>
-		  <xsd:element name="data">
-			<xsd:complexType>
-			  <xsd:sequence>
-				<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-				<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-			  </xsd:sequence>
-			  <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-			  <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-			  <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-			  <xsd:attribute ref="xml:space" />
-			</xsd:complexType>
-		  </xsd:element>
-		  <xsd:element name="resheader">
-			<xsd:complexType>
-			  <xsd:sequence>
-				<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-			  </xsd:sequence>
-			  <xsd:attribute name="name" type="xsd:string" use="required" />
-			</xsd:complexType>
-		  </xsd:element>
-		</xsd:choice>
-	  </xsd:complexType>
-	</xsd:element>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
   </xsd:schema>
   <resheader name="resmimetype">
-	<value>text/microsoft-resx</value>
+    <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
-	<value>2.0</value>
+    <value>2.0</value>
   </resheader>
   <resheader name="reader">
-	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDaysThreshold.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblDaysThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1055, 15</value>
+  </data>
+  <data name="lblDaysThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 21</value>
+  </data>
+  <data name="lblDaysThreshold.Text" xml:space="preserve">
+    <value>بدون مبيعات لمدة:</value>
+  </data>
+  <data name="nudDaysThreshold.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="nudDaysThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>969, 12</value>
+  </data>
+  <data name="lblMinQty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblMinQty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1006, 56</value>
+  </data>
+  <data name="lblMinQty.Size" type="System.Drawing.Size, System.Drawing">
+    <value>179, 21</value>
+  </data>
+  <data name="lblMinQty.Text" xml:space="preserve">
+    <value>الحد الأدنى للكمية المتبقية:</value>
+  </data>
+  <data name="nudMinQty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="nudMinQty.Location" type="System.Drawing.Point, System.Drawing">
+    <value>920, 54</value>
+  </data>
+  <data name="lblCategory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblCategory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>465, 14</value>
+  </data>
+  <data name="lblCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 21</value>
+  </data>
+  <data name="lblCategory.Text" xml:space="preserve">
+    <value>الفئة:</value>
+  </data>
+  <data name="cmbCategory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblBrand.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblBrand.Location" type="System.Drawing.Point, System.Drawing">
+    <value>675, 14</value>
+  </data>
+  <data name="lblBrand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 21</value>
+  </data>
+  <data name="lblBrand.Text" xml:space="preserve">
+    <value>العلامة:</value>
+  </data>
+  <data name="cmbBrand.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>903, 15</value>
+  </data>
+  <data name="lblLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 21</value>
+  </data>
+  <data name="lblLocation.Text" xml:space="preserve">
+    <value>الموقع:</value>
+  </data>
+  <data name="cmbLocation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnLoad.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnLoad.Location" type="System.Drawing.Point, System.Drawing">
+    <value>519, 50</value>
+  </data>
+  <data name="btnLoad.Text" xml:space="preserve">
+    <value>تحميل</value>
+  </data>
+  <data name="btnExport.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnExport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>615, 50</value>
+  </data>
+  <data name="btnExport.Text" xml:space="preserve">
+    <value>تصدير CSV</value>
+  </data>
+  <data name="btnPrint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnPrint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>711, 50</value>
+  </data>
+  <data name="btnPrint.Text" xml:space="preserve">
+    <value>طباعة</value>
+  </data>
+  <data name="btnClear.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="btnClear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>807, 50</value>
+  </data>
+  <data name="btnClear.Text" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="lblTotalItems.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblTotalItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>134, 23</value>
+  </data>
+  <data name="lblTotalItems.Text" xml:space="preserve">
+    <value>إجمالي العناصر: 0</value>
+  </data>
+  <data name="lblTotalValue.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblTotalValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 23</value>
+  </data>
+  <data name="lblTotalValue.Text" xml:space="preserve">
+    <value>القيمة الإجمالية: 0</value>
+  </data>
+  <data name="lblDormantDays.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblDormantDays.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 23</value>
+  </data>
+  <data name="lblDormantDays.Text" xml:space="preserve">
+    <value>متوسط الأيام الراكدة: 0</value>
+  </data>
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 20</value>
+  </data>
+  <data name="lblStatus.Text" xml:space="preserve">
+    <value>جاهز</value>
+  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-	<value>Yes</value>
+    <value>Yes</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
-	<value>True</value>
+    <value>True</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-	<value>تقرير العناصر غير المتحركة</value>
-  </data>
-  <data name="lblDaysThreshold.Text" xml:space="preserve">
-	<value>بدون مبيعات لمدة:</value>
-  </data>
-  <data name="lblMinQty.Text" xml:space="preserve">
-	<value>الحد الأدنى للكمية المتبقية:</value>
-  </data>
-  <data name="lblCategory.Text" xml:space="preserve">
-	<value>الفئة:</value>
-  </data>
-  <data name="lblBrand.Text" xml:space="preserve">
-	<value>العلامة:</value>
-  </data>
-  <data name="lblLocation.Text" xml:space="preserve">
-	<value>الموقع:</value>
-  </data>
-  <data name="btnLoad.Text" xml:space="preserve">
-	<value>تحميل</value>
-  </data>
-  <data name="btnClear.Text" xml:space="preserve">
-	<value>مسح</value>
-  </data>
-  <data name="btnPrint.Text" xml:space="preserve">
-	<value>طباعة</value>
-  </data>
-  <data name="btnExport.Text" xml:space="preserve">
-	<value>تصدير CSV</value>
-  </data>
-  <data name="lblStatus.Text" xml:space="preserve">
-	<value>جاهز</value>
-  </data>
-  <data name="lblTotalItems.Text" xml:space="preserve">
-	<value>إجمالي العناصر: 0</value>
-  </data>
-  <data name="lblTotalValue.Text" xml:space="preserve">
-	<value>القيمة الإجمالية: 0</value>
-  </data>
-  <data name="lblDormantDays.Text" xml:space="preserve">
-	<value>متوسط الأيام الراكدة: 0</value>
-  </data>
-  <data name="AllCategoriesOption" xml:space="preserve">
-	<value>-- جميع الفئات --</value>
-  </data>
-  <data name="AllBrandsOption" xml:space="preserve">
-	<value>-- جميع العلامات --</value>
-  </data>
-  <data name="AllLocationsOption" xml:space="preserve">
-	<value>-- جميع المواقع --</value>
-  </data>
-  <data name="ReadyMessage" xml:space="preserve">
-	<value>جاهز. انقر على 'تحميل' لإنشاء التقرير.</value>
-  </data>
-  <data name="LoadingMessage" xml:space="preserve">
-	<value>جاري تحميل تقرير العناصر غير المتحركة...</value>
-  </data>
-  <data name="ReportLoadedMessage" xml:space="preserve">
-	<value>تم تحميل التقرير: تم العثور على {0} عنصراً.</value>
-  </data>
-  <data name="ErrorLoadingReportMessage" xml:space="preserve">
-	<value>خطأ في تحميل التقرير.</value>
-  </data>
-  <data name="TotalItemsLabel" xml:space="preserve">
-	<value>إجمالي العناصر:</value>
-  </data>
-  <data name="TotalValueLabel" xml:space="preserve">
-	<value>القيمة الإجمالية:</value>
-  </data>
-  <data name="AvgDormantDaysLabel" xml:space="preserve">
-	<value>متوسط الأيام الراكدة:</value>
+    <value>تقرير العناصر غير المتحركة</value>
   </data>
 </root>

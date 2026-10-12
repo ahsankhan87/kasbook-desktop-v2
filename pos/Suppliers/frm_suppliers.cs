@@ -35,7 +35,7 @@ namespace pos
 
         public void frm_suppliers_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+            //AppTheme.Apply(this);
             ApplyDashboardTheme();
             InitializeFilters();
             LoadDashboard();
@@ -107,11 +107,11 @@ namespace pos
         private void InitializeFilters()
         {
             cmbStatus.Items.Clear();
-            cmbStatus.Items.AddRange(new object[] { "All", "Active", "Inactive", "Overdue" });
+            cmbStatus.Items.AddRange(new object[] { UiMessages.T("All", "الكل"), UiMessages.T("Active", "نشط"), UiMessages.T("Inactive", "غير نشط"), UiMessages.T("Overdue", "متأخر") });
             cmbStatus.SelectedIndex = 0;
 
             cmbCategory.Items.Clear();
-            cmbCategory.Items.Add("All Categories");
+            cmbCategory.Items.Add(UiMessages.T("All Categories", "كل الفئات"));
             cmbCategory.SelectedIndex = 0;
         }
 
@@ -178,7 +178,7 @@ namespace pos
             lblThisMonthValue.Text = thisMonth.ToString("N2");
 
             decimal diff = thisMonth - prevMonth;
-            lblThisMonthTrend.Text = (diff >= 0 ? "▲ " : "▼ ") + Math.Abs(diff).ToString("N2") + " vs PM";
+            lblThisMonthTrend.Text = UiMessages.T((diff >= 0 ? "▲ " : "▼ ") + Math.Abs(diff).ToString("N2") + " vs PM", (diff >= 0 ? "▲ " : "▼ ") + Math.Abs(diff).ToString("N2") + " مقابل الشهر السابق");
             lblThisMonthTrend.ForeColor = diff >= 0 ? _okGreen : _overdueRed;
         }
 
@@ -189,7 +189,7 @@ namespace pos
 
         private void PopulateCategoryFilter()
         {
-            string selected = cmbCategory.SelectedItem == null ? "All Categories" : cmbCategory.SelectedItem.ToString();
+            string selected = cmbCategory.SelectedItem == null ? UiMessages.T("All Categories", "كل الفئات").ToString() : cmbCategory.SelectedItem.ToString();
             var categories = _dashboardSource.AsEnumerable()
                 .Select(r => Convert.ToString(r["category"]))
                 .Where(a => !string.IsNullOrWhiteSpace(a))
@@ -211,24 +211,28 @@ namespace pos
             if (_dashboardView == null) return;
 
             string text = (txt_search.Text ?? string.Empty).Trim().Replace("'", "''");
-            string category = cmbCategory.SelectedItem == null ? "All Categories" : cmbCategory.SelectedItem.ToString().Replace("'", "''");
-            string status = cmbStatus.SelectedItem == null ? "All" : cmbStatus.SelectedItem.ToString();
+            string categoryDisplay = cmbCategory.SelectedItem == null ? UiMessages.T("All Categories", "كل الفئات").ToString() : cmbCategory.SelectedItem.ToString();
+            string statusDisplay = cmbStatus.SelectedItem == null ? UiMessages.T("All", "الكل").ToString() : cmbStatus.SelectedItem.ToString();
+
+            // Convert display values to database keys
+            string categoryKey = GetCategoryDatabaseKey(categoryDisplay);
+            string statusKey = GetStatusDatabaseKey(statusDisplay);
 
             string filter = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(text))
                 filter = "(supplier_name LIKE '%" + text + "%' OR supplier_code LIKE '%" + text + "%')";
 
-            if (!string.Equals(category, "All Categories", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(categoryKey, "ALL_CATEGORIES", StringComparison.OrdinalIgnoreCase))
             {
                 if (filter.Length > 0) filter += " AND ";
-                filter += "category = '" + category + "'";
+                filter += "category = '" + categoryKey.Replace("'", "''") + "'";
             }
 
-            if (!string.Equals(status, "All", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(statusKey, "All", StringComparison.OrdinalIgnoreCase))
             {
                 if (filter.Length > 0) filter += " AND ";
-                filter += "status_text = '" + status.Replace("'", "''") + "'";
+                filter += "status_text = '" + statusKey.Replace("'", "''") + "'";
             }
 
             _dashboardView.RowFilter = filter;
@@ -240,6 +244,52 @@ namespace pos
                 ResetDetails();
                 ToggleDetailsPanel(false);
             }
+        }
+
+        private string GetStatusDatabaseKey(string displayValue)
+        {
+            // Map UI display values (Arabic or English) to database keys (English only)
+            if (string.IsNullOrWhiteSpace(displayValue))
+                return "All";
+
+            string normalized = displayValue.Trim();
+
+            // Check for known values (bilingual)
+            if (normalized.Equals(UiMessages.T("All", "الكل"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("All", StringComparison.OrdinalIgnoreCase))
+                return "All";
+
+            if (normalized.Equals(UiMessages.T("Active", "نشط"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Active", StringComparison.OrdinalIgnoreCase))
+                return "Active";
+
+            if (normalized.Equals(UiMessages.T("Inactive", "غير نشط"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Inactive", StringComparison.OrdinalIgnoreCase))
+                return "Inactive";
+
+            if (normalized.Equals(UiMessages.T("Overdue", "متأخر"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("Overdue", StringComparison.OrdinalIgnoreCase))
+                return "Overdue";
+
+            // Default to the value as-is (for any custom values)
+            return normalized;
+        }
+
+        private string GetCategoryDatabaseKey(string displayValue)
+        {
+            // Map UI display values (Arabic or English) to database keys
+            if (string.IsNullOrWhiteSpace(displayValue))
+                return "ALL_CATEGORIES";
+
+            string normalized = displayValue.Trim();
+
+            // Check for "All Categories" / "كل الفئات"
+            if (normalized.Equals(UiMessages.T("All Categories", "كل الفئات"), StringComparison.OrdinalIgnoreCase) ||
+                normalized.Equals("All Categories", StringComparison.OrdinalIgnoreCase))
+                return "ALL_CATEGORIES";
+
+            // For custom category values, return as-is (they're fetched from data, not hardcoded)
+            return normalized;
         }
 
         private void UpdateRowNumbers()
@@ -254,7 +304,7 @@ namespace pos
             DataTable filtered = _dashboardView.ToTable();
             int count = filtered.Rows.Count;
             decimal payable = filtered.AsEnumerable().Sum(r => ToDecimal(r["payable_balance"]));
-            lblBottomSummary.Text = count.ToString("N0") + " suppliers shown | Payable: " + payable.ToString("N2");
+            lblBottomSummary.Text = UiMessages.T(count.ToString("N0") + " suppliers shown | Payable: " + payable.ToString("N2"), count.ToString("N0") + " موردين معروضين | المستحق الدفع: " + payable.ToString("N2"));
         }
 
         private void txt_search_TextChanged(object sender, EventArgs e)
@@ -295,9 +345,9 @@ namespace pos
             _avatarInitials = GetInitials(_selectedSupplierName);
             panelAvatar.Invalidate();
 
-            lblPhoneValue.Text = "Phone: " + Convert.ToString(row.Cells["colPhone"].Value);
-            lblAddressValue.Text = "Address: " + Convert.ToString(row.Cells["colAddress"].Value);
-            lblCategoryValue.Text = "Category: " + Convert.ToString(row.Cells["colCategory"].Value);
+            lblPhoneValue.Text = UiMessages.T("Phone: ", "الهاتف: ") + Convert.ToString(row.Cells["colPhone"].Value);
+            lblAddressValue.Text = UiMessages.T("Address: ", "العنوان: ") + Convert.ToString(row.Cells["colAddress"].Value);
+            lblCategoryValue.Text = UiMessages.T("Category: ", "الفئة: ") + Convert.ToString(row.Cells["colCategory"].Value);
 
             lblPurchasedValue.Text = ToDecimal(row.Cells["colTotalPurchases"].Value).ToString("N2");
             lblPaidValue.Text = ToDecimal(row.Cells["colTotalPaid"].Value).ToString("N2");
@@ -354,11 +404,11 @@ namespace pos
                 }
 
                 if (lstBills.Items.Count == 0)
-                    lstBills.Items.Add("No bills");
+                    lstBills.Items.Add(UiMessages.T("No bills", "لا توجد فواتير"));
             }
             catch
             {
-                lstBills.Items.Add("Unable to load bills");
+                lstBills.Items.Add(UiMessages.T("Unable to load bills", "لا يمكن تحميل الفواتير"));
             }
         }
 
@@ -366,13 +416,13 @@ namespace pos
         {
             _selectedSupplierId = 0;
             _selectedSupplierName = string.Empty;
-            lblSupplierHeader.Text = "Select supplier";
+            lblSupplierHeader.Text = UiMessages.T("Select supplier", "اختر مورد");
             _avatarInitials = "?";
             panelAvatar.Invalidate();
 
-            lblPhoneValue.Text = "Phone: -";
-            lblAddressValue.Text = "Address: -";
-            lblCategoryValue.Text = "Category: -";
+            lblPhoneValue.Text = UiMessages.T("Phone: -", "الهاتف: -");
+            lblAddressValue.Text = UiMessages.T("Address: -", "العنوان: -");
+            lblCategoryValue.Text = UiMessages.T("Category: -", "الفئة: -");
             lblPurchasedValue.Text = "0.00";
             lblPaidValue.Text = "0.00";
             lblPayableValue.Text = "0.00";
@@ -465,7 +515,7 @@ namespace pos
             {
                 e.PaintBackground(e.CellBounds, true);
                 string status = Convert.ToString(e.FormattedValue);
-                Color badgeColor = status == "Overdue" ? _overdueRed : (status == "Inactive" ? Color.Gray : _okGreen);
+                Color badgeColor = status == UiMessages.T("Overdue", "متأخر") ? _overdueRed : (status == UiMessages.T("Inactive", "غير نشط") ? Color.Gray : _okGreen);
 
                 Rectangle badge = new Rectangle(e.CellBounds.X + 10, e.CellBounds.Y + 7, e.CellBounds.Width - 20, e.CellBounds.Height - 14);
                 using (GraphicsPath path = RoundedRect(badge, 8))
@@ -554,7 +604,7 @@ namespace pos
         {
             if (_selectedSupplierId <= 0)
             {
-                UiMessages.ShowWarning("Please select a supplier.", "يرجى اختيار مورد.");
+                UiMessages.ShowWarning(UiMessages.T("Please select a supplier.", "يرجى اختيار مورد."), UiMessages.T("Please select a supplier.", "يرجى اختيار مورد."));
                 return;
             }
 
@@ -575,7 +625,7 @@ namespace pos
         {
             if (_selectedSupplierId <= 0)
             {
-                UiMessages.ShowWarning("Please select a supplier.", "يرجى اختيار مورد.");
+                UiMessages.ShowWarning(UiMessages.T("Please select a supplier.", "يرجى اختيار مورد."), UiMessages.T("Please select a supplier.", "يرجى اختيار مورد."));
                 return;
             }
 

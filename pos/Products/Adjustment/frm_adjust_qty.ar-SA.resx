@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 53</value>
@@ -127,11 +131,17 @@
   <data name="lblTitle.Text" xml:space="preserve">
     <value>ضبط الكمية الدقيقة</value>
   </data>
+  <data name="txtQty.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txtQty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 53</value>
+    <value>138, 53</value>
+  </data>
+  <data name="btnOk.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="btnOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 211</value>
+    <value>136, 211</value>
   </data>
   <data name="btnOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 33</value>
@@ -139,8 +149,11 @@
   <data name="btnOk.Text" xml:space="preserve">
     <value>نعم</value>
   </data>
+  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 211</value>
+    <value>234, 211</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 33</value>
@@ -148,11 +161,13 @@
   <data name="btnCancel.Text" xml:space="preserve">
     <value>يلغي</value>
   </data>
+  <data name="label1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -165,11 +180,14 @@
   <data name="label1.Text" xml:space="preserve">
     <value>أدخل الموقع</value>
   </data>
+  <data name="btn_deleteProduct.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="btn_deleteProduct.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btn_deleteProduct.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 245</value>
+    <value>136, 245</value>
   </data>
   <data name="btn_deleteProduct.Size" type="System.Drawing.Size, System.Drawing">
     <value>194, 41</value>
@@ -177,20 +195,38 @@
   <data name="btn_deleteProduct.Text" xml:space="preserve">
     <value>حذف المنتج</value>
   </data>
+  <data name="txt_location.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_location.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 87</value>
+    <value>138, 87</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>أدخل سعر البيع</value>
   </data>
+  <data name="txt_sale_price.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="txt_sale_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 121</value>
+    <value>137, 121</value>
+  </data>
+  <data name="lbl_productCode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="lbl_productCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 19</value>
+    <value>153, 19</value>
+  </data>
+  <data name="txt_cost_price.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="txt_cost_price.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 155</value>
+    <value>138, 155</value>
+  </data>
+  <data name="label3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 157</value>

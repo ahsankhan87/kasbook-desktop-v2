@@ -117,39 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- Form Title and Main Dashboard -->
-  <data name="$this.Text" xml:space="preserve">
-    <value>لوحة المبيعات</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitBottom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 605</value>
   </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>لوحة المبيعات</value>
+  <data name="panelTopCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>839, 326</value>
   </data>
-  <!-- KPI Card Titles -->
-  <data name="lblTotalSalesTitle.Text" xml:space="preserve">
-    <value>إجمالي المبيعات (هذا الشهر)</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitBottom.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
-  <data name="lblInvoicesTitle.Text" xml:space="preserve">
-    <value>إجمالي الفواتير</value>
+  <data name="panelRecentInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>586, 326</value>
   </data>
-  <data name="lblPaidTitle.Text" xml:space="preserve">
-    <value>المبلغ المدفوع</value>
+  <data name="splitBottom.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
-  <data name="lblOutstandingTitle.Text" xml:space="preserve">
-    <value>المبلغ المستحق / القابل للتحصيل</value>
+  <data name="splitBottom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 326</value>
   </data>
-  <data name="lblAvgInvoiceTitle.Text" xml:space="preserve">
-    <value>متوسط قيمة الفاتورة</value>
-  </data>
-  <!-- Chart Labels -->
-  <data name="lblMonthlyChart.Text" xml:space="preserve">
-    <value>المبيعات الشهرية (السنة الحالية)</value>
-  </data>
-  <data name="lblCategoryChart.Text" xml:space="preserve">
-    <value>المبيعات حسب الفئة</value>
-  </data>
-  <!-- Grid Headers and Titles -->
-  <data name="lblTopCustomers.Text" xml:space="preserve">
-    <value>أفضل 10 عملاء</value>
+  <data name="gridTopCustomers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>815, 270</value>
   </data>
   <data name="colCustomerRank.HeaderText" xml:space="preserve">
     <value>الترتيب</value>
@@ -166,8 +155,11 @@
   <data name="colCustomerOutstanding.HeaderText" xml:space="preserve">
     <value>المستحق</value>
   </data>
-  <data name="lblRecentInvoices.Text" xml:space="preserve">
-    <value>الفواتير الأخيرة</value>
+  <data name="lblTopCustomers.Text" xml:space="preserve">
+    <value>أفضل 10 عملاء</value>
+  </data>
+  <data name="gridRecentInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>562, 270</value>
   </data>
   <data name="colInvoiceNo.HeaderText" xml:space="preserve">
     <value>رقم الفاتورة</value>
@@ -181,69 +173,11 @@
   <data name="colInvoiceStatus.HeaderText" xml:space="preserve">
     <value>الحالة</value>
   </data>
-  <!-- Period Filter -->
-  <data name="lblPeriodTitle.Text" xml:space="preserve">
-    <value>اختر الفترة</value>
+  <data name="lblRecentInvoices.Text" xml:space="preserve">
+    <value>الفواتير الأخيرة</value>
   </data>
-  <data name="rbToday.Text" xml:space="preserve">
-    <value>اليوم</value>
-  </data>
-  <data name="rbWeek.Text" xml:space="preserve">
-    <value>هذا الأسبوع</value>
-  </data>
-  <data name="rbMonth.Text" xml:space="preserve">
-    <value>هذا الشهر</value>
-  </data>
-  <data name="rbQuarter.Text" xml:space="preserve">
-    <value>هذا الربع</value>
-  </data>
-  <data name="rbYear.Text" xml:space="preserve">
-    <value>هذه السنة</value>
-  </data>
-  <data name="rbCustom.Text" xml:space="preserve">
-    <value>نطاق مخصص</value>
-  </data>
-  <data name="lblFrom.Text" xml:space="preserve">
-    <value>من</value>
-  </data>
-  <data name="lblTo.Text" xml:space="preserve">
-    <value>إلى</value>
-  </data>
-  <!-- Status Bar -->
-  <data name="tslLastRefresh.Text" xml:space="preserve">
-    <value>آخر تحديث: --</value>
-  </data>
-  <data name="tslRefresh.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
-  <!-- Dynamic Values (Defaults) -->
-  <data name="lblTotalSalesValue.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblTotalSalesTrend.Text" xml:space="preserve">
-    <value>▲ +0.00% مقابل الشهر السابق</value>
-  </data>
-  <data name="lblInvoicesValue.Text" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblPaidValue.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblOutstandingValue.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="lblOutstandingSub.Text" xml:space="preserve">
-    <value>متأخر عن 30 يوم: 0.00</value>
-  </data>
-  <data name="lblAvgInvoiceValue.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="splitBottom.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <data name="splitBottom.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="splitCharts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 349</value>
   </data>
   <data name="splitCharts.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -251,36 +185,203 @@
   <data name="splitCharts.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblMonthlyChart.Text" xml:space="preserve">
+    <value>المبيعات الشهرية (السنة الحالية)</value>
+  </data>
+  <data name="lblCategoryChart.Text" xml:space="preserve">
+    <value>المبيعات حسب الفئة</value>
+  </data>
+  <data name="dtpTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>905, 48</value>
+  </data>
+  <data name="lblTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1064, 51</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 17</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="dtpFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1101, 48</value>
+  </data>
+  <data name="lblFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1261, 54</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 17</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="lblPeriodTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblPeriodTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>620, 12</value>
+  </data>
+  <data name="lblPeriodTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 23</value>
+  </data>
+  <data name="lblPeriodTitle.Text" xml:space="preserve">
+    <value>اختر الفترة</value>
+  </data>
+  <data name="panelPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 257</value>
+  </data>
+  <data name="panelKpis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1430, 187</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>لوحة المبيعات</value>
+  </data>
   <data name="rbToday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>784, 4</value>
+    <value>797, 4</value>
+  </data>
+  <data name="rbToday.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="rbToday.Text" xml:space="preserve">
+    <value>اليوم</value>
   </data>
   <data name="rbWeek.Location" type="System.Drawing.Point, System.Drawing">
-    <value>684, 4</value>
+    <value>691, 4</value>
+  </data>
+  <data name="rbWeek.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 21</value>
+  </data>
+  <data name="rbWeek.Text" xml:space="preserve">
+    <value>هذا الأسبوع</value>
   </data>
   <data name="rbMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>580, 4</value>
+    <value>594, 4</value>
+  </data>
+  <data name="rbMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 21</value>
+  </data>
+  <data name="rbMonth.Text" xml:space="preserve">
+    <value>هذا الشهر</value>
   </data>
   <data name="rbQuarter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>468, 4</value>
+    <value>508, 4</value>
+  </data>
+  <data name="rbQuarter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 21</value>
+  </data>
+  <data name="rbQuarter.Text" xml:space="preserve">
+    <value>هذا الربع</value>
   </data>
   <data name="rbYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 4</value>
+    <value>408, 4</value>
+  </data>
+  <data name="rbYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="rbYear.Text" xml:space="preserve">
+    <value>هذه السنة</value>
   </data>
   <data name="rbCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 4</value>
+    <value>293, 4</value>
+  </data>
+  <data name="rbCustom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 21</value>
+  </data>
+  <data name="rbCustom.Text" xml:space="preserve">
+    <value>نطاق مخصص</value>
   </data>
   <data name="cardTotalSales.Location" type="System.Drawing.Point, System.Drawing">
     <value>1148, 4</value>
   </data>
+  <data name="cardTotalSales.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 179</value>
+  </data>
+  <data name="lblTotalSalesTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 20</value>
+  </data>
+  <data name="lblTotalSalesTrend.Text" xml:space="preserve">
+    <value>▲ +0.00% مقابل الشهر السابق</value>
+  </data>
+  <data name="lblTotalSalesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 23</value>
+  </data>
+  <data name="lblTotalSalesTitle.Text" xml:space="preserve">
+    <value>إجمالي المبيعات (هذا الشهر)</value>
+  </data>
   <data name="cardInvoices.Location" type="System.Drawing.Point, System.Drawing">
     <value>862, 4</value>
+  </data>
+  <data name="cardInvoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 179</value>
+  </data>
+  <data name="lblInvoicesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 23</value>
+  </data>
+  <data name="lblInvoicesTitle.Text" xml:space="preserve">
+    <value>إجمالي الفواتير</value>
+  </data>
+  <data name="cardPaid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 179</value>
+  </data>
+  <data name="lblPaidTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 23</value>
+  </data>
+  <data name="lblPaidTitle.Text" xml:space="preserve">
+    <value>المبلغ المدفوع</value>
   </data>
   <data name="cardOutstanding.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 4</value>
   </data>
+  <data name="cardOutstanding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 179</value>
+  </data>
+  <data name="lblOutstandingSub.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 20</value>
+  </data>
+  <data name="lblOutstandingSub.Text" xml:space="preserve">
+    <value>متأخر عن 30 يوم: 0.00</value>
+  </data>
+  <data name="lblOutstandingTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>244, 23</value>
+  </data>
+  <data name="lblOutstandingTitle.Text" xml:space="preserve">
+    <value>المبلغ المستحق / القابل للتحصيل</value>
+  </data>
   <data name="cardAvgInvoice.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
+  </data>
+  <data name="cardAvgInvoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 179</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 23</value>
+  </data>
+  <data name="lblAvgInvoiceTitle.Text" xml:space="preserve">
+    <value>متوسط قيمة الفاتورة</value>
+  </data>
+  <data name="tslLastRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 20</value>
+  </data>
+  <data name="tslLastRefresh.Text" xml:space="preserve">
+    <value>آخر تحديث: --</value>
+  </data>
+  <data name="tslRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="tslRefresh.Text" xml:space="preserve">
+    <value>تحديث</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -288,5 +389,8 @@
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>لوحة المبيعات</value>
   </data>
 </root>

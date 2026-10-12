@@ -121,8 +121,14 @@
     <value>مطبعة</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chk_qty_on_hand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 21</value>
+  </data>
+  <data name="chk_qty_on_hand.Text" xml:space="preserve">
+    <value>عرض الكمية المتوفرة</value>
+  </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 13</value>
+    <value>44, 17</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>ماركة:</value>
@@ -130,41 +136,38 @@
   <data name="btn_search.Text" xml:space="preserve">
     <value>بحث (F3)</value>
   </data>
+  <data name="cmb_item_type.Location" type="System.Drawing.Point, System.Drawing">
+    <value>446, 31</value>
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 28</value>
+    <value>601, 34</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 13</value>
+    <value>71, 17</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>نوع العنصر:</value>
   </data>
+  <data name="cmb_units.Location" type="System.Drawing.Point, System.Drawing">
+    <value>446, 63</value>
+  </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+    <value>35, 17</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>موقع</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 13</value>
+    <value>32, 17</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>فئة:</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 74</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 13</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>عرض الكمية في متناول اليد:</value>
-  </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 53</value>
+    <value>601, 66</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>57, 17</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>الوحدات:</value>
@@ -174,34 +177,37 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="category_name.Width" type="System.Int32, mscorlib">
-    <value>47</value>
+    <value>56</value>
   </data>
   <data name="code.HeaderText" xml:space="preserve">
     <value>شفرة</value>
+  </data>
+  <data name="code.Width" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
   <data name="name.HeaderText" xml:space="preserve">
     <value>منتج</value>
   </data>
   <data name="name.Width" type="System.Int32, mscorlib">
-    <value>53</value>
+    <value>64</value>
   </data>
   <data name="unit.HeaderText" xml:space="preserve">
     <value>وحدة</value>
   </data>
   <data name="unit.Width" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>67</value>
   </data>
   <data name="location_code.HeaderText" xml:space="preserve">
     <value>موقع</value>
   </data>
   <data name="location_code.Width" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>64</value>
   </data>
   <data name="brand.HeaderText" xml:space="preserve">
     <value>ماركة</value>
   </data>
   <data name="brand.Width" type="System.Int32, mscorlib">
-    <value>58</value>
+    <value>68</value>
   </data>
   <data name="item_type.HeaderText" xml:space="preserve">
     <value>نوع العنصر</value>
@@ -210,25 +216,25 @@
     <value>الكمية</value>
   </data>
   <data name="qty.Width" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>73</value>
   </data>
   <data name="shop_qty.HeaderText" xml:space="preserve">
     <value>تسوق الكمية</value>
   </data>
   <data name="shop_qty.Width" type="System.Int32, mscorlib">
-    <value>89</value>
+    <value>114</value>
   </data>
   <data name="cost_price.HeaderText" xml:space="preserve">
     <value>سعر الكلفة</value>
   </data>
   <data name="cost_price.Width" type="System.Int32, mscorlib">
-    <value>81</value>
+    <value>102</value>
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>سعر الوحدة</value>
   </data>
   <data name="unit_price.Width" type="System.Int32, mscorlib">
-    <value>85</value>
+    <value>105</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
