@@ -455,7 +455,7 @@ namespace POS.DLL
                         P.tax_amount AS Tax,
                         (P.amount + P.tax_amount) AS NetAmount,
                         CASE WHEN LOWER(P.description) LIKE '%attachment:%' THEN 1 ELSE 0 END AS HasAttachment,
-                        CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.invoice_no = P.invoice_no AND E.branch_id = P.branch_id) THEN 1 ELSE 0 END AS Posted
+                        CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.payment_ref_invoice_no = P.invoice_no AND E.branch_id = P.branch_id) THEN 1 ELSE 0 END AS Posted
                         FROM acc_payments P
                         WHERE P.branch_id = @branch_id
                         AND P.payment_date BETWEEN @fromDate AND @toDate";
@@ -611,7 +611,7 @@ namespace POS.DLL
                 try
                 {
                     cn.Open();
-                    cmd = new SqlCommand("SELECT ISNULL(SUM(P.amount + P.tax_amount), 0) FROM acc_payments P WHERE P.branch_id = @branch_id AND NOT EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.invoice_no = P.invoice_no)", cn);
+                    cmd = new SqlCommand("SELECT ISNULL(SUM(P.amount + P.tax_amount), 0) FROM acc_payments P WHERE P.branch_id = @branch_id AND NOT EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.payment_ref_invoice_no = P.invoice_no)", cn);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     return Convert.ToDecimal(cmd.ExecuteScalar());
                 }
@@ -629,7 +629,7 @@ namespace POS.DLL
                 try
                 {
                     cn.Open();
-                    cmd = new SqlCommand("SELECT COUNT(1) FROM acc_payments P WHERE P.branch_id = @branch_id AND NOT EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.invoice_no = P.invoice_no)", cn);
+                    cmd = new SqlCommand("SELECT COUNT(1) FROM acc_payments P WHERE P.branch_id = @branch_id AND NOT EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.payment_ref_invoice_no = P.invoice_no)", cn);
                     cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -707,7 +707,7 @@ namespace POS.DLL
                         payment_date AS TxnDate,
                         name AS AccountName,
                         (amount + tax_amount) AS NetAmount,
-                        CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.invoice_no = P.invoice_no) THEN 'Posted' ELSE 'Pending' END AS Status
+                        CASE WHEN EXISTS (SELECT 1 FROM acc_entries E WHERE E.branch_id = P.branch_id AND E.payment_ref_invoice_no = P.invoice_no) THEN 'Posted' ELSE 'Pending' END AS Status
                         FROM acc_payments P
                         WHERE P.branch_id = @branch_id
                         ORDER BY payment_date DESC, id DESC";

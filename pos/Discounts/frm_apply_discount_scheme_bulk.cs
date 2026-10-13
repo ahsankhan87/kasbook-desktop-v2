@@ -31,7 +31,7 @@ namespace pos.Discounts
             var dt = new DiscountSchemesBLL().GetAllActive(UsersModal.logged_in_branch_id);
             var empty = dt.NewRow();
             empty["id"] = 0;
-            empty["name"] = "Please Select";
+            empty["name"] = UiMessages.T("Please Select", "يرجى الاختيار");
             dt.Rows.InsertAt(empty, 0);
 
             cmb_scheme.DisplayMember = "name";
@@ -44,7 +44,7 @@ namespace pos.Discounts
             var dt = new GeneralBLL().GetRecord("code,name", "pos_brands");
             var empty = dt.NewRow();
             empty["code"] = "";
-            empty["name"] = "All Brands";
+            empty["name"] = UiMessages.T("All Brands", "جميع العلامات التجارية");
             dt.Rows.InsertAt(empty, 0);
 
             cmb_brand.DisplayMember = "name";
@@ -57,7 +57,7 @@ namespace pos.Discounts
             var dt = new GeneralBLL().GetRecord("code,name", "pos_categories");
             var empty = dt.NewRow();
             empty["code"] = "";
-            empty["name"] = "All Categories";
+            empty["name"] = UiMessages.T("All Categories", "جميع الأقسام");
             dt.Rows.InsertAt(empty, 0);
 
             cmb_category.DisplayMember = "name";

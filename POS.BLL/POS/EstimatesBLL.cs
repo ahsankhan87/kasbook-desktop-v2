@@ -135,6 +135,19 @@ namespace POS.BLL
             }
         }
 
+        public int UpdateEstimateStatusToConverted(string estimateInvoiceNo, string linkedSalesInvoiceNo)
+        {
+            try
+            {
+                EstimatesDLL objDLL = new EstimatesDLL();
+                return objDLL.UpdateEstimateStatusToConverted(estimateInvoiceNo, linkedSalesInvoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
 
     }
 }

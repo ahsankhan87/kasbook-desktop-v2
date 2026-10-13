@@ -123,10 +123,15 @@ namespace POS.DLL
                     if (cn.State == ConnectionState.Closed)
                     {
                         cn.Open();
-                        String query = "SELECT SI.*,(SI.total_tax+SI.total_amount-SI.discount_value) as total,C.first_name AS customer " +
+                        String query = "SELECT SI.*," +
+                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total," +
+                            "C.first_name AS customer," +
+                            "CASE WHEN SI.status = 1 THEN 'Converted' ELSE 'Active' END AS status1," +
+                            "ISNULL(U.name, '') AS converted_by_name " +
                             "FROM pos_estimates SI " +
-                            "LEFT JOIN pos_customers C ON C.id=SI.customer_id "+
-                            "WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by id desc ";
+                            "LEFT JOIN pos_customers C ON C.id=SI.customer_id " +
+                            "LEFT JOIN pos_users U ON U.id=SI.converted_by " +
+                            "WHERE SI.sale_date BETWEEN @FY_from_date AND @FY_to_date AND SI.branch_id = @branch_id Order by SI.id desc ";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); 
@@ -280,10 +285,24 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        cmd = new SqlCommand("SELECT id,invoice_no,sale_type,sale_date,total_amount,discount_value,total_tax FROM pos_estimates WHERE invoice_no LIKE @invoice_no", cn);
-                        //cmd.Parameters.AddWithValue("@invoice_no", condition);
+                        String query = "SELECT SI.*," +
+                            "(SI.total_tax+SI.total_amount-SI.discount_value) as total," +
+                            "C.first_name AS customer," +
+                            "CASE WHEN SI.status = 1 THEN 'Converted' ELSE 'Active' END AS status1," +
+                            "ISNULL(U.name, '') AS converted_by_name " +
+                            "FROM pos_estimates SI " +
+                            "LEFT JOIN pos_customers C ON C.id=SI.customer_id " +
+                            "LEFT JOIN pos_users U ON U.id=SI.converted_by " +
+                            "WHERE SI.invoice_no LIKE @invoice_no " +
+                            "OR SI.description LIKE @description " +
+                            "OR C.first_name LIKE @customer_name " +
+                            "OR C.vat_no LIKE @customer_vat";
+
+                        cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@invoice_no", string.Format("%{0}%", condition));
-                        
+                        cmd.Parameters.AddWithValue("@description", string.Format("%{0}%", condition));
+                        cmd.Parameters.AddWithValue("@customer_name", string.Format("%{0}%", condition));
+                        cmd.Parameters.AddWithValue("@customer_vat", string.Format("%{0}%", condition));
                         da = new SqlDataAdapter(cmd);
                         da.Fill(dt);
                         return dt;
@@ -410,6 +429,48 @@ namespace POS.DLL
 
             }
 
+        }
+
+        /// <summary>
+        /// Updates the estimate status to mark it as converted to a sales invoice.
+        /// </summary>
+        /// <param name="estimateInvoiceNo">The estimate invoice number (e.g., "E1-000001")</param>
+        /// <param name="linkedSalesInvoiceNo">The sales invoice number created from this estimate</param>
+        /// <returns>Number of rows affected (1 if successful, 0 if estimate not found)</returns>
+        public int UpdateEstimateStatusToConverted(string estimateInvoiceNo, string linkedSalesInvoiceNo)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                try
+                {
+                    if (cn.State == ConnectionState.Closed)
+                    {
+                        cn.Open();
+                    }
+
+                    string query = @"UPDATE pos_estimates 
+                                     SET status = 1, 
+                                         linked_sales_invoice_no = @linkedSalesInvoiceNo,
+                                         converted_date = @convertedDate,
+                                         converted_by = @userId
+                                     WHERE invoice_no = @estimateInvoiceNo
+                                     AND branch_id = @branch_id";
+
+                    cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@estimateInvoiceNo", estimateInvoiceNo ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@linkedSalesInvoiceNo", linkedSalesInvoiceNo ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@convertedDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@userId", UsersModal.logged_in_userid);
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                    int result = cmd.ExecuteNonQuery();
+                    return result;
+                }
+                catch
+                {
+                    throw;
+                }
+            }
         }
 
     }

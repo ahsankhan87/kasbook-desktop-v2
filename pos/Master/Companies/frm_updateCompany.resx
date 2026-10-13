@@ -1126,13 +1126,13 @@
     <value>4, 0, 4, 0</value>
   </data>
   <data name="label21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 17</value>
+    <value>141, 17</value>
   </data>
   <data name="label21.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="label21.Text" xml:space="preserve">
-    <value>Commission Account</value>
+    <value>Commission Account:</value>
   </data>
   <data name="&gt;&gt;label21.Name" xml:space="preserve">
     <value>label21</value>

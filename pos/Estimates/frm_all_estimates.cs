@@ -37,7 +37,49 @@ namespace pos
             _searchDebounce.Interval = DebounceMs;
             _searchDebounce.Tick += SearchDebounce_Tick;
 
+            // Hook into CellFormatting event for efficient formatting of visible cells only
+            grid_all_estimates.CellFormatting += Grid_all_estimates_CellFormatting;
+            grid_all_estimates.CellMouseEnter += Grid_all_estimates_CellMouseEnter;
+
             load_all_estimates_grid();
+        }
+
+        private void Grid_all_estimates_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Only format status1 column and only for visible cells
+            if (e.ColumnIndex == grid_all_estimates.Columns["status1"].Index && e.Value != null)
+            {
+                string statusText = e.Value.ToString();
+                DataGridViewRow row = grid_all_estimates.Rows[e.RowIndex];
+
+                if (statusText == "Converted")
+                {
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(200, 255, 200); // Light green
+                }
+                else if (statusText == "Active")
+                {
+                    row.DefaultCellStyle.BackColor = SystemColors.Window; // White
+                }
+            }
+        }
+
+        private void Grid_all_estimates_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            // Set tooltip on mouse enter
+            if (e.ColumnIndex == grid_all_estimates.Columns["status1"].Index && e.RowIndex >= 0)
+            {
+                DataGridViewCell cell = grid_all_estimates.Rows[e.RowIndex].Cells["status1"];
+                string statusText = cell.Value?.ToString() ?? "";
+
+                if (statusText == "Converted")
+                {
+                    cell.ToolTipText = "This estimate has been converted to a sales invoice";
+                }
+                else if (statusText == "Active")
+                {
+                    cell.ToolTipText = "This estimate is active and can be converted";
+                }
+            }
         }
 
         private void StyleForm()
@@ -63,9 +105,8 @@ namespace pos
                     EstimatesBLL objEstimatesBLL = new EstimatesBLL();
                     grid_all_estimates.AutoGenerateColumns = false;
 
-                    //String keyword = "id,name,date_created";
-                   // String table = "pos_all_estimates";
                     grid_all_estimates.DataSource = objEstimatesBLL.GetAllEstimates();
+                    // DataBindingComplete event will fire automatically when binding is done
                 }
             }
             catch (Exception ex)
@@ -90,8 +131,8 @@ namespace pos
 
                     String condition = (txt_search.Text ?? string.Empty).Trim();
                     grid_all_estimates.DataSource = objBLL.SearchRecord(condition);
+                    // DataBindingComplete event will fire automatically when binding is done
                 }
-
             }
             catch (Exception ex)
             {

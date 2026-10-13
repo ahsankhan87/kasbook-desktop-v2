@@ -117,35 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>خطة الخصم</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbl_header_title.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_header_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>369, 9</value>
+  </data>
+  <data name="lbl_header_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 28</value>
   </data>
   <data name="lbl_header_title.Text" xml:space="preserve">
     <value>خطة الخصم</value>
   </data>
-  <data name="lbl_name.Text" xml:space="preserve">
-    <value>الاسم:</value>
-  </data>
-  <data name="lbl_name_ar.Text" xml:space="preserve">
-    <value>الاسم بالعربية:</value>
-  </data>
-  <data name="lbl_calc_type.Text" xml:space="preserve">
-    <value>نوع الحساب:</value>
-  </data>
-  <data name="lbl_value.Text" xml:space="preserve">
-    <value>القيمة:</value>
-  </data>
-  <data name="lbl_start_date.Text" xml:space="preserve">
-    <value>تاريخ البداية:</value>
-  </data>
-  <data name="lbl_end_date.Text" xml:space="preserve">
-    <value>تاريخ النهاية:</value>
+  <data name="chk_is_active.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 21</value>
   </data>
   <data name="chk_is_active.Text" xml:space="preserve">
     <value>نشط</value>
   </data>
+  <data name="chk_no_start.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 21</value>
+  </data>
   <data name="chk_no_start.Text" xml:space="preserve">
     <value>بدون تاريخ بداية</value>
+  </data>
+  <data name="chk_no_end.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
   </data>
   <data name="chk_no_end.Text" xml:space="preserve">
     <value>بدون تاريخ نهاية</value>
@@ -156,18 +155,50 @@
   <data name="btn_cancel.Text" xml:space="preserve">
     <value>إلغاء</value>
   </data>
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="lbl_name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
   </data>
-  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lbl_name.Text" xml:space="preserve">
+    <value>الاسم:</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbl_name_ar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 17</value>
+  </data>
+  <data name="lbl_name_ar.Text" xml:space="preserve">
+    <value>الاسم بالعربية:</value>
+  </data>
+  <data name="lbl_calc_type.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="lbl_calc_type.Text" xml:space="preserve">
+    <value>نوع الحساب:</value>
+  </data>
+  <data name="lbl_value.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 17</value>
+  </data>
+  <data name="lbl_value.Text" xml:space="preserve">
+    <value>القيمة:</value>
+  </data>
+  <data name="lbl_start_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 17</value>
+  </data>
+  <data name="lbl_start_date.Text" xml:space="preserve">
+    <value>تاريخ البداية:</value>
+  </data>
+  <data name="lbl_end_date.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="lbl_end_date.Text" xml:space="preserve">
+    <value>تاريخ النهاية:</value>
+  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>خطة الخصم</value>
   </data>
 </root>

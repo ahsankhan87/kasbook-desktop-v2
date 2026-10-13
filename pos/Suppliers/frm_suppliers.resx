@@ -117,16 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblCreditLimitTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 17</value>
-  </data>
   <data name="&gt;&gt;pnlTop.Name" xml:space="preserve">
     <value>pnlTop</value>
   </data>
-  <data name="&gt;&gt;lblPhoneValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pnlFilters.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 142</value>
   </data>
@@ -153,23 +147,23 @@
   <data name="lblTotalSuppliersValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;colCreditDays.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblPurchasedValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
   </data>
-  <data name="lblFilterStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>835, 20</value>
-  </data>
-  <data name="&gt;&gt;lblCategoryValue.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;colId.Name" xml:space="preserve">
+    <value>colId</value>
   </data>
   <data name="&gt;&gt;cardOverduePayables.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblCreditLimitTitle.Parent" xml:space="preserve">
-    <value>pnlDetails</value>
+  <data name="&gt;&gt;pnlBottom.Name" xml:space="preserve">
+    <value>pnlBottom</value>
   </data>
-  <data name="lblCategoryValue.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="lblThisMonthTrend.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 20</value>
+  </data>
+  <data name="&gt;&gt;lblBottomSummary.Name" xml:space="preserve">
+    <value>lblBottomSummary</value>
   </data>
   <data name="lblOverduePayablesValue.Text" xml:space="preserve">
     <value>0.00</value>
@@ -180,11 +174,8 @@
   <data name="tableKpis.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;lblTotalSuppliersTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblBottomSummary.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblCreditDaysValue.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt, style=Bold</value>
   </data>
   <data name="lblCreditDaysTitle.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -192,14 +183,20 @@
   <data name="&gt;&gt;splitMain.Panel2.Parent" xml:space="preserve">
     <value>splitMain</value>
   </data>
+  <data name="colSupplierName.HeaderText" xml:space="preserve">
+    <value>Supplier Name</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;lblThisMonthTrend.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblBottomSummary.Name" xml:space="preserve">
-    <value>lblBottomSummary</value>
-  </data>
   <data name="&gt;&gt;splitMain.Panel1.Parent" xml:space="preserve">
     <value>splitMain</value>
+  </data>
+  <data name="lblThisMonthValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 41</value>
   </data>
   <data name="&gt;&gt;btnMakePayment.Name" xml:space="preserve">
     <value>btnMakePayment</value>
@@ -216,8 +213,8 @@
   <data name="&gt;&gt;lblCreditDaysValue.Name" xml:space="preserve">
     <value>lblCreditDaysValue</value>
   </data>
-  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 16</value>
+  <data name="&gt;&gt;lblCategoryValue.ZOrder" xml:space="preserve">
+    <value>15</value>
   </data>
   <data name="lblPhoneValue.Text" xml:space="preserve">
     <value>Phone: -</value>
@@ -233,6 +230,9 @@
   </data>
   <data name="colPhone.HeaderText" xml:space="preserve">
     <value>Phone</value>
+  </data>
+  <data name="lblFilterCategory.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;lblCategoryValue.Parent" xml:space="preserve">
     <value>pnlDetails</value>
@@ -252,14 +252,8 @@
   <data name="lblThisMonthValue.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="lblAddressValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 118</value>
-  </data>
   <data name="&gt;&gt;lblCategoryValue.Name" xml:space="preserve">
     <value>lblCategoryValue</value>
-  </data>
-  <data name="lblPaidTitle.Text" xml:space="preserve">
-    <value>Paid</value>
   </data>
   <data name="lblBills.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -267,14 +261,14 @@
   <data name="lblCreditLimitValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblFilterCategory.Text" xml:space="preserve">
-    <value>Category</value>
+  <data name="&gt;&gt;lblAddressValue.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;cmbCategory.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;splitMain.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;colTotalPurchases.Name" xml:space="preserve">
-    <value>colTotalPurchases</value>
   </data>
   <data name="&gt;&gt;lblFilterSearch.Parent" xml:space="preserve">
     <value>pnlFilters</value>
@@ -288,17 +282,11 @@
   <data name="lblFilterSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 20</value>
   </data>
-  <data name="lblAddressValue.Text" xml:space="preserve">
-    <value>Address: -</value>
-  </data>
   <data name="&gt;&gt;lblCreditDaysTitle.Parent" xml:space="preserve">
     <value>pnlDetails</value>
   </data>
   <data name="lblThisMonthTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 10</value>
-  </data>
-  <data name="&gt;&gt;colTotalPaid.Name" xml:space="preserve">
-    <value>colTotalPaid</value>
   </data>
   <data name="&gt;&gt;cardOverduePayables.Parent" xml:space="preserve">
     <value>tableKpis</value>
@@ -306,14 +294,11 @@
   <data name="pnlFilters.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="lblCreditLimitTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 249</value>
+  </data>
   <data name="&gt;&gt;grid_suppliers.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lblCreditDaysValue.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt, style=Bold</value>
-  </data>
-  <data name="splitMain.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
   </data>
   <data name="cardTotalSuppliers.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -321,11 +306,8 @@
   <data name="splitMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;colTotalPaid.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblBills.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 20</value>
+  <data name="&gt;&gt;lblPayableTitle.Parent" xml:space="preserve">
+    <value>pnlDetails</value>
   </data>
   <data name="&gt;&gt;pnlFilters.Name" xml:space="preserve">
     <value>pnlFilters</value>
@@ -357,14 +339,14 @@
   <data name="lblPurchasedValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblCreditDaysValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 20</value>
+  <data name="&gt;&gt;pnlFilters.Parent" xml:space="preserve">
+    <value>pnlTop</value>
   </data>
   <data name="cmbCategory.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;lblAddressValue.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="&gt;&gt;colLastBill.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colAddress.Name" xml:space="preserve">
     <value>colAddress</value>
@@ -378,17 +360,14 @@
   <data name="&gt;&gt;cardTotalSuppliers.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;colSupplierName.Name" xml:space="preserve">
-    <value>colSupplierName</value>
+  <data name="&gt;&gt;colTotalPaid.Name" xml:space="preserve">
+    <value>colTotalPaid</value>
   </data>
   <data name="tableKpis.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 12</value>
   </data>
   <data name="lblTotalPayablesTitle.Text" xml:space="preserve">
     <value>Total Payables</value>
-  </data>
-  <data name="&gt;&gt;lblThisMonthValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCreditLimitValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
@@ -411,8 +390,8 @@
   <data name="&gt;&gt;lblFilterStatus.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblOverduePayablesValue.Parent" xml:space="preserve">
-    <value>cardOverduePayables</value>
+  <data name="&gt;&gt;colSupplierName.Name" xml:space="preserve">
+    <value>colSupplierName</value>
   </data>
   <data name="&gt;&gt;lblPayableValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -423,23 +402,23 @@
   <data name="lblTotalPayablesValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 41</value>
   </data>
-  <data name="lblPurchasedValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 165</value>
-  </data>
   <data name="lblCreditLimitValue.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="lblTotalPayablesTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCreditLimitValue.Text" xml:space="preserve">
-    <value>0.00</value>
+  <data name="&gt;&gt;colTotalPaid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="pnlTop.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>14, 12, 14, 10</value>
   </data>
+  <data name="&gt;&gt;btnNewBill.Name" xml:space="preserve">
+    <value>btnNewBill</value>
+  </data>
   <data name="lblTotalPayablesValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 33</value>
+  </data>
+  <data name="colPayable.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="btnViewProfile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -453,8 +432,8 @@
   <data name="&gt;&gt;lblPaidTitle.Name" xml:space="preserve">
     <value>lblPaidTitle</value>
   </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>Supplier Summary Dashboard</value>
+  <data name="colTotalPurchases.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;cardTotalPayables.Name" xml:space="preserve">
     <value>cardTotalPayables</value>
@@ -465,23 +444,17 @@
   <data name="&gt;&gt;colStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;pnlBottom.Name" xml:space="preserve">
-    <value>pnlBottom</value>
-  </data>
   <data name="lblCreditDaysTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="btnMakePayment.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="lblFilterCategory.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;colCategory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCreditDaysTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 17</value>
-  </data>
-  <data name="&gt;&gt;pnlDetails.Name" xml:space="preserve">
-    <value>pnlDetails</value>
   </data>
   <data name="&gt;&gt;colAddress.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -510,13 +483,10 @@
   <data name="lblTotalSuppliersTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
-  <data name="lblThisMonthTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;lblPhoneValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colSupplierCode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;colLastBill.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;panelAvatar.Parent" xml:space="preserve">
@@ -540,14 +510,14 @@
   <data name="colLastBill.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblPurchasedValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 165</value>
   </data>
-  <data name="&gt;&gt;lblPaidTitle.Parent" xml:space="preserve">
-    <value>pnlDetails</value>
+  <data name="&gt;&gt;splitMain.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;panelAvatar.ZOrder" xml:space="preserve">
-    <value>18</value>
+  <data name="lblPayableValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 207</value>
   </data>
   <data name="lblFilterStatus.Text" xml:space="preserve">
     <value>Status</value>
@@ -579,8 +549,8 @@
   <data name="cmbCategory.Location" type="System.Drawing.Point, System.Drawing">
     <value>669, 16</value>
   </data>
-  <data name="&gt;&gt;lblPayableTitle.Parent" xml:space="preserve">
-    <value>pnlDetails</value>
+  <data name="&gt;&gt;colPayable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblThisMonthTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -603,8 +573,14 @@
   <data name="&gt;&gt;btnViewProfile.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cardTotalSuppliers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>293, 86</value>
+  </data>
   <data name="&gt;&gt;lblPayableValue.Parent" xml:space="preserve">
     <value>pnlDetails</value>
+  </data>
+  <data name="lblFilterCategory.Text" xml:space="preserve">
+    <value>Category</value>
   </data>
   <data name="&gt;&gt;lblPayableTitle.Name" xml:space="preserve">
     <value>lblPayableTitle</value>
@@ -615,8 +591,8 @@
   <data name="lblPurchasedTitle.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblBottomSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;colCreditDays.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblThisMonthValue.Parent" xml:space="preserve">
     <value>cardThisMonth</value>
@@ -648,6 +624,9 @@
   <data name="&gt;&gt;pnlBottom.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblFilterCategory.Name" xml:space="preserve">
+    <value>lblFilterCategory</value>
+  </data>
   <data name="&gt;&gt;btnNewBill.Parent" xml:space="preserve">
     <value>pnlDetails</value>
   </data>
@@ -656,9 +635,6 @@
   </data>
   <data name="&gt;&gt;pnlDetails.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblPaidTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblOverduePayablesTitle.Name" xml:space="preserve">
     <value>lblOverduePayablesTitle</value>
@@ -671,6 +647,9 @@
   </data>
   <data name="&gt;&gt;txt_search.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblOverduePayablesValue.Parent" xml:space="preserve">
+    <value>cardOverduePayables</value>
   </data>
   <data name="&gt;&gt;detailSlideTimer.Name" xml:space="preserve">
     <value>detailSlideTimer</value>
@@ -687,17 +666,11 @@
   <data name="lblCreditLimitTitle.Text" xml:space="preserve">
     <value>Credit Limit</value>
   </data>
-  <data name="colTotalPurchases.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
   <data name="&gt;&gt;panelAvatar.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblOverduePayablesValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 33</value>
-  </data>
-  <data name="lblSupplierHeader.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 58</value>
   </data>
   <data name="cardThisMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>900, 3</value>
@@ -708,17 +681,11 @@
   <data name="lblPaidTitle.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="lblFilterStatus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblTotalPayablesTitle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 10</value>
   </data>
-  <data name="lblPaidValue.Text" xml:space="preserve">
-    <value>0.00</value>
-  </data>
-  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
-    <value>521, 24</value>
-  </data>
-  <data name="colPhone.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;cmbCategory.Parent" xml:space="preserve">
+    <value>pnlFilters</value>
   </data>
   <data name="lblCreditDaysValue.Text" xml:space="preserve">
     <value>0</value>
@@ -726,10 +693,7 @@
   <data name="&gt;&gt;cardOverduePayables.Name" xml:space="preserve">
     <value>cardOverduePayables</value>
   </data>
-  <data name="&gt;&gt;splitMain.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblCreditDaysValue.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="tableKpis.TabIndex" type="System.Int32, mscorlib">
@@ -737,9 +701,6 @@
   </data>
   <data name="cardTotalPayables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 16</value>
   </data>
   <data name="panelAvatar.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -816,8 +777,8 @@
   <data name="&gt;&gt;lblFilterStatus.Name" xml:space="preserve">
     <value>lblFilterStatus</value>
   </data>
-  <data name="grid_suppliers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;lblCreditLimitTitle.Parent" xml:space="preserve">
+    <value>pnlDetails</value>
   </data>
   <data name="&gt;&gt;lblFilterSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -825,8 +786,8 @@
   <data name="lblPayableTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 207</value>
   </data>
-  <data name="&gt;&gt;cmbCategory.Parent" xml:space="preserve">
-    <value>pnlFilters</value>
+  <data name="lblTotalPayablesTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="colNo.HeaderText" xml:space="preserve">
     <value>#</value>
@@ -849,8 +810,8 @@
   <data name="btnViewProfile.Text" xml:space="preserve">
     <value>View Profile</value>
   </data>
-  <data name="&gt;&gt;pnlFilters.Parent" xml:space="preserve">
-    <value>pnlTop</value>
+  <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 24</value>
   </data>
   <data name="grid_suppliers.Size" type="System.Drawing.Size, System.Drawing">
     <value>941, 551</value>
@@ -861,8 +822,8 @@
   <data name="&gt;&gt;lblFilterStatus.Parent" xml:space="preserve">
     <value>pnlFilters</value>
   </data>
-  <data name="&gt;&gt;lblOverduePayablesValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panelAvatar.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="&gt;&gt;lblCreditLimitValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -875,12 +836,6 @@
   </data>
   <data name="cardThisMonth.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
-  </data>
-  <data name="&gt;&gt;colCategory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitMain.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;lblTotalPayablesTitle.Parent" xml:space="preserve">
     <value>cardTotalPayables</value>
@@ -918,8 +873,8 @@
   <data name="&gt;&gt;lblThisMonthTrend.Parent" xml:space="preserve">
     <value>cardThisMonth</value>
   </data>
-  <data name="cardOverduePayables.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="lblCreditLimitValue.Text" xml:space="preserve">
+    <value>0.00</value>
   </data>
   <data name="tableKpis.Size" type="System.Drawing.Size, System.Drawing">
     <value>1197, 92</value>
@@ -927,8 +882,11 @@
   <data name="lblCategoryValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 16</value>
   </data>
-  <data name="lblPayableValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 207</value>
+  <data name="lblAddressValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 118</value>
+  </data>
+  <data name="&gt;&gt;lblThisMonthValue.Name" xml:space="preserve">
+    <value>lblThisMonthValue</value>
   </data>
   <data name="cardThisMonth.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -969,9 +927,6 @@
   <data name="lblCreditLimitTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lstBills.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>339, 32</value>
   </data>
@@ -984,17 +939,14 @@
   <data name="&gt;&gt;lblOverduePayablesValue.Name" xml:space="preserve">
     <value>lblOverduePayablesValue</value>
   </data>
-  <data name="lblTotalSuppliersValue.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;splitMain.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;colStatus.Name" xml:space="preserve">
     <value>colStatus</value>
   </data>
-  <data name="grid_suppliers.RowHeadersWidth" type="System.Int32, mscorlib">
-    <value>51</value>
+  <data name="&gt;&gt;lblPaidTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableKpis.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1008,11 +960,8 @@
   <data name="&gt;&gt;lblTotalPayablesValue.Parent" xml:space="preserve">
     <value>cardTotalPayables</value>
   </data>
-  <data name="lblThisMonthValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 41</value>
-  </data>
-  <data name="lblPurchasedValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 20</value>
+  <data name="lblCreditDaysValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 20</value>
   </data>
   <data name="btnMakePayment.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 512</value>
@@ -1022,6 +971,9 @@
   </data>
   <data name="&gt;&gt;lstBills.Parent" xml:space="preserve">
     <value>pnlDetails</value>
+  </data>
+  <data name="lblFilterStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>835, 20</value>
   </data>
   <data name="colLastBill.HeaderText" xml:space="preserve">
     <value>Last Bill Date</value>
@@ -1035,14 +987,11 @@
   <data name="lblBills.Text" xml:space="preserve">
     <value>Last 5 bills</value>
   </data>
-  <data name="colTotalPurchases.HeaderText" xml:space="preserve">
-    <value>Total Purchases</value>
+  <data name="&gt;&gt;lblOverduePayablesValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblPaidValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 20</value>
-  </data>
-  <data name="lblTotalPayablesTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 10</value>
   </data>
   <data name="pnlDetails.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1065,11 +1014,11 @@
   <data name="&gt;&gt;grid_suppliers.Name" xml:space="preserve">
     <value>grid_suppliers</value>
   </data>
-  <data name="lblThisMonthTrend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 20</value>
+  <data name="lblPaidTitle.Text" xml:space="preserve">
+    <value>Paid</value>
   </data>
-  <data name="&gt;&gt;cardTotalSuppliers.Name" xml:space="preserve">
-    <value>cardTotalSuppliers</value>
+  <data name="lblCreditLimitTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 17</value>
   </data>
   <data name="&gt;&gt;pnlDetails.Parent" xml:space="preserve">
     <value>splitMain.Panel2</value>
@@ -1101,11 +1050,11 @@
   <data name="&gt;&gt;colNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblCreditLimitTitle.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="lblSupplierHeader.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 10pt, style=Bold</value>
-  </data>
-  <data name="&gt;&gt;pnlTop.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;lstBills.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -1164,8 +1113,8 @@
   <data name="&gt;&gt;lblTotalSuppliersValue.Name" xml:space="preserve">
     <value>lblTotalSuppliersValue</value>
   </data>
-  <data name="lblOverduePayablesTitle.Text" xml:space="preserve">
-    <value>Overdue Payables</value>
+  <data name="lblBottomSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1176,11 +1125,17 @@
   <data name="splitMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>1225, 551</value>
   </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>Supplier Summary Dashboard</value>
+  </data>
   <data name="colCreditDays.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="pnlBottom.Size" type="System.Drawing.Size, System.Drawing">
     <value>1225, 32</value>
+  </data>
+  <data name="&gt;&gt;lblPayableTitle.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="&gt;&gt;colPhone.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1197,11 +1152,11 @@
   <data name="&gt;&gt;pnlDetails.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cardTotalSuppliers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 86</value>
+  <data name="lblThisMonthTitle.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;colId.Name" xml:space="preserve">
-    <value>colId</value>
+  <data name="cardOverduePayables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;lblPurchasedTitle.ZOrder" xml:space="preserve">
     <value>14</value>
@@ -1224,9 +1179,6 @@
   <data name="lblThisMonthTrend.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;colPayable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lblPayableTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1242,8 +1194,11 @@
   <data name="lblThisMonthTrend.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="lblOverduePayablesTitle.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblBottomSummary.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;cardTotalSuppliers.Name" xml:space="preserve">
+    <value>cardTotalSuppliers</value>
   </data>
   <data name="lblPayableTitle.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1253,6 +1208,9 @@
   </data>
   <data name="lblCreditDaysTitle.Text" xml:space="preserve">
     <value>Credit Days</value>
+  </data>
+  <data name="lblCategoryValue.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
     <value>lblTitle</value>
@@ -1266,8 +1224,8 @@
   <data name="pnlDetails.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;btnNewBill.Name" xml:space="preserve">
-    <value>btnNewBill</value>
+  <data name="&gt;&gt;lstBills.Name" xml:space="preserve">
+    <value>lstBills</value>
   </data>
   <data name="&gt;&gt;splitMain.Panel2.Name" xml:space="preserve">
     <value>splitMain.Panel2</value>
@@ -1284,11 +1242,11 @@
   <data name="pnlTop.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="cardTotalPayables.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="lblAddressValue.Text" xml:space="preserve">
+    <value>Address: -</value>
   </data>
-  <data name="cardTotalSuppliers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="lblCreditDaysValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lblThisMonthTitle.Text" xml:space="preserve">
     <value>Total Purchases This Month</value>
@@ -1296,11 +1254,14 @@
   <data name="&gt;&gt;lblPhoneValue.Parent" xml:space="preserve">
     <value>pnlDetails</value>
   </data>
-  <data name="&gt;&gt;lblFilterCategory.Name" xml:space="preserve">
-    <value>lblFilterCategory</value>
+  <data name="colId.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="lblCreditLimitTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 249</value>
+  <data name="&gt;&gt;lblPaidTitle.Parent" xml:space="preserve">
+    <value>pnlDetails</value>
+  </data>
+  <data name="lblOverduePayablesTitle.Text" xml:space="preserve">
+    <value>Overdue Payables</value>
   </data>
   <data name="colId.HeaderText" xml:space="preserve">
     <value>id</value>
@@ -1326,8 +1287,8 @@
   <data name="lblPurchasedValue.Text" xml:space="preserve">
     <value>0.00</value>
   </data>
-  <data name="btnNewBill.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="&gt;&gt;colCreditLimit.Name" xml:space="preserve">
+    <value>colCreditLimit</value>
   </data>
   <data name="&gt;&gt;lblCreditDaysTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1341,11 +1302,20 @@
   <data name="&gt;&gt;lblAddressValue.Name" xml:space="preserve">
     <value>lblAddressValue</value>
   </data>
-  <data name="lblThisMonthValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblTotalSuppliersValue.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="lblTotalPayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
+  <data name="lblBills.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 20</value>
+  </data>
+  <data name="cardTotalPayables.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmbStatus.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grid_suppliers.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="colPayable.HeaderText" xml:space="preserve">
     <value>Payable Balance</value>
@@ -1353,20 +1323,26 @@
   <data name="pnlBottom.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="grid_suppliers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
   <data name="&gt;&gt;cmbCategory.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblFilterSearch.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="colTotalPurchases.HeaderText" xml:space="preserve">
+    <value>Total Purchases</value>
   </data>
   <data name="lstBills.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 307</value>
   </data>
+  <data name="&gt;&gt;lblTotalSuppliersTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="btnNewBill.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="&gt;&gt;cmbStatus.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;pnlTop.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="colCreditLimit.HeaderText" xml:space="preserve">
     <value>credit_limit</value>
@@ -1376,6 +1352,9 @@
   </data>
   <data name="&gt;&gt;cardTotalPayables.Parent" xml:space="preserve">
     <value>tableKpis</value>
+  </data>
+  <data name="lblFilterStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="lblCreditLimitValue.Location" type="System.Drawing.Point, System.Drawing">
     <value>118, 249</value>
@@ -1398,9 +1377,6 @@
   <data name="&gt;&gt;lblOverduePayablesTitle.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cmbCategory.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;lblBottomSummary.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
@@ -1410,8 +1386,8 @@
   <data name="btnMakePayment.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
-  <data name="&gt;&gt;lblTotalPayablesTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;colTotalPurchases.Name" xml:space="preserve">
+    <value>colTotalPurchases</value>
   </data>
   <data name="&gt;&gt;lblCreditDaysValue.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -1434,8 +1410,8 @@
   <data name="&gt;&gt;lblTotalPayablesTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblPayableTitle.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="splitMain.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;lblTotalPayablesValue.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1464,8 +1440,11 @@
   <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 8</value>
   </data>
-  <data name="lblFilterSearch.Text" xml:space="preserve">
-    <value>Search</value>
+  <data name="lblPaidValue.Text" xml:space="preserve">
+    <value>0.00</value>
+  </data>
+  <data name="colPhone.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;pnlFilters.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1473,8 +1452,8 @@
   <data name="lblPaidValue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt, style=Bold</value>
   </data>
-  <data name="lblThisMonthTitle.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9pt</value>
+  <data name="lblSupplierHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 58</value>
   </data>
   <data name="&gt;&gt;lblThisMonthTitle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1506,8 +1485,8 @@
   <data name="colAddress.HeaderText" xml:space="preserve">
     <value>address</value>
   </data>
-  <data name="colSupplierName.HeaderText" xml:space="preserve">
-    <value>Supplier Name</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 16</value>
   </data>
   <data name="&gt;&gt;tableKpis.Parent" xml:space="preserve">
     <value>pnlTop</value>
@@ -1518,8 +1497,11 @@
   <data name="&gt;&gt;pnlBottom.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="cardOverduePayables.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="lblOverduePayablesTitle.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblTotalPayablesTitle.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lblFilterStatus.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1529,6 +1511,9 @@
   </data>
   <data name="&gt;&gt;pnlBottom.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="lblTotalPayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>877, 680</value>
@@ -1584,6 +1569,12 @@
   <data name="cardOverduePayables.Size" type="System.Drawing.Size, System.Drawing">
     <value>293, 86</value>
   </data>
+  <data name="lblThisMonthTitle.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="lblFilterSearch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;lblSupplierHeader.Name" xml:space="preserve">
     <value>lblSupplierHeader</value>
   </data>
@@ -1593,8 +1584,8 @@
   <data name="&gt;&gt;splitMain.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblThisMonthValue.Name" xml:space="preserve">
-    <value>lblThisMonthValue</value>
+  <data name="txt_search.Location" type="System.Drawing.Point, System.Drawing">
+    <value>60, 16</value>
   </data>
   <data name="lblBottomSummary.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 8</value>
@@ -1620,6 +1611,9 @@
   <data name="lblOverduePayablesTitle.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 10</value>
   </data>
+  <data name="lblThisMonthValue.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;grid_suppliers.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -1635,26 +1629,32 @@
   <data name="&gt;&gt;colPayable.Name" xml:space="preserve">
     <value>colPayable</value>
   </data>
-  <data name="&gt;&gt;colCreditLimit.Name" xml:space="preserve">
-    <value>colCreditLimit</value>
+  <data name="lblFilterSearch.Text" xml:space="preserve">
+    <value>Search</value>
   </data>
   <data name="&gt;&gt;cardTotalSuppliers.Parent" xml:space="preserve">
     <value>tableKpis</value>
   </data>
-  <data name="&gt;&gt;lblPayableTitle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="btnNewBill.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="cardOverduePayables.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;splitMain.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="colId.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="&gt;&gt;lstBills.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblTotalSuppliersTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 20</value>
   </data>
-  <data name="colPayable.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="cardTotalSuppliers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblThisMonthValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblTotalSuppliersTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1665,11 +1665,11 @@
   <data name="lblBills.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Semibold, 9pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;lblCreditLimitTitle.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;pnlDetails.Name" xml:space="preserve">
+    <value>pnlDetails</value>
   </data>
-  <data name="&gt;&gt;lstBills.Name" xml:space="preserve">
-    <value>lstBills</value>
+  <data name="&gt;&gt;splitMain.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="colStatus.HeaderText" xml:space="preserve">
     <value>Status</value>
@@ -1682,8 +1682,5 @@
   </metadata>
   <metadata name="detailSlideTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ar-SA</value>
   </metadata>
 </root>

@@ -1883,6 +1883,12 @@
     <EmbeddedResource Include="Accounts\ImportProgressForm.resx">
       <DependentUpon>ImportProgressForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Journals\frm_account_lookup.ar-SA.resx">
+      <DependentUpon>frm_account_lookup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounts\Journals\frm_account_lookup.resx">
+      <DependentUpon>frm_account_lookup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accounts\Journals\frm_journal_entries.ar-SA.resx">
       <DependentUpon>frm_journal_entries.cs</DependentUpon>
     </EmbeddedResource>
@@ -2032,8 +2038,17 @@
     <EmbeddedResource Include="Dashboard\frm_dashboard.resx">
       <DependentUpon>frm_dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Discounts\frm_add_discount_scheme.ar-SA.resx">
+      <DependentUpon>frm_add_discount_scheme.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Discounts\frm_add_discount_scheme.resx">
       <DependentUpon>frm_add_discount_scheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Discounts\frm_apply_discount_scheme_bulk.ar-SA.resx">
+      <DependentUpon>frm_apply_discount_scheme_bulk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Discounts\frm_discount_schemes.ar-SA.resx">
+      <DependentUpon>frm_discount_schemes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Discounts\frm_discount_schemes.resx">
       <DependentUpon>frm_discount_schemes.cs</DependentUpon>
@@ -2232,6 +2247,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Companies\frm_updateCompany.ar-SA.resx">
       <DependentUpon>frm_updateCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Currencies\frm_addCurrency.ar-SA.resx">
+      <DependentUpon>frm_addCurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Currencies\frm_addCurrency.resx">
+      <DependentUpon>frm_addCurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Currencies\frm_currencies.ar-SA.resx">
+      <DependentUpon>frm_currencies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Master\Currencies\frm_currencies.resx">
+      <DependentUpon>frm_currencies.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Master\Fiscal Years\frm_addFiscalYear.ar-SA.resx">
       <DependentUpon>frm_addFiscalYear.cs</DependentUpon>
@@ -3003,6 +3030,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frm_suppliers.ar-SA.resx">
       <DependentUpon>frm_suppliers.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Suppliers\frm_supplier_detail.resx">
       <DependentUpon>frm_supplier_detail.cs</DependentUpon>

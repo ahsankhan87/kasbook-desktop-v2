@@ -117,11 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="$this.Text" xml:space="preserve">
-    <value>خطط الخصم</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lbl_title.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_title.Location" type="System.Drawing.Point, System.Drawing">
+    <value>959, 9</value>
+  </data>
+  <data name="lbl_title.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 28</value>
   </data>
   <data name="lbl_title.Text" xml:space="preserve">
     <value>خطط الخصم</value>
+  </data>
+  <data name="btn_search.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="btn_apply_to_products.Text" xml:space="preserve">
+    <value>تطبيق على المنتجات</value>
   </data>
   <data name="btn_new.Text" xml:space="preserve">
     <value>جديد</value>
@@ -132,17 +146,11 @@
   <data name="btn_delete.Text" xml:space="preserve">
     <value>حذف</value>
   </data>
-  <data name="btn_refresh.Text" xml:space="preserve">
-    <value>تحديث</value>
-  </data>
-  <data name="btn_search.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
   <data name="btn_toggle.Text" xml:space="preserve">
     <value>تبديل الحالة</value>
   </data>
-  <data name="btn_apply_to_products.Text" xml:space="preserve">
-    <value>تطبيق على المنتجات</value>
+  <data name="btn_refresh.Text" xml:space="preserve">
+    <value>تحديث</value>
   </data>
   <data name="col_id.HeaderText" xml:space="preserve">
     <value>#</value>
@@ -150,14 +158,24 @@
   <data name="col_name.HeaderText" xml:space="preserve">
     <value>الاسم</value>
   </data>
-  <data name="col_value.HeaderText" xml:space="preserve">
-    <value>القيمة</value>
-  </data>
   <data name="col_calc_type.HeaderText" xml:space="preserve">
     <value>نوع الحساب</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="col_calc_type.Width" type="System.Int32, mscorlib">
+    <value>106</value>
+  </data>
+  <data name="col_value.HeaderText" xml:space="preserve">
+    <value>القيمة</value>
+  </data>
+  <data name="col_value.Width" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
   <data name="col_is_active.HeaderText" xml:space="preserve">
     <value>نشط</value>
+  </data>
+  <data name="col_is_active.Width" type="System.Int32, mscorlib">
+    <value>43</value>
   </data>
   <data name="col_start_date.HeaderText" xml:space="preserve">
     <value>تاريخ البداية</value>
@@ -165,18 +183,16 @@
   <data name="col_end_date.HeaderText" xml:space="preserve">
     <value>تاريخ النهاية</value>
   </data>
+  <data name="col_end_date.Width" type="System.Int32, mscorlib">
+    <value>104</value>
+  </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>خطط الخصم</value>
   </data>
 </root>

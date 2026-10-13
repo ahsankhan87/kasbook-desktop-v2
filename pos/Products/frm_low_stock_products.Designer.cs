@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_low_stock_products));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txt_brand_code = new System.Windows.Forms.TextBox();
             this.txt_brands = new System.Windows.Forms.TextBox();
@@ -57,6 +57,7 @@
             // 
             // panel1
             // 
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.txt_brand_code);
             this.panel1.Controls.Add(this.txt_brands);
@@ -66,7 +67,6 @@
             this.panel1.Controls.Add(this.btn_search);
             this.panel1.Controls.Add(this.btn_refresh);
             this.panel1.Controls.Add(this.grid_low_stock_products);
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // txt_brand_code
@@ -116,10 +116,10 @@
             // 
             // grid_low_stock_products
             // 
+            resources.ApplyResources(this.grid_low_stock_products, "grid_low_stock_products");
             this.grid_low_stock_products.AllowUserToAddRows = false;
             this.grid_low_stock_products.AllowUserToDeleteRows = false;
             this.grid_low_stock_products.AllowUserToOrderColumns = true;
-            resources.ApplyResources(this.grid_low_stock_products, "grid_low_stock_products");
             this.grid_low_stock_products.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_low_stock_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grid_low_stock_products.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -196,16 +196,16 @@
             // purchase_order_qty
             // 
             this.purchase_order_qty.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.purchase_order_qty.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.purchase_order_qty.DefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(this.purchase_order_qty, "purchase_order_qty");
             this.purchase_order_qty.Name = "purchase_order_qty";
             // 
             // panel2
             // 
+            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel2.Controls.Add(this.lbl_low_stock_products_title);
-            resources.ApplyResources(this.panel2, "panel2");
             this.panel2.Name = "panel2";
             // 
             // lbl_low_stock_products_title

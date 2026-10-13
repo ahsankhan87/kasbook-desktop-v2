@@ -886,10 +886,25 @@ namespace POS.DLL
 
                         transaction.Commit();
 
-                        foreach (SalesModalHeader sale_header in sales)
-                        {
-                            Log.LogAction("Add Sales", $"InvoiceNo: {sale_header.invoice_no}, Sale Date: {sale_header.sale_date}, Total Amount: {((sale_header.total_amount + sale_header.total_tax) - sale_header.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
-                        }
+                         foreach (SalesModalHeader sale_header in sales)
+                         {
+                             Log.LogAction("Add Sales", $"InvoiceNo: {sale_header.invoice_no}, Sale Date: {sale_header.sale_date}, Total Amount: {((sale_header.total_amount + sale_header.total_tax) - sale_header.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+
+                             // Update estimate status to mark it as converted if this sale is from an estimate
+                             if (!string.IsNullOrWhiteSpace(sale_header.estimate_invoice_no))
+                             {
+                                 try
+                                 {
+                                     EstimatesDLL estimatesDLL = new EstimatesDLL();
+                                     estimatesDLL.UpdateEstimateStatusToConverted(sale_header.estimate_invoice_no, sale_header.invoice_no);
+                                     Log.LogAction("Convert Estimate", $"Estimate: {sale_header.estimate_invoice_no} converted to Sale: {sale_header.invoice_no}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                     Log.LogAction("Convert Estimate Error", $"Failed to mark estimate {sale_header.estimate_invoice_no} as converted: {ex.Message}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                                 }
+                             }
+                         }
                     }
                     catch
                     {
@@ -2255,6 +2270,9 @@ namespace POS.DLL
                             cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
                             cmd.Parameters.AddWithValue("@payment_terms_id", sale_header.payment_terms_id);
                             cmd.Parameters.AddWithValue("@payment_method_id", sale_header.payment_method_id);
+                            // add customer name and vat
+                            cmd.Parameters.AddWithValue("@customer_name", sale_header.customer_name);
+                            cmd.Parameters.AddWithValue("@customer_vat", sale_header.customer_vat);
 
                             cmd.Parameters.AddWithValue("@OperationType", "1");
                         }

@@ -609,5 +609,21 @@ namespace POS.BLL
                 throw;
             }
         }
+
+        /// <summary>
+        /// Mark an estimate as converted to a sales invoice.
+        /// </summary>
+        public int UpdateEstimateStatusToConverted(string estimateInvoiceNo, string linkedSalesInvoiceNo)
+        {
+            try
+            {
+                EstimatesBLL estimatesBLL = new EstimatesBLL();
+                return estimatesBLL.UpdateEstimateStatusToConverted(estimateInvoiceNo, linkedSalesInvoiceNo);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

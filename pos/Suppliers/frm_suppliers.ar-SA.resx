@@ -117,96 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lblTotalSuppliersTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 20</value>
-  </data>
-  <data name="lblTotalSuppliersTitle.Text" xml:space="preserve">
-    <value>إجمالي الموردين</value>
-  </data>
-  <data name="cardTotalSuppliers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>901, 3</value>
-  </data>
-  <data name="lblTotalPayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
-  </data>
-  <data name="lblTotalPayablesTitle.Text" xml:space="preserve">
-    <value>إجمالي المستحقات الدفع</value>
-  </data>
-  <data name="cardTotalPayables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>602, 3</value>
-  </data>
-  <data name="lblOverduePayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 20</value>
-  </data>
-  <data name="lblOverduePayablesTitle.Text" xml:space="preserve">
-    <value>المستحقات الدفع المتأخرة</value>
-  </data>
-  <data name="cardOverduePayables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 3</value>
-  </data>
-  <data name="lblThisMonthTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
-  </data>
-  <data name="lblThisMonthTitle.Text" xml:space="preserve">
-    <value>إجمالي المشتريات هذا الشهر</value>
-  </data>
-  <data name="cardThisMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="lblFilterStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 17</value>
-  </data>
-  <data name="lblFilterStatus.Text" xml:space="preserve">
-    <value>الحالة</value>
-  </data>
-  <data name="lblFilterCategory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 17</value>
-  </data>
-  <data name="lblFilterCategory.Text" xml:space="preserve">
-    <value>الفئة</value>
-  </data>
-  <data name="lblFilterSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 17</value>
-  </data>
-  <data name="lblFilterSearch.Text" xml:space="preserve">
-    <value>بحث</value>
-  </data>
-  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>226, 32</value>
-  </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>ملخص لوحة الموردين</value>
-  </data>
-  <data name="colSupplierCode.HeaderText" xml:space="preserve">
-    <value>رقم المورد</value>
-  </data>
-  <data name="colSupplierName.HeaderText" xml:space="preserve">
-    <value>اسم المورد</value>
-  </data>
-  <data name="colCategory.HeaderText" xml:space="preserve">
-    <value>الفئة</value>
-  </data>
-  <data name="colPhone.HeaderText" xml:space="preserve">
-    <value>الهاتف</value>
-  </data>
-  <data name="colTotalPurchases.HeaderText" xml:space="preserve">
-    <value>إجمالي المشتريات</value>
-  </data>
-  <data name="colLastBill.HeaderText" xml:space="preserve">
-    <value>تاريخ آخر فاتورة</value>
-  </data>
-  <data name="colDaysSince.HeaderText" xml:space="preserve">
-    <value>الأيام منذ آخر عملية شراء</value>
-  </data>
-  <data name="colStatus.HeaderText" xml:space="preserve">
-    <value>الحالة</value>
-  </data>
-  <data name="colCreditLimit.HeaderText" xml:space="preserve">
-    <value>حد الائتمان</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitMain.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="splitMain.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
   <data name="btnMakePayment.Text" xml:space="preserve">
@@ -218,6 +133,7 @@
   <data name="btnViewProfile.Text" xml:space="preserve">
     <value>عرض الملف الشخصي</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblBills.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 20</value>
   </data>
@@ -266,8 +182,104 @@
   <data name="lblSupplierHeader.Text" xml:space="preserve">
     <value>اختر المورد</value>
   </data>
-  <data name="splitMain.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>Yes</value>
+  <data name="cardTotalSuppliers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>901, 3</value>
+  </data>
+  <data name="lblTotalSuppliersTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 20</value>
+  </data>
+  <data name="lblTotalSuppliersTitle.Text" xml:space="preserve">
+    <value>إجمالي الموردين</value>
+  </data>
+  <data name="cardTotalPayables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>602, 3</value>
+  </data>
+  <data name="lblTotalPayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 20</value>
+  </data>
+  <data name="lblTotalPayablesTitle.Text" xml:space="preserve">
+    <value>إجمالي المستحقات الدفع</value>
+  </data>
+  <data name="cardOverduePayables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>303, 3</value>
+  </data>
+  <data name="lblOverduePayablesTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 20</value>
+  </data>
+  <data name="lblOverduePayablesTitle.Text" xml:space="preserve">
+    <value>المستحقات الدفع المتأخرة</value>
+  </data>
+  <data name="cardThisMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="lblThisMonthTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 20</value>
+  </data>
+  <data name="lblThisMonthTitle.Text" xml:space="preserve">
+    <value>إجمالي المشتريات هذا الشهر</value>
+  </data>
+  <data name="lblThisMonthTrend.Location" type="System.Drawing.Point, System.Drawing">
+    <value>215, 11</value>
+  </data>
+  <data name="lblFilterStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 17</value>
+  </data>
+  <data name="lblFilterStatus.Text" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="lblFilterCategory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 17</value>
+  </data>
+  <data name="lblFilterCategory.Text" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="lblFilterSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 17</value>
+  </data>
+  <data name="lblFilterSearch.Text" xml:space="preserve">
+    <value>بحث</value>
+  </data>
+  <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>226, 32</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>ملخص لوحة الموردين</value>
+  </data>
+  <data name="colSupplierCode.HeaderText" xml:space="preserve">
+    <value>رقم المورد</value>
+  </data>
+  <data name="colSupplierName.HeaderText" xml:space="preserve">
+    <value>اسم المورد</value>
+  </data>
+  <data name="colCategory.HeaderText" xml:space="preserve">
+    <value>الفئة</value>
+  </data>
+  <data name="colPhone.HeaderText" xml:space="preserve">
+    <value>الهاتف</value>
+  </data>
+  <data name="colTotalPurchases.HeaderText" xml:space="preserve">
+    <value>إجمالي المشتريات</value>
+  </data>
+  <data name="colPayable.HeaderText" xml:space="preserve">
+    <value>الرصيد المستحق الدفع</value>
+  </data>
+  <data name="colCreditDays.HeaderText" xml:space="preserve">
+    <value>أيام الائتمان</value>
+  </data>
+  <data name="colLastBill.HeaderText" xml:space="preserve">
+    <value>تاريخ آخر فاتورة</value>
+  </data>
+  <data name="colDaysSince.HeaderText" xml:space="preserve">
+    <value>الأيام منذ آخر عملية شراء</value>
+  </data>
+  <data name="colStatus.HeaderText" xml:space="preserve">
+    <value>الحالة</value>
+  </data>
+  <data name="colAddress.HeaderText" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="colCreditLimit.HeaderText" xml:space="preserve">
+    <value>حد الائتمان</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

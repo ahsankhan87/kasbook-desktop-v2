@@ -30,9 +30,12 @@ namespace pos
         {
             AppTheme.Apply(this);
             StyleForm();
-            //load_estimates_detail_grid(sale_id);
-             try
+
+            try
             {
+                // Display conversion status if applicable
+                DisplayEstimateConversionStatus();
+
                 double _total_qty = 0;
                 double _total_cost = 0;
                 double _total_vat = 0;
@@ -41,7 +44,6 @@ namespace pos
 
                 grid_estimates_detail.DataSource = null;
                 grid_estimates_detail.AutoGenerateColumns = false;
-                //grid_estimates_detail.DataSource = load_estimates_detail_grid();
 
                 EstimatesBLL objestimatesBLL = new EstimatesBLL();
                 DataTable dt = objestimatesBLL.GetAllEstimatesItems(_sale_id);
@@ -81,6 +83,56 @@ namespace pos
                  MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
              }
+        }
+
+        private void DisplayEstimateConversionStatus()
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(POS.DLL.dbConnection.ConnectionString))
+                {
+                    cn.Open();
+                    string query = @"SELECT status, linked_sales_invoice_no, converted_date 
+                                    FROM pos_estimates 
+                                    WHERE invoice_no = @invoiceNo";
+
+                    using (SqlCommand cmd = new SqlCommand(query, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@invoiceNo", _invoice_no);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                int status = Convert.ToInt32(reader["status"]);
+                                if (status == 1) // Converted
+                                {
+                                    string linkedInvoiceNo = reader["linked_sales_invoice_no"] != DBNull.Value
+                                        ? reader["linked_sales_invoice_no"].ToString()
+                                        : "Unknown";
+                                    DateTime convertedDate = reader["converted_date"] != DBNull.Value
+                                        ? Convert.ToDateTime(reader["converted_date"])
+                                        : DateTime.MinValue;
+
+                                    string message = $"This estimate was converted to Sales Invoice: {linkedInvoiceNo}";
+                                    if (convertedDate != DateTime.MinValue)
+                                        message += $" on {convertedDate:yyyy-MM-dd HH:mm}";
+
+                                    UiMessages.ShowInfo(
+                                        message,
+                                        $"تم تحويل عرض السعر هذا إلى فاتورة المبيعات: {linkedInvoiceNo}",
+                                        "Estimate Status",
+                                        "حالة عرض السعر"
+                                    );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // Silently handle if columns don't exist yet (backward compatibility)
+            }
         }
 
         private void StyleForm()

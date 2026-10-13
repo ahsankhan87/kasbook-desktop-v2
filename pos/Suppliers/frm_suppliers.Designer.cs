@@ -19,6 +19,29 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_suppliers));
+            this.splitMain = new System.Windows.Forms.SplitContainer();
+            this.grid_suppliers = new System.Windows.Forms.DataGridView();
+            this.pnlDetails = new System.Windows.Forms.Panel();
+            this.btnMakePayment = new System.Windows.Forms.Button();
+            this.btnNewBill = new System.Windows.Forms.Button();
+            this.btnViewProfile = new System.Windows.Forms.Button();
+            this.lstBills = new System.Windows.Forms.ListBox();
+            this.lblBills = new System.Windows.Forms.Label();
+            this.lblCreditLimitValue = new System.Windows.Forms.Label();
+            this.lblCreditLimitTitle = new System.Windows.Forms.Label();
+            this.lblCreditDaysValue = new System.Windows.Forms.Label();
+            this.lblCreditDaysTitle = new System.Windows.Forms.Label();
+            this.lblPayableValue = new System.Windows.Forms.Label();
+            this.lblPayableTitle = new System.Windows.Forms.Label();
+            this.lblPaidValue = new System.Windows.Forms.Label();
+            this.lblPaidTitle = new System.Windows.Forms.Label();
+            this.lblPurchasedValue = new System.Windows.Forms.Label();
+            this.lblPurchasedTitle = new System.Windows.Forms.Label();
+            this.lblCategoryValue = new System.Windows.Forms.Label();
+            this.lblAddressValue = new System.Windows.Forms.Label();
+            this.lblPhoneValue = new System.Windows.Forms.Label();
+            this.panelAvatar = new System.Windows.Forms.Panel();
+            this.lblSupplierHeader = new System.Windows.Forms.Label();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.tableKpis = new System.Windows.Forms.TableLayoutPanel();
             this.cardTotalSuppliers = new System.Windows.Forms.Panel();
@@ -42,8 +65,9 @@
             this.lblFilterSearch = new System.Windows.Forms.Label();
             this.txt_search = new System.Windows.Forms.TextBox();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.splitMain = new System.Windows.Forms.SplitContainer();
-            this.grid_suppliers = new System.Windows.Forms.DataGridView();
+            this.pnlBottom = new System.Windows.Forms.Panel();
+            this.lblBottomSummary = new System.Windows.Forms.Label();
+            this.detailSlideTimer = new System.Windows.Forms.Timer(this.components);
             this.colNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplierCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,30 +84,12 @@
             this.colCreditLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTotalPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIsOverdue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pnlDetails = new System.Windows.Forms.Panel();
-            this.btnMakePayment = new System.Windows.Forms.Button();
-            this.btnNewBill = new System.Windows.Forms.Button();
-            this.btnViewProfile = new System.Windows.Forms.Button();
-            this.lstBills = new System.Windows.Forms.ListBox();
-            this.lblBills = new System.Windows.Forms.Label();
-            this.lblCreditLimitValue = new System.Windows.Forms.Label();
-            this.lblCreditLimitTitle = new System.Windows.Forms.Label();
-            this.lblCreditDaysValue = new System.Windows.Forms.Label();
-            this.lblCreditDaysTitle = new System.Windows.Forms.Label();
-            this.lblPayableValue = new System.Windows.Forms.Label();
-            this.lblPayableTitle = new System.Windows.Forms.Label();
-            this.lblPaidValue = new System.Windows.Forms.Label();
-            this.lblPaidTitle = new System.Windows.Forms.Label();
-            this.lblPurchasedValue = new System.Windows.Forms.Label();
-            this.lblPurchasedTitle = new System.Windows.Forms.Label();
-            this.lblCategoryValue = new System.Windows.Forms.Label();
-            this.lblAddressValue = new System.Windows.Forms.Label();
-            this.lblPhoneValue = new System.Windows.Forms.Label();
-            this.panelAvatar = new System.Windows.Forms.Panel();
-            this.lblSupplierHeader = new System.Windows.Forms.Label();
-            this.pnlBottom = new System.Windows.Forms.Panel();
-            this.lblBottomSummary = new System.Windows.Forms.Label();
-            this.detailSlideTimer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
+            this.splitMain.Panel1.SuspendLayout();
+            this.splitMain.Panel2.SuspendLayout();
+            this.splitMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grid_suppliers)).BeginInit();
+            this.pnlDetails.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.tableKpis.SuspendLayout();
             this.cardTotalSuppliers.SuspendLayout();
@@ -91,14 +97,197 @@
             this.cardOverduePayables.SuspendLayout();
             this.cardThisMonth.SuspendLayout();
             this.pnlFilters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).BeginInit();
-            this.splitMain.Panel1.SuspendLayout();
-            this.splitMain.Panel2.SuspendLayout();
-            this.splitMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_suppliers)).BeginInit();
-            this.pnlDetails.SuspendLayout();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // splitMain
+            // 
+            resources.ApplyResources(this.splitMain, "splitMain");
+            this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitMain.Name = "splitMain";
+            // 
+            // splitMain.Panel1
+            // 
+            resources.ApplyResources(this.splitMain.Panel1, "splitMain.Panel1");
+            this.splitMain.Panel1.Controls.Add(this.grid_suppliers);
+            // 
+            // splitMain.Panel2
+            // 
+            resources.ApplyResources(this.splitMain.Panel2, "splitMain.Panel2");
+            this.splitMain.Panel2.Controls.Add(this.pnlDetails);
+            // 
+            // grid_suppliers
+            // 
+            resources.ApplyResources(this.grid_suppliers, "grid_suppliers");
+            this.grid_suppliers.AllowUserToAddRows = false;
+            this.grid_suppliers.AllowUserToDeleteRows = false;
+            this.grid_suppliers.AllowUserToOrderColumns = true;
+            this.grid_suppliers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grid_suppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_suppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNo,
+            this.colSupplierCode,
+            this.colSupplierName,
+            this.colCategory,
+            this.colPhone,
+            this.colTotalPurchases,
+            this.colPayable,
+            this.colCreditDays,
+            this.colLastBill,
+            this.colDaysSince,
+            this.colStatus,
+            this.colId,
+            this.colAddress,
+            this.colCreditLimit,
+            this.colTotalPaid,
+            this.colIsOverdue});
+            this.grid_suppliers.MultiSelect = false;
+            this.grid_suppliers.Name = "grid_suppliers";
+            this.grid_suppliers.ReadOnly = true;
+            this.grid_suppliers.RowHeadersVisible = false;
+            this.grid_suppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grid_suppliers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_suppliers_CellDoubleClick);
+            this.grid_suppliers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grid_suppliers_CellFormatting);
+            this.grid_suppliers.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.grid_suppliers_CellPainting);
+            this.grid_suppliers.SelectionChanged += new System.EventHandler(this.grid_suppliers_SelectionChanged);
+            // 
+            // pnlDetails
+            // 
+            resources.ApplyResources(this.pnlDetails, "pnlDetails");
+            this.pnlDetails.BackColor = System.Drawing.Color.White;
+            this.pnlDetails.Controls.Add(this.btnMakePayment);
+            this.pnlDetails.Controls.Add(this.btnNewBill);
+            this.pnlDetails.Controls.Add(this.btnViewProfile);
+            this.pnlDetails.Controls.Add(this.lstBills);
+            this.pnlDetails.Controls.Add(this.lblBills);
+            this.pnlDetails.Controls.Add(this.lblCreditLimitValue);
+            this.pnlDetails.Controls.Add(this.lblCreditLimitTitle);
+            this.pnlDetails.Controls.Add(this.lblCreditDaysValue);
+            this.pnlDetails.Controls.Add(this.lblCreditDaysTitle);
+            this.pnlDetails.Controls.Add(this.lblPayableValue);
+            this.pnlDetails.Controls.Add(this.lblPayableTitle);
+            this.pnlDetails.Controls.Add(this.lblPaidValue);
+            this.pnlDetails.Controls.Add(this.lblPaidTitle);
+            this.pnlDetails.Controls.Add(this.lblPurchasedValue);
+            this.pnlDetails.Controls.Add(this.lblPurchasedTitle);
+            this.pnlDetails.Controls.Add(this.lblCategoryValue);
+            this.pnlDetails.Controls.Add(this.lblAddressValue);
+            this.pnlDetails.Controls.Add(this.lblPhoneValue);
+            this.pnlDetails.Controls.Add(this.panelAvatar);
+            this.pnlDetails.Controls.Add(this.lblSupplierHeader);
+            this.pnlDetails.Name = "pnlDetails";
+            // 
+            // btnMakePayment
+            // 
+            resources.ApplyResources(this.btnMakePayment, "btnMakePayment");
+            this.btnMakePayment.Name = "btnMakePayment";
+            this.btnMakePayment.UseVisualStyleBackColor = true;
+            this.btnMakePayment.Click += new System.EventHandler(this.btnMakePayment_Click);
+            // 
+            // btnNewBill
+            // 
+            resources.ApplyResources(this.btnNewBill, "btnNewBill");
+            this.btnNewBill.Name = "btnNewBill";
+            this.btnNewBill.UseVisualStyleBackColor = true;
+            this.btnNewBill.Click += new System.EventHandler(this.btnNewBill_Click);
+            // 
+            // btnViewProfile
+            // 
+            resources.ApplyResources(this.btnViewProfile, "btnViewProfile");
+            this.btnViewProfile.Name = "btnViewProfile";
+            this.btnViewProfile.UseVisualStyleBackColor = true;
+            this.btnViewProfile.Click += new System.EventHandler(this.btnViewProfile_Click);
+            // 
+            // lstBills
+            // 
+            resources.ApplyResources(this.lstBills, "lstBills");
+            this.lstBills.FormattingEnabled = true;
+            this.lstBills.Name = "lstBills";
+            // 
+            // lblBills
+            // 
+            resources.ApplyResources(this.lblBills, "lblBills");
+            this.lblBills.Name = "lblBills";
+            // 
+            // lblCreditLimitValue
+            // 
+            resources.ApplyResources(this.lblCreditLimitValue, "lblCreditLimitValue");
+            this.lblCreditLimitValue.Name = "lblCreditLimitValue";
+            // 
+            // lblCreditLimitTitle
+            // 
+            resources.ApplyResources(this.lblCreditLimitTitle, "lblCreditLimitTitle");
+            this.lblCreditLimitTitle.Name = "lblCreditLimitTitle";
+            // 
+            // lblCreditDaysValue
+            // 
+            resources.ApplyResources(this.lblCreditDaysValue, "lblCreditDaysValue");
+            this.lblCreditDaysValue.Name = "lblCreditDaysValue";
+            // 
+            // lblCreditDaysTitle
+            // 
+            resources.ApplyResources(this.lblCreditDaysTitle, "lblCreditDaysTitle");
+            this.lblCreditDaysTitle.Name = "lblCreditDaysTitle";
+            // 
+            // lblPayableValue
+            // 
+            resources.ApplyResources(this.lblPayableValue, "lblPayableValue");
+            this.lblPayableValue.Name = "lblPayableValue";
+            // 
+            // lblPayableTitle
+            // 
+            resources.ApplyResources(this.lblPayableTitle, "lblPayableTitle");
+            this.lblPayableTitle.Name = "lblPayableTitle";
+            // 
+            // lblPaidValue
+            // 
+            resources.ApplyResources(this.lblPaidValue, "lblPaidValue");
+            this.lblPaidValue.Name = "lblPaidValue";
+            // 
+            // lblPaidTitle
+            // 
+            resources.ApplyResources(this.lblPaidTitle, "lblPaidTitle");
+            this.lblPaidTitle.Name = "lblPaidTitle";
+            // 
+            // lblPurchasedValue
+            // 
+            resources.ApplyResources(this.lblPurchasedValue, "lblPurchasedValue");
+            this.lblPurchasedValue.Name = "lblPurchasedValue";
+            // 
+            // lblPurchasedTitle
+            // 
+            resources.ApplyResources(this.lblPurchasedTitle, "lblPurchasedTitle");
+            this.lblPurchasedTitle.Name = "lblPurchasedTitle";
+            // 
+            // lblCategoryValue
+            // 
+            resources.ApplyResources(this.lblCategoryValue, "lblCategoryValue");
+            this.lblCategoryValue.AutoEllipsis = true;
+            this.lblCategoryValue.Name = "lblCategoryValue";
+            // 
+            // lblAddressValue
+            // 
+            resources.ApplyResources(this.lblAddressValue, "lblAddressValue");
+            this.lblAddressValue.AutoEllipsis = true;
+            this.lblAddressValue.Name = "lblAddressValue";
+            // 
+            // lblPhoneValue
+            // 
+            resources.ApplyResources(this.lblPhoneValue, "lblPhoneValue");
+            this.lblPhoneValue.AutoEllipsis = true;
+            this.lblPhoneValue.Name = "lblPhoneValue";
+            // 
+            // panelAvatar
+            // 
+            resources.ApplyResources(this.panelAvatar, "panelAvatar");
+            this.panelAvatar.Name = "panelAvatar";
+            this.panelAvatar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAvatar_Paint);
+            // 
+            // lblSupplierHeader
+            // 
+            resources.ApplyResources(this.lblSupplierHeader, "lblSupplierHeader");
+            this.lblSupplierHeader.AutoEllipsis = true;
+            this.lblSupplierHeader.Name = "lblSupplierHeader";
             // 
             // pnlTop
             // 
@@ -250,56 +439,21 @@
             resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
             // 
-            // splitMain
+            // pnlBottom
             // 
-            resources.ApplyResources(this.splitMain, "splitMain");
-            this.splitMain.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitMain.Name = "splitMain";
+            resources.ApplyResources(this.pnlBottom, "pnlBottom");
+            this.pnlBottom.BackColor = System.Drawing.Color.White;
+            this.pnlBottom.Controls.Add(this.lblBottomSummary);
+            this.pnlBottom.Name = "pnlBottom";
             // 
-            // splitMain.Panel1
+            // lblBottomSummary
             // 
-            resources.ApplyResources(this.splitMain.Panel1, "splitMain.Panel1");
-            this.splitMain.Panel1.Controls.Add(this.grid_suppliers);
+            resources.ApplyResources(this.lblBottomSummary, "lblBottomSummary");
+            this.lblBottomSummary.Name = "lblBottomSummary";
             // 
-            // splitMain.Panel2
+            // detailSlideTimer
             // 
-            resources.ApplyResources(this.splitMain.Panel2, "splitMain.Panel2");
-            this.splitMain.Panel2.Controls.Add(this.pnlDetails);
-            // 
-            // grid_suppliers
-            // 
-            resources.ApplyResources(this.grid_suppliers, "grid_suppliers");
-            this.grid_suppliers.AllowUserToAddRows = false;
-            this.grid_suppliers.AllowUserToDeleteRows = false;
-            this.grid_suppliers.AllowUserToOrderColumns = true;
-            this.grid_suppliers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grid_suppliers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_suppliers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colNo,
-            this.colSupplierCode,
-            this.colSupplierName,
-            this.colCategory,
-            this.colPhone,
-            this.colTotalPurchases,
-            this.colPayable,
-            this.colCreditDays,
-            this.colLastBill,
-            this.colDaysSince,
-            this.colStatus,
-            this.colId,
-            this.colAddress,
-            this.colCreditLimit,
-            this.colTotalPaid,
-            this.colIsOverdue});
-            this.grid_suppliers.MultiSelect = false;
-            this.grid_suppliers.Name = "grid_suppliers";
-            this.grid_suppliers.ReadOnly = true;
-            this.grid_suppliers.RowHeadersVisible = false;
-            this.grid_suppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grid_suppliers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_suppliers_CellDoubleClick);
-            this.grid_suppliers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.grid_suppliers_CellFormatting);
-            this.grid_suppliers.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.grid_suppliers_CellPainting);
-            this.grid_suppliers.SelectionChanged += new System.EventHandler(this.grid_suppliers_SelectionChanged);
+            this.detailSlideTimer.Interval = 15;
             // 
             // colNo
             // 
@@ -424,160 +578,6 @@
             this.colIsOverdue.Name = "colIsOverdue";
             this.colIsOverdue.ReadOnly = true;
             // 
-            // pnlDetails
-            // 
-            resources.ApplyResources(this.pnlDetails, "pnlDetails");
-            this.pnlDetails.BackColor = System.Drawing.Color.White;
-            this.pnlDetails.Controls.Add(this.btnMakePayment);
-            this.pnlDetails.Controls.Add(this.btnNewBill);
-            this.pnlDetails.Controls.Add(this.btnViewProfile);
-            this.pnlDetails.Controls.Add(this.lstBills);
-            this.pnlDetails.Controls.Add(this.lblBills);
-            this.pnlDetails.Controls.Add(this.lblCreditLimitValue);
-            this.pnlDetails.Controls.Add(this.lblCreditLimitTitle);
-            this.pnlDetails.Controls.Add(this.lblCreditDaysValue);
-            this.pnlDetails.Controls.Add(this.lblCreditDaysTitle);
-            this.pnlDetails.Controls.Add(this.lblPayableValue);
-            this.pnlDetails.Controls.Add(this.lblPayableTitle);
-            this.pnlDetails.Controls.Add(this.lblPaidValue);
-            this.pnlDetails.Controls.Add(this.lblPaidTitle);
-            this.pnlDetails.Controls.Add(this.lblPurchasedValue);
-            this.pnlDetails.Controls.Add(this.lblPurchasedTitle);
-            this.pnlDetails.Controls.Add(this.lblCategoryValue);
-            this.pnlDetails.Controls.Add(this.lblAddressValue);
-            this.pnlDetails.Controls.Add(this.lblPhoneValue);
-            this.pnlDetails.Controls.Add(this.panelAvatar);
-            this.pnlDetails.Controls.Add(this.lblSupplierHeader);
-            this.pnlDetails.Name = "pnlDetails";
-            // 
-            // btnMakePayment
-            // 
-            resources.ApplyResources(this.btnMakePayment, "btnMakePayment");
-            this.btnMakePayment.Name = "btnMakePayment";
-            this.btnMakePayment.UseVisualStyleBackColor = true;
-            this.btnMakePayment.Click += new System.EventHandler(this.btnMakePayment_Click);
-            // 
-            // btnNewBill
-            // 
-            resources.ApplyResources(this.btnNewBill, "btnNewBill");
-            this.btnNewBill.Name = "btnNewBill";
-            this.btnNewBill.UseVisualStyleBackColor = true;
-            this.btnNewBill.Click += new System.EventHandler(this.btnNewBill_Click);
-            // 
-            // btnViewProfile
-            // 
-            resources.ApplyResources(this.btnViewProfile, "btnViewProfile");
-            this.btnViewProfile.Name = "btnViewProfile";
-            this.btnViewProfile.UseVisualStyleBackColor = true;
-            this.btnViewProfile.Click += new System.EventHandler(this.btnViewProfile_Click);
-            // 
-            // lstBills
-            // 
-            resources.ApplyResources(this.lstBills, "lstBills");
-            this.lstBills.FormattingEnabled = true;
-            this.lstBills.Name = "lstBills";
-            // 
-            // lblBills
-            // 
-            resources.ApplyResources(this.lblBills, "lblBills");
-            this.lblBills.Name = "lblBills";
-            // 
-            // lblCreditLimitValue
-            // 
-            resources.ApplyResources(this.lblCreditLimitValue, "lblCreditLimitValue");
-            this.lblCreditLimitValue.Name = "lblCreditLimitValue";
-            // 
-            // lblCreditLimitTitle
-            // 
-            resources.ApplyResources(this.lblCreditLimitTitle, "lblCreditLimitTitle");
-            this.lblCreditLimitTitle.Name = "lblCreditLimitTitle";
-            // 
-            // lblCreditDaysValue
-            // 
-            resources.ApplyResources(this.lblCreditDaysValue, "lblCreditDaysValue");
-            this.lblCreditDaysValue.Name = "lblCreditDaysValue";
-            // 
-            // lblCreditDaysTitle
-            // 
-            resources.ApplyResources(this.lblCreditDaysTitle, "lblCreditDaysTitle");
-            this.lblCreditDaysTitle.Name = "lblCreditDaysTitle";
-            // 
-            // lblPayableValue
-            // 
-            resources.ApplyResources(this.lblPayableValue, "lblPayableValue");
-            this.lblPayableValue.Name = "lblPayableValue";
-            // 
-            // lblPayableTitle
-            // 
-            resources.ApplyResources(this.lblPayableTitle, "lblPayableTitle");
-            this.lblPayableTitle.Name = "lblPayableTitle";
-            // 
-            // lblPaidValue
-            // 
-            resources.ApplyResources(this.lblPaidValue, "lblPaidValue");
-            this.lblPaidValue.Name = "lblPaidValue";
-            // 
-            // lblPaidTitle
-            // 
-            resources.ApplyResources(this.lblPaidTitle, "lblPaidTitle");
-            this.lblPaidTitle.Name = "lblPaidTitle";
-            // 
-            // lblPurchasedValue
-            // 
-            resources.ApplyResources(this.lblPurchasedValue, "lblPurchasedValue");
-            this.lblPurchasedValue.Name = "lblPurchasedValue";
-            // 
-            // lblPurchasedTitle
-            // 
-            resources.ApplyResources(this.lblPurchasedTitle, "lblPurchasedTitle");
-            this.lblPurchasedTitle.Name = "lblPurchasedTitle";
-            // 
-            // lblCategoryValue
-            // 
-            resources.ApplyResources(this.lblCategoryValue, "lblCategoryValue");
-            this.lblCategoryValue.AutoEllipsis = true;
-            this.lblCategoryValue.Name = "lblCategoryValue";
-            // 
-            // lblAddressValue
-            // 
-            resources.ApplyResources(this.lblAddressValue, "lblAddressValue");
-            this.lblAddressValue.AutoEllipsis = true;
-            this.lblAddressValue.Name = "lblAddressValue";
-            // 
-            // lblPhoneValue
-            // 
-            resources.ApplyResources(this.lblPhoneValue, "lblPhoneValue");
-            this.lblPhoneValue.AutoEllipsis = true;
-            this.lblPhoneValue.Name = "lblPhoneValue";
-            // 
-            // panelAvatar
-            // 
-            resources.ApplyResources(this.panelAvatar, "panelAvatar");
-            this.panelAvatar.Name = "panelAvatar";
-            this.panelAvatar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelAvatar_Paint);
-            // 
-            // lblSupplierHeader
-            // 
-            resources.ApplyResources(this.lblSupplierHeader, "lblSupplierHeader");
-            this.lblSupplierHeader.AutoEllipsis = true;
-            this.lblSupplierHeader.Name = "lblSupplierHeader";
-            // 
-            // pnlBottom
-            // 
-            resources.ApplyResources(this.pnlBottom, "pnlBottom");
-            this.pnlBottom.BackColor = System.Drawing.Color.White;
-            this.pnlBottom.Controls.Add(this.lblBottomSummary);
-            this.pnlBottom.Name = "pnlBottom";
-            // 
-            // lblBottomSummary
-            // 
-            resources.ApplyResources(this.lblBottomSummary, "lblBottomSummary");
-            this.lblBottomSummary.Name = "lblBottomSummary";
-            // 
-            // detailSlideTimer
-            // 
-            this.detailSlideTimer.Interval = 15;
-            // 
             // frm_suppliers
             // 
             resources.ApplyResources(this, "$this");
@@ -589,6 +589,13 @@
             this.ShowIcon = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frm_suppliers_Load);
+            this.splitMain.Panel1.ResumeLayout(false);
+            this.splitMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
+            this.splitMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grid_suppliers)).EndInit();
+            this.pnlDetails.ResumeLayout(false);
+            this.pnlDetails.PerformLayout();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.tableKpis.ResumeLayout(false);
@@ -602,13 +609,6 @@
             this.cardThisMonth.PerformLayout();
             this.pnlFilters.ResumeLayout(false);
             this.pnlFilters.PerformLayout();
-            this.splitMain.Panel1.ResumeLayout(false);
-            this.splitMain.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitMain)).EndInit();
-            this.splitMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grid_suppliers)).EndInit();
-            this.pnlDetails.ResumeLayout(false);
-            this.pnlDetails.PerformLayout();
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             this.ResumeLayout(false);

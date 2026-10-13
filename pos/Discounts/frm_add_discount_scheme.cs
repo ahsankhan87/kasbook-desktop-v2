@@ -2,6 +2,7 @@
 using POS.Core;
 using pos.UI;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -12,6 +13,11 @@ namespace pos.Discounts
         private readonly frm_discount_schemes _parent;
         private readonly int _editId;
         private readonly bool _isEdit;
+        private readonly Dictionary<int, string> _calcTypeMap = new Dictionary<int, string>
+        {
+            { 0, "PERCENT" },
+            { 1, "AMOUNT" }
+        };
 
         public frm_add_discount_scheme(frm_discount_schemes parent, int editId = 0)
         {
@@ -25,20 +31,20 @@ namespace pos.Discounts
         {
             AppTheme.Apply(this);
             cmb_calc_type.Items.Clear();
-            cmb_calc_type.Items.Add("PERCENT");
-            cmb_calc_type.Items.Add("AMOUNT");
+            cmb_calc_type.Items.Add(UiMessages.T("PERCENT", "نسبة مئوية (%)"));
+            cmb_calc_type.Items.Add(UiMessages.T("AMOUNT", "مبلغ مالي"));
             cmb_calc_type.SelectedIndex = 0;
 
             if (_isEdit)
             {
-                lbl_header_title.Text = "Edit Discount Scheme";
-                btn_save.Text = "Update";
+                lbl_header_title.Text = UiMessages.T("Edit Discount Scheme", "تحرير خطة الخصم");
+                btn_save.Text = UiMessages.T("Update", "تحديث");
                 LoadForEdit();
             }
             else
             {
-                lbl_header_title.Text = "New Discount Scheme";
-                btn_save.Text = "Save";
+                lbl_header_title.Text = UiMessages.T("New Discount Scheme", "خطة خصم جديدة");
+                btn_save.Text = UiMessages.T("Save", "حفظ");
                 chk_is_active.Checked = true;
             }
         }
@@ -57,7 +63,19 @@ namespace pos.Discounts
                 txt_name_ar.Text = r["name_ar"].ToString();
                 txt_value.Text = r["value"].ToString();
                 chk_is_active.Checked = Convert.ToBoolean(r["is_active"]);
-                cmb_calc_type.SelectedItem = r["calc_type"].ToString();
+
+                // Map stored calc_type to combo index
+                string calcType = r["calc_type"].ToString();
+                int selectedIndex = 0;
+                foreach (var kvp in _calcTypeMap)
+                {
+                    if (kvp.Value == calcType)
+                    {
+                        selectedIndex = kvp.Key;
+                        break;
+                    }
+                }
+                cmb_calc_type.SelectedIndex = selectedIndex;
 
                 if (r["start_date"] != DBNull.Value)
                     dtp_start.Value = Convert.ToDateTime(r["start_date"]);
@@ -84,7 +102,7 @@ namespace pos.Discounts
                     id = _isEdit ? _editId : 0,
                     name = txt_name.Text.Trim(),
                     name_ar = txt_name_ar.Text.Trim(),
-                    calc_type = cmb_calc_type.SelectedItem.ToString(),
+                    calc_type = _calcTypeMap[cmb_calc_type.SelectedIndex],
                     value = double.Parse(txt_value.Text.Trim()),
                     is_active = chk_is_active.Checked,
                     start_date = chk_no_start.Checked ? (DateTime?)null : dtp_start.Value.Date,
@@ -131,7 +149,7 @@ namespace pos.Discounts
                 return false;
             }
 
-            if (cmb_calc_type.SelectedItem?.ToString() == "PERCENT" && val > 100)
+            if (_calcTypeMap[cmb_calc_type.SelectedIndex] == "PERCENT" && val > 100)
             {
                 UiMessages.ShowInfo("Percent discount cannot exceed 100%.", "نسبة الخصم لا يمكن أن تتجاوز 100%.", "Validation", "التحقق");
                 txt_value.Focus();
