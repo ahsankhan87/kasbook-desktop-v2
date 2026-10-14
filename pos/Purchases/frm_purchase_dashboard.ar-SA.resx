@@ -117,34 +117,160 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="colRank.HeaderText" xml:space="preserve">
+    <value>رتبة</value>
+  </data>
+  <data name="colSupplierName.HeaderText" xml:space="preserve">
+    <value>اسم المورد</value>
+  </data>
+  <data name="colSupplierTotal.HeaderText" xml:space="preserve">
+    <value>إجمالي المشتريات</value>
+  </data>
+  <data name="colSupplierShare.HeaderText" xml:space="preserve">
+    <value>% من الإجمالي</value>
+  </data>
+  <data name="colSupplierPayable.HeaderText" xml:space="preserve">
+    <value>المبلغ المستحق</value>
+  </data>
+  <data name="lblTopSuppliers.Text" xml:space="preserve">
+    <value>أفضل الموردين</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitBottom.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="colBillNo.HeaderText" xml:space="preserve">
+    <value>رقم الفاتورة</value>
+  </data>
+  <data name="colBillSupplier.HeaderText" xml:space="preserve">
+    <value>المورد</value>
+  </data>
+  <data name="colBillDate.HeaderText" xml:space="preserve">
+    <value>تاريخ الفاتورة</value>
+  </data>
+  <data name="colDueDate.HeaderText" xml:space="preserve">
+    <value>تاريخ الاستحقاق</value>
+  </data>
+  <data name="colBillAmount.HeaderText" xml:space="preserve">
+    <value>المبلغ</value>
+  </data>
+  <data name="colDaysOverdue.HeaderText" xml:space="preserve">
+    <value>أيام التأخير</value>
+  </data>
+  <data name="lblPendingBills.Text" xml:space="preserve">
+    <value>الفواتير المعلقة</value>
+  </data>
   <data name="splitBottom.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
+  </data>
+  <data name="lblMonthlyBar.Text" xml:space="preserve">
+    <value>المشتريات الشهرية</value>
   </data>
   <data name="splitCharts.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="lblSupplierDonut.Text" xml:space="preserve">
+    <value>المشتريات حسب المورد (أفضل 5 + أخرى)</value>
+  </data>
   <data name="splitCharts.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="lblTrend.Text" xml:space="preserve">
+    <value>الاتجاه السنوي</value>
+  </data>
+  <data name="dtpTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="dtpTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>609, 11</value>
+  </data>
+  <data name="lblTo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>745, 14</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 17</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>إلى</value>
+  </data>
+  <data name="dtpFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="dtpFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>795, 11</value>
+  </data>
+  <data name="lblFrom.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>931, 14</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 17</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="cmbPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cmbPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>970, 11</value>
+  </data>
+  <data name="lblPeriod.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="lblPeriod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1142, 14</value>
+  </data>
+  <data name="lblPeriod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 17</value>
+  </data>
+  <data name="lblPeriod.Text" xml:space="preserve">
+    <value>الفترة</value>
+  </data>
+  <data name="lblTotalPurchasesTrend.Text" xml:space="preserve">
+    <value>0.00% مقابل الفترة السابقة</value>
+  </data>
+  <data name="lblTotalPurchasesTitle.Text" xml:space="preserve">
+    <value>إجمالي المشتريات</value>
+  </data>
   <data name="cardTotalPurchases.Location" type="System.Drawing.Point, System.Drawing">
     <value>960, 3</value>
+  </data>
+  <data name="lblTotalBillsTitle.Text" xml:space="preserve">
+    <value>إجمالي الفواتير</value>
   </data>
   <data name="cardTotalBills.Location" type="System.Drawing.Point, System.Drawing">
     <value>721, 3</value>
   </data>
+  <data name="lblAmountPaidTitle.Text" xml:space="preserve">
+    <value>المبلغ المدفوع</value>
+  </data>
   <data name="cardAmountPaid.Location" type="System.Drawing.Point, System.Drawing">
     <value>482, 3</value>
+  </data>
+  <data name="lblPayableSub.Text" xml:space="preserve">
+    <value>متأخر: 0.00</value>
+  </data>
+  <data name="lblPayableTitle.Text" xml:space="preserve">
+    <value>المبالغ المستحقة / المعلقة</value>
   </data>
   <data name="cardPayable.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 3</value>
   </data>
+  <data name="lblAvgPurchaseTitle.Text" xml:space="preserve">
+    <value>متوسط المشتري</value>
+  </data>
   <data name="cardAvgPurchase.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
+  </data>
+  <data name="lblTitle.Text" xml:space="preserve">
+    <value>لوحة المشتريات</value>
   </data>
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -155,74 +281,5 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>لوحة المشتريات</value>
-  </data>
-  <data name="lblTitle.Text" xml:space="preserve">
-    <value>لوحة المشتريات</value>
-  </data>
-  <data name="lblTotalPurchasesTitle.Text" xml:space="preserve">
-    <value>إجمالي المشتريات</value>
-  </data>
-  <data name="lblTotalBillsTitle.Text" xml:space="preserve">
-    <value>إجمالي الفواتير</value>
-  </data>
-  <data name="lblAmountPaidTitle.Text" xml:space="preserve">
-    <value>المبلغ المدفوع</value>
-  </data>
-  <data name="lblPayableTitle.Text" xml:space="preserve">
-    <value>المبالغ المستحقة / المعلقة</value>
-  </data>
-  <data name="lblAvgPurchaseTitle.Text" xml:space="preserve">
-    <value>متوسط المشتري</value>
-  </data>
-  <data name="lblMonthlyBar.Text" xml:space="preserve">
-    <value>المشتريات الشهرية</value>
-  </data>
-  <data name="lblSupplierDonut.Text" xml:space="preserve">
-    <value>المشتريات حسب المورد (أفضل 5 + أخرى)</value>
-  </data>
-  <data name="lblTrend.Text" xml:space="preserve">
-    <value>الاتجاه السنوي</value>
-  </data>
-  <data name="lblTopSuppliers.Text" xml:space="preserve">
-    <value>أفضل الموردين</value>
-  </data>
-  <data name="lblPendingBills.Text" xml:space="preserve">
-    <value>الفواتير المعلقة</value>
-  </data>
-  <data name="lblPeriod.Text" xml:space="preserve">
-    <value>الفترة</value>
-  </data>
-  <data name="lblFrom.Text" xml:space="preserve">
-    <value>من</value>
-  </data>
-  <data name="lblTo.Text" xml:space="preserve">
-    <value>إلى</value>
-  </data>
-  <data name="colSupplierTotal.HeaderText" xml:space="preserve">
-    <value>إجمالي المشتريات</value>
-  </data>
-  <data name="colSupplierPayable.HeaderText" xml:space="preserve">
-    <value>المبلغ المستحق</value>
-  </data>
-  <data name="colBillSupplier.HeaderText" xml:space="preserve">
-    <value>المورد</value>
-  </data>
-  <data name="colBillNo.HeaderText" xml:space="preserve">
-    <value>رقم الفاتورة</value>
-  </data>
-  <data name="colBillDate.HeaderText" xml:space="preserve">
-    <value>تاريخ الفاتورة</value>
-  </data>
-  <data name="colBillAmount.HeaderText" xml:space="preserve">
-    <value>المبلغ</value>
-  </data>
-  <data name="colDueDate.HeaderText" xml:space="preserve">
-    <value>تاريخ الاستحقاق</value>
-  </data>
-  <data name="lblTotalPurchasesTrend.Text" xml:space="preserve">
-    <value>0.00% مقابل الفترة السابقة</value>
-  </data>
-  <data name="lblPayableSub.Text" xml:space="preserve">
-    <value>متأخر: 0.00</value>
   </data>
 </root>

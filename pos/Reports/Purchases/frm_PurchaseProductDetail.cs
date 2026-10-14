@@ -63,7 +63,7 @@ namespace pos.Reports.Purchases
                     }
 
                     DataRow totalRow = filteredDt.NewRow();
-                    totalRow["product_name"] = "Total";
+                    totalRow["product_name"] = UiMessages.T("Total", "الإجمالي");
                     totalRow["quantity"] = totalQty;
                     totalRow["cost_price"] = totalCostPrice;
                     totalRow["discount_value"] = totalDiscount;
@@ -81,7 +81,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -113,14 +113,15 @@ namespace pos.Reports.Purchases
             {
                 if (grid_products.Rows.Count == 0)
                 {
-                    MessageBox.Show("No data to print.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(UiMessages.T("No data to print.", "لا توجد بيانات للطباعة."), 
+                        UiMessages.T("Print", "طباعة"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 DGVPrinterHelper.DGVPrinter printer = new DGVPrinterHelper.DGVPrinter();
                 printer.PageSettings.Landscape = true;
-                printer.Title = "Purchase Product Details";
-                printer.SubTitle = "Invoice No: " + _invoiceNo;
+                printer.Title = UiMessages.T("Purchase Product Details", "تفاصيل منتجات المشتريات");
+                printer.SubTitle = UiMessages.T("Invoice No: ", "رقم الفاتورة: ") + _invoiceNo;
                 printer.PageNumbers = true;
                 printer.PageNumberInHeader = false;
                 printer.Footer = string.Empty;
@@ -155,7 +156,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Print Error", "خطأ في الطباعة"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -165,7 +166,8 @@ namespace pos.Reports.Purchases
             {
                 if (grid_products.DataSource == null)
                 {
-                    MessageBox.Show("No data to export.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(UiMessages.T("No data to export.", "لا توجد بيانات للتصدير."), 
+                        UiMessages.T("Export", "تصدير"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -175,7 +177,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Export Error", "خطأ في التصدير"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

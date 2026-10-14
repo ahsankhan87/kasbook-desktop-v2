@@ -2623,6 +2623,10 @@
     <EmbeddedResource Include="Purchases\frm_purchases_detail.resx">
       <DependentUpon>frm_purchases_detail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Purchases\frm_purchase_dashboard.ar-SA.resx">
+      <DependentUpon>frm_purchase_dashboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Purchases\frm_purchase_return.ar-SA.resx">
       <DependentUpon>frm_purchase_return.cs</DependentUpon>
     </EmbeddedResource>
@@ -2776,11 +2780,27 @@
     <EmbeddedResource Include="Reports\Purchase Orders\frm_purchase_order_report.resx">
       <DependentUpon>frm_purchase_order_report.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\frm_PurchaseInvoiceReport.ar-SA.resx">
+      <DependentUpon>frm_PurchaseInvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\frm_PurchaseInvoiceReport.resx">
+      <DependentUpon>frm_PurchaseInvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\frm_PurchaseProductDetail.ar-SA.resx">
+      <DependentUpon>frm_PurchaseProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\frm_PurchaseProductDetail.resx">
+      <DependentUpon>frm_PurchaseProductDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Purchases\frm_PurchasesReport.ar-SA.resx">
       <DependentUpon>frm_PurchasesReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Purchases\frm_PurchasesReport.resx">
       <DependentUpon>frm_PurchasesReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Purchases\frm_purchase_invoice.ar-SA.resx">
+      <DependentUpon>frm_purchase_invoice.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Purchases\frm_purchase_invoice.resx">
       <DependentUpon>frm_purchase_invoice.cs</DependentUpon>

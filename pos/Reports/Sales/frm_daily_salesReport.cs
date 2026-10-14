@@ -77,7 +77,7 @@ namespace pos
                 }
 
                 DataRow newRow = accounts_dt.NewRow();
-                newRow[10] = "Total";
+                newRow[10] = UiMessages.T("Total", "الإجمالي");
                 newRow[4] = _quantity_sold_total;
                 newRow[5] = _unit_price_total;
                 newRow[6] = _discount_value_total;
@@ -93,8 +93,8 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error");
-                
+                MessageBox.Show(ex.Message, UiMessages.T("Error", "خطأ"));
+
             }
         }
 
@@ -124,8 +124,8 @@ namespace pos
         private void btn_print_Click(object sender, EventArgs e)
         {
             DGVPrinter printer = new DGVPrinter();
-            printer.Title = "Daily Sale Cash Report";
-            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date);
+            printer.Title = UiMessages.T("Daily Sale Cash Report", "تقرير المبيعات النقدية اليومي");
+            printer.SubTitle = string.Format(UiMessages.T("Date: {0}", "التاريخ: {0}"), DateTime.Now.Date);
             printer.SubTitleFormatFlags = StringFormatFlags.LineLimit | StringFormatFlags.NoClip;
             printer.PageSettings.Landscape = true;
             printer.PageNumbers = true;
@@ -160,7 +160,7 @@ namespace pos
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, UiMessages.T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

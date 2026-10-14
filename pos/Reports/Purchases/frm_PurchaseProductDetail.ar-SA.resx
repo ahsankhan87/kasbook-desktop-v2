@@ -121,6 +121,42 @@
   <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>تفاصيل منتجات المشتريات</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>رقم الفاتورة :</value>
+  </data>
+  <data name="btn_print.Text" xml:space="preserve">
+    <value>طباعة (F4)</value>
+  </data>
+  <data name="btn_export.Text" xml:space="preserve">
+    <value>تصدير</value>
+  </data>
+  <data name="col_item_code.HeaderText" xml:space="preserve">
+    <value>الرمز</value>
+  </data>
+  <data name="col_product_name.HeaderText" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
+  <data name="col_quantity.HeaderText" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="col_cost_price.HeaderText" xml:space="preserve">
+    <value>سعر التكلفة</value>
+  </data>
+  <data name="col_discount_value.HeaderText" xml:space="preserve">
+    <value>الخصم</value>
+  </data>
+  <data name="col_vat.HeaderText" xml:space="preserve">
+    <value>الضريبة</value>
+  </data>
+  <data name="col_total.HeaderText" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="col_total_with_vat.HeaderText" xml:space="preserve">
+    <value>الإجمالي (الضريبة)</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
     <value>True</value>

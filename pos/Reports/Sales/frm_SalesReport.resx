@@ -143,9 +143,6 @@
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;chk_ShowZatcaInvoice.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>486, 46</value>
   </data>
@@ -183,8 +180,8 @@
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;txt_to_date.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 17</value>
   </data>
   <data name="cmb_sale_account.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 68</value>
@@ -198,8 +195,8 @@
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;txtCustomerSearch.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="&gt;&gt;CmbCondition.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -225,8 +222,8 @@
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 17</value>
   </data>
-  <data name="btn_export.Location" type="System.Drawing.Point, System.Drawing">
-    <value>981, 12</value>
+  <data name="&gt;&gt;discount_value.Name" xml:space="preserve">
+    <value>discount_value</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -254,6 +251,9 @@
   </data>
   <data name="grid_sales_report.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;profit_percent.Name" xml:space="preserve">
     <value>profit_percent</value>
@@ -323,6 +323,9 @@
   </data>
   <data name="&gt;&gt;btn_print.Parent" xml:space="preserve">
     <value>panel1</value>
+  </data>
+  <data name="grid_sales_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="&gt;&gt;cmb_users.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -414,6 +417,9 @@
   <data name="btn_export.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="btn_search.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -444,14 +450,11 @@
   <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Sales Report</value>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>233, 70</value>
   </data>
   <data name="&gt;&gt;panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="chk_ShowZatcaInvoice.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;cmb_users.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -534,8 +537,8 @@
   <data name="&gt;&gt;profit_percent.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
+  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+    <value>panel1</value>
   </data>
   <data name="txt_search.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 24</value>
@@ -554,6 +557,9 @@
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="unit_price.HeaderText" xml:space="preserve">
     <value>Sale Price</value>
@@ -576,9 +582,6 @@
   <data name="label8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="btn_print.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
@@ -588,20 +591,14 @@
   <data name="grid_sales_report.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 6</value>
   </data>
-  <data name="&gt;&gt;vat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
   </data>
   <data name="&gt;&gt;CmbCondition.Name" xml:space="preserve">
     <value>CmbCondition</value>
   </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1145, 108</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btn_export.Location" type="System.Drawing.Point, System.Drawing">
+    <value>981, 12</value>
   </data>
   <data name="label10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -615,8 +612,8 @@
   <data name="AllUsers" xml:space="preserve">
     <value>All Users</value>
   </data>
-  <data name="grid_sales_report.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1145, 108</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -624,14 +621,14 @@
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1145, 491</value>
   </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
   <data name="&gt;&gt;cmb_users.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;product_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtCustomerSearch.Parent" xml:space="preserve">
-    <value>panel1</value>
   </data>
   <data name="cmb_users.Location" type="System.Drawing.Point, System.Drawing">
     <value>595, 68</value>
@@ -650,6 +647,9 @@
   </data>
   <data name="id.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="cmb_employees.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="profit.HeaderText" xml:space="preserve">
     <value>Profit</value>
@@ -693,6 +693,9 @@
   <data name="btn_export.Text" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
+  <data name="btn_search.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chk_ShowZatcaInvoice.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -729,8 +732,8 @@
   <data name="cmb_sale_account.Items1" xml:space="preserve">
     <value>Sale</value>
   </data>
-  <data name="&gt;&gt;discount_value.Name" xml:space="preserve">
-    <value>discount_value</value>
+  <data name="btn_export.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
   </data>
   <data name="&gt;&gt;quantity_sold.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -801,8 +804,8 @@
   <data name="id.HeaderText" xml:space="preserve">
     <value>ID</value>
   </data>
-  <data name="cmb_sale_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="cost_total.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;total_with_vat.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -873,8 +876,8 @@
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cost_total.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="cmb_sale_type.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Sale Type</value>
@@ -927,8 +930,8 @@
   <data name="&gt;&gt;txt_search.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="btn_print.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>panel1</value>
@@ -939,8 +942,8 @@
   <data name="&gt;&gt;txt_from_date.Name" xml:space="preserve">
     <value>txt_from_date</value>
   </data>
-  <data name="cmb_employees.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;loc_code.Name" xml:space="preserve">
     <value>loc_code</value>
@@ -990,11 +993,11 @@
   <data name="unit_price.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txt_to_date.Parent" xml:space="preserve">
     <value>panel1</value>
   </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 17</value>
+  <data name="&gt;&gt;chk_ShowZatcaInvoice.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 17</value>
@@ -1002,8 +1005,8 @@
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="btn_search.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+  <data name="chk_ShowZatcaInvoice.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1013,9 +1016,6 @@
   </data>
   <data name="&gt;&gt;txt_search.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 70</value>
   </data>
   <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 0, 4, 0</value>
@@ -1044,6 +1044,9 @@
   <data name="profit_percent.HeaderText" xml:space="preserve">
     <value>%</value>
   </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Sales Report</value>
+  </data>
   <data name="&gt;&gt;unit_price.Name" xml:space="preserve">
     <value>unit_price</value>
   </data>
@@ -1052,9 +1055,6 @@
   </data>
   <data name="txt_from_date.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 42</value>
-  </data>
-  <data name="btn_export.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
   </data>
   <data name="&gt;&gt;txtCustomerSearch.ZOrder" xml:space="preserve">
     <value>4</value>
@@ -1068,8 +1068,8 @@
   <data name="&gt;&gt;panel2.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;vat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="invoice_no.HeaderText" xml:space="preserve">
     <value>Invoice No.</value>

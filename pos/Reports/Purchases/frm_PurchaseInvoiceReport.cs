@@ -20,6 +20,16 @@ namespace pos.Reports.Purchases
         private bool _suppressSupplierSearch;
         private int _selectedSupplierId;
 
+        // Internal English condition values for stable logic
+        private readonly string[] _conditionEnglish = new string[]
+        {
+            "Custom", "Today", "Yesterday", "This Week", "Last Week",
+            "This Month", "Last Month", "This Quarter", "Last Quarter",
+            "This Year", "Last Year", "Year to Date (YTD)", "Last 7 Days",
+            "Last 30 Days", "Last 90 Days", "Last 6 Months",
+            "Previous Fiscal Year", "Next Fiscal Year"
+        };
+
         public frm_PurchaseInvoiceReport()
         {
             InitializeComponent();
@@ -44,14 +54,30 @@ namespace pos.Reports.Purchases
         {
             AppTheme.Apply(this);
             StyleForm();
-            CmbCondition.Items.AddRange(new string[]
+
+            // Bilingual date conditions with internal English values for logic
+            var dateConditions = new string[]
             {
-                "Custom", "Today", "Yesterday", "This Week", "Last Week",
-                "This Month", "Last Month", "This Quarter", "Last Quarter",
-                "This Year", "Last Year", "Year to Date (YTD)", "Last 7 Days",
-                "Last 30 Days", "Last 90 Days", "Last 6 Months",
-                "Previous Fiscal Year", "Next Fiscal Year"
-            });
+                UiMessages.T("Custom", "مخصص"),
+                UiMessages.T("Today", "اليوم"),
+                UiMessages.T("Yesterday", "أمس"),
+                UiMessages.T("This Week", "هذا الأسبوع"),
+                UiMessages.T("Last Week", "الأسبوع الماضي"),
+                UiMessages.T("This Month", "هذا الشهر"),
+                UiMessages.T("Last Month", "الشهر الماضي"),
+                UiMessages.T("This Quarter", "هذا الربع"),
+                UiMessages.T("Last Quarter", "الربع الماضي"),
+                UiMessages.T("This Year", "هذا العام"),
+                UiMessages.T("Last Year", "العام الماضي"),
+                UiMessages.T("Year to Date (YTD)", "من بداية العام"),
+                UiMessages.T("Last 7 Days", "آخر 7 أيام"),
+                UiMessages.T("Last 30 Days", "آخر 30 يوم"),
+                UiMessages.T("Last 90 Days", "آخر 90 يوم"),
+                UiMessages.T("Last 6 Months", "آخر 6 أشهر"),
+                UiMessages.T("Previous Fiscal Year", "السنة المالية السابقة"),
+                UiMessages.T("Next Fiscal Year", "السنة المالية القادمة")
+            };
+            CmbCondition.Items.AddRange(dateConditions);
             CmbCondition.SelectedIndex = 0;
             cmb_purchase_type.SelectedIndex = 0;
             get_employees_dropdownlist();
@@ -70,7 +96,7 @@ namespace pos.Reports.Purchases
             DataTable employees = employeeBLL.GetAll();
             DataRow emptyRow = employees.NewRow();
             emptyRow[0] = 0;
-            emptyRow[2] = "All Employee";
+            emptyRow[2] = UiMessages.T("All Employee", "جميع الموظفين");
             employees.Rows.InsertAt(emptyRow, 0);
 
             cmb_employees.DisplayMember = "first_name";
@@ -80,7 +106,7 @@ namespace pos.Reports.Purchases
 
         private async void btn_search_Click(object sender, EventArgs e)
         {
-            using (pos.UI.Busy.BusyScope.Show(this, "Loading purchase invoice report..."))
+            using (pos.UI.Busy.BusyScope.Show(this, UiMessages.T("Loading purchase invoice report...", "جاري تحميل تقرير فاتورة المشتريات...")))
             {
                 try
                 {
@@ -119,7 +145,7 @@ namespace pos.Reports.Purchases
                     if (_purchaseInvoiceReportDt.Rows.Count > 0)
                     {
                         DataRow totalRow = _purchaseInvoiceReportDt.NewRow();
-                        totalRow["invoice_no"] = "Total";
+                        totalRow["invoice_no"] = UiMessages.T("Total", "الإجمالي");
                         totalRow["total_items"] = totalItems;
                         totalRow["subtotal"] = subtotalSum;
                         totalRow["discount_value"] = discountSum;
@@ -138,7 +164,7 @@ namespace pos.Reports.Purchases
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error");
+                    MessageBox.Show(ex.Message, UiMessages.T("Error", "خطأ"));
                 }
             }
         }
@@ -185,14 +211,15 @@ namespace pos.Reports.Purchases
             {
                 if (_purchaseInvoiceReportDt == null || _purchaseInvoiceReportDt.Rows.Count <= 1)
                 {
-                    MessageBox.Show("No data to print. Please run a search first.", "Print", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(UiMessages.T("No data to print. Please run a search first.", "لا توجد بيانات للطباعة. يرجى تشغيل البحث أولاً."), 
+                        UiMessages.T("Print", "طباعة"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
                 DGVPrinterHelper.DGVPrinter printer = new DGVPrinterHelper.DGVPrinter();
                 printer.PageSettings.Landscape = true;
-                printer.Title = "Purchase Invoice Report";
-                printer.SubTitle = string.Format("From {0} To {1}", txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString());
+                printer.Title = UiMessages.T("Purchase Invoice Report", "تقرير فاتورة المشتريات");
+                printer.SubTitle = string.Format(UiMessages.T("From {0} To {1}", "من {0} إلى {1}"), txt_from_date.Value.ToShortDateString(), txt_to_date.Value.ToShortDateString());
                 printer.PageNumbers = true;
                 printer.PageNumberInHeader = false;
                 printer.Footer = string.Empty;
@@ -231,7 +258,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Print Error", "خطأ في الطباعة"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -241,7 +268,8 @@ namespace pos.Reports.Purchases
             {
                 if (_purchaseInvoiceReportDt == null || _purchaseInvoiceReportDt.Rows.Count <= 1)
                 {
-                    MessageBox.Show("No data to export. Please run a search first.", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(UiMessages.T("No data to export. Please run a search first.", "لا توجد بيانات للتصدير. يرجى تشغيل البحث أولاً."), 
+                        UiMessages.T("Export", "تصدير"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
@@ -252,7 +280,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Export Error", "خطأ في التصدير"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -262,7 +290,12 @@ namespace pos.Reports.Purchases
             DateTime startDate = today;
             DateTime endDate = today;
 
-            switch (CmbCondition.SelectedItem.ToString())
+            // Get the English condition value using the selected index
+            string condition = CmbCondition.SelectedIndex >= 0 && CmbCondition.SelectedIndex < _conditionEnglish.Length
+                ? _conditionEnglish[CmbCondition.SelectedIndex]
+                : "Custom";
+
+            switch (condition)
             {
                 case "Custom":
                     return;
@@ -356,9 +389,12 @@ namespace pos.Reports.Purchases
             suppliersDataGridView.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
             suppliersDataGridView.Columns[0].Name = "Name";
+            suppliersDataGridView.Columns[0].HeaderText = UiMessages.T("Name", "الاسم");
             suppliersDataGridView.Columns[1].Name = "ID";
             suppliersDataGridView.Columns[2].Name = "Contact";
+            suppliersDataGridView.Columns[2].HeaderText = UiMessages.T("Contact", "جهة الاتصال");
             suppliersDataGridView.Columns[3].Name = "VAT No";
+            suppliersDataGridView.Columns[3].HeaderText = UiMessages.T("VAT No", "رقم الضريبة");
 
             suppliersDataGridView.Columns[1].Visible = false;
 
@@ -457,7 +493,7 @@ namespace pos.Reports.Purchases
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, UiMessages.T("Error", "خطأ"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

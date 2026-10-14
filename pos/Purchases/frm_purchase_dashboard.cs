@@ -2,6 +2,7 @@ using POS.BLL;
 using pos.UI;
 using pos.UI.Busy;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -22,6 +23,9 @@ namespace pos
         private DateTime _prevFromDate;
         private DateTime _prevToDate;
 
+        // Period mapping by index: 0=Today, 1=Week, 2=Month, 3=Quarter, 4=Year, 5=Custom
+        private readonly string[] _periodEnglish = { "Today", "This Week", "This Month", "This Quarter", "This Year", "Custom Range" };
+
         public frm_purchase_dashboard()
         {
             InitializeComponent();
@@ -29,7 +33,7 @@ namespace pos
 
         private void frm_purchase_dashboard_Load(object sender, EventArgs e)
         {
-            AppTheme.Apply(this);
+            //AppTheme.Apply(this);
             StyleDashboard();
             ConfigureCharts();
             ConfigureGrids();
@@ -187,17 +191,17 @@ namespace pos
         private void LoadPeriodOptions()
         {
             cmbPeriod.Items.Clear();
-            cmbPeriod.Items.Add("Today");
-            cmbPeriod.Items.Add("This Week");
-            cmbPeriod.Items.Add("This Month");
-            cmbPeriod.Items.Add("This Quarter");
-            cmbPeriod.Items.Add("This Year");
-            cmbPeriod.Items.Add("Custom Range");
+            cmbPeriod.Items.Add(UiMessages.T("Today", "اليوم"));
+            cmbPeriod.Items.Add(UiMessages.T("This Week", "هذا الأسبوع"));
+            cmbPeriod.Items.Add(UiMessages.T("This Month", "هذا الشهر"));
+            cmbPeriod.Items.Add(UiMessages.T("This Quarter", "هذا الربع"));
+            cmbPeriod.Items.Add(UiMessages.T("This Year", "هذا العام"));
+            cmbPeriod.Items.Add(UiMessages.T("Custom Range", "نطاق مخصص"));
         }
 
         private void cmbPeriod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool custom = string.Equals(Convert.ToString(cmbPeriod.SelectedItem), "Custom Range", StringComparison.OrdinalIgnoreCase);
+            bool custom = cmbPeriod.SelectedIndex == 5; // Custom Range is the last item (index 5)
             dtpFrom.Enabled = custom;
             dtpTo.Enabled = custom;
 
@@ -209,7 +213,7 @@ namespace pos
 
         private void dtpFromTo_ValueChanged(object sender, EventArgs e)
         {
-            if (string.Equals(Convert.ToString(cmbPeriod.SelectedItem), "Custom Range", StringComparison.OrdinalIgnoreCase))
+            if (cmbPeriod.SelectedIndex == 5) // Custom Range
             {
                 LoadDashboard();
             }
@@ -218,7 +222,9 @@ namespace pos
         private void ResolveDatesFromPeriod()
         {
             DateTime today = DateTime.Today;
-            string period = Convert.ToString(cmbPeriod.SelectedItem);
+            string period = cmbPeriod.SelectedIndex >= 0 && cmbPeriod.SelectedIndex < _periodEnglish.Length 
+                ? _periodEnglish[cmbPeriod.SelectedIndex] 
+                : "This Year";
 
             if (string.Equals(period, "Today", StringComparison.OrdinalIgnoreCase))
             {
@@ -312,11 +318,11 @@ namespace pos
             if (dt == null || dt.Rows.Count == 0)
             {
                 lblTotalPurchasesValue.Text = 0m.ToString("N2");
-                lblTotalPurchasesTrend.Text = "0.00% vs last period";
+                lblTotalPurchasesTrend.Text = UiMessages.T("0.00% vs last period", "0.00% مقابل الفترة السابقة");
                 lblTotalBillsValue.Text = "0";
                 lblAmountPaidValue.Text = 0m.ToString("N2");
                 lblPayableValue.Text = 0m.ToString("N2");
-                lblPayableSub.Text = "Overdue: 0.00";
+                lblPayableSub.Text = UiMessages.T("Overdue: ", "متأخر: ") + 0m.ToString("N2");
                 lblAvgPurchaseValue.Text = 0m.ToString("N2");
                 return;
             }
@@ -333,13 +339,13 @@ namespace pos
             decimal trend = prev == 0 ? (totalPurchases == 0 ? 0 : 100) : ((totalPurchases - prev) / prev) * 100m;
 
             lblTotalPurchasesValue.Text = totalPurchases.ToString("N2");
-            lblTotalPurchasesTrend.Text = string.Format("{0}{1:N2}% vs last period", trend >= 0 ? "+" : string.Empty, trend);
+            lblTotalPurchasesTrend.Text = string.Format("{0}{1:N2}% {2}", trend >= 0 ? "+" : string.Empty, trend, UiMessages.T("vs last period", "مقابل الفترة السابقة"));
             lblTotalPurchasesTrend.ForeColor = trend >= 0 ? _primaryGreen : Color.Firebrick;
 
             lblTotalBillsValue.Text = totalBills.ToString("N0");
             lblAmountPaidValue.Text = amountPaid.ToString("N2");
             lblPayableValue.Text = payable.ToString("N2");
-            lblPayableSub.Text = "Overdue: " + overdue.ToString("N2");
+            lblPayableSub.Text = UiMessages.T("Overdue: ", "متأخر: ") + overdue.ToString("N2");
             lblPayableValue.ForeColor = overdue > 0 ? Color.Firebrick : AppTheme.TextPrimary;
             lblAvgPurchaseValue.Text = avg.ToString("N2");
         }
