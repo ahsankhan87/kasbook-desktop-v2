@@ -2839,6 +2839,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_daily_salesReport.ar-SA.resx">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales\frm_daily_salesReport.resx">
       <DependentUpon>frm_daily_salesReport.cs</DependentUpon>

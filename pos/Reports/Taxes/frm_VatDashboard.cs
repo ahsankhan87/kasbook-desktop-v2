@@ -225,6 +225,7 @@ namespace pos.Reports.Taxes
                 var terms = Convert.ToString(dt.Rows[i]["Terms"]);
                 if (string.Equals(terms, "Total Sales", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(terms, "Total Purchases", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(terms, "Total Purchases + Expenses", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(terms, "Grand Total", StringComparison.OrdinalIgnoreCase))
                 {
                     dt.Rows.RemoveAt(i);
@@ -243,18 +244,28 @@ namespace pos.Reports.Taxes
             decimal purchaseReturnVat = Math.Abs(GetAmount(dt, "Terms", "Purchase Return", "VatAmount"));
             decimal expenseVat = Math.Abs(GetAmount(dt, "Terms", "Expenses", "VatAmount"));
 
+            // Total Sales = Sales - Sales Return
             decimal totalSalesNet = salesNet - salesReturnNet;
             decimal totalSalesVat = salesVat - salesReturnVat;
 
-            decimal totalPurchasesNet = purchaseNet - purchaseReturnNet + expenseNet;
-            decimal totalPurchasesVat = purchaseVat - purchaseReturnVat + expenseVat;
+            // Total Purchases = Purchases - Purchase Return (EXCLUDING Expenses)
+            decimal totalPurchasesNet = purchaseNet - purchaseReturnNet;
+            decimal totalPurchasesVat = purchaseVat - purchaseReturnVat;
 
-            decimal grandNet = totalSalesNet - totalPurchasesNet;
-            decimal grandVat = totalSalesVat - totalPurchasesVat;
+            // Total Purchases + Expenses (combined for ZATCA formula)
+            // Note: Expenses row already shows expense totals, so we combine here
+            decimal totalPurchasesAndExpensesNet = totalPurchasesNet + expenseNet;
+            decimal totalPurchasesAndExpensesVat = totalPurchasesVat + expenseVat;
+
+            // Grand Total = Sales - Purchases (with expenses included in purchases for ZATCA formula)
+            decimal grandNet = totalSalesNet - totalPurchasesAndExpensesNet;
+            decimal grandVat = totalSalesVat - totalPurchasesAndExpensesVat;
 
             long salesDocs = GetDocs(dt, "Terms", "Sales", "Docs") + GetDocs(dt, "Terms", "Sales Return", "Docs");
-            long purchaseDocs = GetDocs(dt, "Terms", "Purchases", "Docs") + GetDocs(dt, "Terms", "Purchase Return", "Docs") + GetDocs(dt, "Terms", "Expenses", "Docs");
+            long purchaseDocs = GetDocs(dt, "Terms", "Purchases", "Docs") + GetDocs(dt, "Terms", "Purchase Return", "Docs");
+            long expenseDocs = GetDocs(dt, "Terms", "Expenses", "Docs");
 
+            // Insert Total Sales row
             var totalSalesRow = dt.NewRow();
             totalSalesRow["Terms"] = "Total Sales";
             if (dt.Columns.Contains("Docs")) totalSalesRow["Docs"] = salesDocs;
@@ -269,6 +280,7 @@ namespace pos.Reports.Taxes
             // visual spacer
             dt.Rows.InsertAt(dt.NewRow(), Math.Min(dt.Rows.Count, (salesReturnIndex >= 0 ? salesReturnIndex + 2 : dt.Rows.Count)));
 
+            // Insert Total Purchases row (WITHOUT Expenses)
             var totalPurchasesRow = dt.NewRow();
             totalPurchasesRow["Terms"] = "Total Purchases";
             if (dt.Columns.Contains("Docs")) totalPurchasesRow["Docs"] = purchaseDocs;
@@ -280,12 +292,25 @@ namespace pos.Reports.Taxes
             else
                 dt.Rows.Add(totalPurchasesRow);
 
+            // Note: Expenses row already shows expense totals (not a subtotal row)
+            // Insert Total Purchases + Expenses row (COMBINED) after Expenses row
+            var totalPurchasesAndExpensesRow = dt.NewRow();
+            totalPurchasesAndExpensesRow["Terms"] = "Total Purchases + Expenses";
+            if (dt.Columns.Contains("Docs")) totalPurchasesAndExpensesRow["Docs"] = purchaseDocs + expenseDocs;
+            totalPurchasesAndExpensesRow["NetAmount"] = totalPurchasesAndExpensesNet;
+            totalPurchasesAndExpensesRow["VatAmount"] = totalPurchasesAndExpensesVat;
+            int expenseIndex = FindRowIndex(dt, "Terms", "Expenses");
+            if (expenseIndex >= 0)
+                dt.Rows.InsertAt(totalPurchasesAndExpensesRow, expenseIndex + 1);
+            else
+                dt.Rows.Add(totalPurchasesAndExpensesRow);
+
             // visual spacer before grand total
             dt.Rows.Add(dt.NewRow());
 
             var grandRow = dt.NewRow();
             grandRow["Terms"] = "Grand Total";
-            if (dt.Columns.Contains("Docs")) grandRow["Docs"] = salesDocs + purchaseDocs;
+            if (dt.Columns.Contains("Docs")) grandRow["Docs"] = salesDocs + purchaseDocs + expenseDocs;
             grandRow["NetAmount"] = grandNet;
             grandRow["VatAmount"] = grandVat;
             dt.Rows.Add(grandRow);
@@ -527,7 +552,8 @@ namespace pos.Reports.Taxes
                 }
                 else if (string.Equals(term, "Total Sales", StringComparison.OrdinalIgnoreCase)
                     || string.Equals(term, "Total Purchases", StringComparison.OrdinalIgnoreCase)
-                    || string.Equals(term, "Expenses", StringComparison.OrdinalIgnoreCase))
+                    || string.Equals(term, "Total Expenses", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(term, "Total Purchases + Expenses", StringComparison.OrdinalIgnoreCase))
                 {
                     row.DefaultCellStyle.BackColor = Color.FromArgb(240, 247, 255);
                     row.DefaultCellStyle.ForeColor = Color.DarkBlue;

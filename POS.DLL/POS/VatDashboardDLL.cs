@@ -25,6 +25,7 @@ namespace POS.DLL
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 SalesReturnAgg AS (
                     SELECT
@@ -35,6 +36,7 @@ namespace POS.DLL
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 PurchAgg AS (
                     SELECT
@@ -45,6 +47,7 @@ namespace POS.DLL
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 PurchReturnAgg AS (
                     SELECT
@@ -55,6 +58,7 @@ namespace POS.DLL
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 ExpenseAgg AS (
                     SELECT
@@ -63,7 +67,7 @@ namespace POS.DLL
                         VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      
+                      AND ISNULL(tax_amount,0) <> 0
                 )
                 SELECT * FROM (
                     SELECT
@@ -140,6 +144,7 @@ namespace POS.DLL
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                     GROUP BY branch_id
                 ),
                 SalesReturnAgg AS (
@@ -152,6 +157,7 @@ namespace POS.DLL
                     WHERE sale_date >= @from AND sale_date < DATEADD(day,1,@to)
                       AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                     GROUP BY branch_id
                 ),
                 PurchAgg AS (
@@ -164,6 +170,7 @@ namespace POS.DLL
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                     GROUP BY branch_id
                 ),
                 PurchReturnAgg AS (
@@ -176,6 +183,7 @@ namespace POS.DLL
                     WHERE purchase_date >= @from AND purchase_date < DATEADD(day,1,@to)
                       AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                     GROUP BY branch_id
                 ),
                 ExpenseAgg AS (
@@ -186,7 +194,7 @@ namespace POS.DLL
                         VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      
+                      AND ISNULL(tax_amount,0) <> 0
                     GROUP BY branch_id
                 ),
                 Branches AS (
@@ -239,30 +247,34 @@ namespace POS.DLL
                     FROM pos_sales
                     WHERE branch_id = @branch_id AND sale_date >= @from AND sale_date < DATEADD(day,1,@to) AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 SalesReturnAgg AS (
                     SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_sales
                     WHERE branch_id = @branch_id AND sale_date >= @from AND sale_date < DATEADD(day,1,@to) AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 PurchAgg AS (
                     SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE branch_id = @branch_id AND purchase_date >= @from AND purchase_date < DATEADD(day,1,@to) AND account <> 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 PurchReturnAgg AS (
                     SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(total_amount,0) - ISNULL(discount_value,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(total_tax,0))),0)
                     FROM pos_purchases
                     WHERE branch_id = @branch_id AND purchase_date >= @from AND purchase_date < DATEADD(day,1,@to) AND account = 'Return'
                       AND ISNULL(invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(total_tax,0) <> 0
                 ),
                 ExpenseAgg AS (
                     SELECT Docs = COUNT(1), NetAmount = ISNULL(SUM(ABS(ISNULL(amount,0))),0), VatAmount = ISNULL(SUM(ABS(ISNULL(tax_amount,0))),0)
                     FROM acc_payments
                     WHERE branch_id = @branch_id AND payment_date >= @from AND payment_date < DATEADD(day,1,@to)
-                      
+                      AND ISNULL(tax_amount,0) <> 0
                 )
                 SELECT * FROM (
                     SELECT Terms = 'Sales', Docs = (SELECT Docs FROM SalesAgg), Flag = 'Sales', NetAmount = (SELECT NetAmount FROM SalesAgg), VatAmount = (SELECT VatAmount FROM SalesAgg), SortOrder = 1
@@ -316,6 +328,7 @@ namespace POS.DLL
                     LEFT JOIN pos_customers c ON c.id = s.customer_id
                     WHERE s.sale_date >= @pFrom AND s.sale_date < DATEADD(day,1,@pTo)
                       AND ISNULL(s.invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(s.total_tax,0) <> 0
                       AND {1}";
 
                 string purchasesSelect = @"
@@ -335,6 +348,7 @@ namespace POS.DLL
                     LEFT JOIN pos_suppliers s ON s.id = p.supplier_id
                     WHERE p.purchase_date >= @pFrom AND p.purchase_date < DATEADD(day,1,@pTo)
                       AND ISNULL(p.invoice_no,'') NOT LIKE 'ZS%'
+                      AND ISNULL(p.total_tax,0) <> 0
                       AND {1}";
 
                 string expensesSelect = @"
@@ -352,7 +366,8 @@ namespace POS.DLL
                         Description = ISNULL(e.description, '')
                     FROM acc_payments e
                     WHERE e.payment_date >= @pFrom AND e.payment_date < DATEADD(day,1,@pTo)
-                     ";
+                      AND ISNULL(e.tax_amount,0) <> 0
+                 ";
 
                 string sql;
                 switch (normalizedTerm.ToLowerInvariant())
