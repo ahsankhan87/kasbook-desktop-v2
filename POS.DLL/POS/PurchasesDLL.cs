@@ -1642,8 +1642,18 @@ namespace POS.DLL
 
                         }
 
+                        // Collect the distinct items of this invoice so we can recalculate
+                        // the Weighted Average Cost (WAC / avg_cost) AFTER the old purchase
+                        // rows have been deleted. Without this, editing a purchase (which is
+                        // delete + re-insert) leaves pos_products.avg_cost stale whenever the
+                        // quantity or cost price of an item changed.
+                        HashSet<string> affectedItems = new HashSet<string>();
+
                         foreach (DataRow dr in sales_dt.Rows)
                         {
+                            if (dr["item_number"] != DBNull.Value && !string.IsNullOrWhiteSpace(dr["item_number"].ToString()))
+                                affectedItems.Add(dr["item_number"].ToString());
+
                             //String query_2 = "UPDATE pos_products SET qty= (SELECT qty FROM pos_products WHERE code = @item_code)-@quantity WHERE code=@item_code ";
                             String query_2 = "UPDATE pos_product_stocks SET qty= (SELECT TOP 1 qty FROM pos_product_stocks WHERE item_number = @item_number AND branch_id = @branch_id)-@quantity WHERE item_number=@item_number AND branch_id = @branch_id ";
                             //--Insert Location qty
@@ -1681,6 +1691,32 @@ namespace POS.DLL
                         using (SqlCommand cmd = new SqlCommand(SQL3, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
                         using (SqlCommand cmd = new SqlCommand(SQL4, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
                         //using (SqlCommand cmd = new SqlCommand(SQL5, cn, transaction)) { cmd.Parameters.AddWithValue("@invoice_no", invoice_no); cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id); cmd.ExecuteNonQuery(); }
+
+                        // ===== Recalculate Weighted Average Cost (WAC) for the affected items =====
+                        // The old purchase rows are deleted by now. Recompute avg_cost from the
+                        // REMAINING pos_purchases_items history so that when a purchase is edited
+                        // (qty or cost changed) the product's WAC is corrected. The re-inserted
+                        // (new) lines will then be applied on top of this base by sp_Purchase_items
+                        // during Insertpurchases, producing the correct final average.
+                        String query_recalc_wac =
+                            "DECLARE @tot_qty DECIMAL(18,6), @tot_cost DECIMAL(18,6); " +
+                            "SELECT @tot_qty = SUM(quantity), @tot_cost = SUM(quantity * cost_price) " +
+                            "FROM pos_purchases_items WHERE item_number = @item_number; " +
+                            "IF ISNULL(@tot_qty, 0) > 0 " +
+                            "    UPDATE pos_products SET avg_cost = @tot_cost / @tot_qty WHERE item_number = @item_number; " +
+                            "ELSE IF EXISTS (SELECT 1 FROM pos_product_stocks WHERE item_number = @item_number AND qty > 0) " +
+                            "    UPDATE pos_products SET avg_cost = ISNULL(avg_cost, 0) WHERE item_number = @item_number; " +
+                            "ELSE " +
+                            "    UPDATE pos_products SET avg_cost = 0 WHERE item_number = @item_number;";
+
+                        foreach (string itemNumber in affectedItems)
+                        {
+                            using (SqlCommand cmd = new SqlCommand(query_recalc_wac, cn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@item_number", itemNumber);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
 
                         //String query = "DELETE FROM pos_purchases WHERE invoice_no = @invoice_no" +
                         //            " DELETE FROM pos_purchases_items WHERE invoice_no = @invoice_no" +
