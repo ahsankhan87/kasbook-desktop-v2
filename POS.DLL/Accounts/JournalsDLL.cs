@@ -1647,7 +1647,22 @@ WHERE id = @voucher_id
                 return result;
             }
 
-            string voucherNo = GetMaxInvoiceNo();
+            string voucherNo = string.IsNullOrWhiteSpace(model.VoucherNo)
+                ? GetMaxInvoiceNo()
+                : model.VoucherNo.Trim();
+
+            if (!string.IsNullOrWhiteSpace(model.VoucherNo) && VoucherNoExists(voucherNo))
+            {
+                result.Messages.Add(new ValidationError
+                {
+                    FieldName = "VoucherNo",
+                    Message = "Requested voucher number already exists.",
+                    Severity = "Error",
+                    IsBlocking = true
+                });
+                return result;
+            }
+
             DataTable stagedLines = BuildAutoLinesDataTable(model, voucherNo, userId);
             List<int> insertedEntryIds = new List<int>();
 
@@ -1834,8 +1849,30 @@ WHERE id = @voucher_id
                     }
                 }
             }
+
+            return result;
         }
 
+        private bool VoucherNoExists(string voucherNo)
+        {
+            if (string.IsNullOrWhiteSpace(voucherNo))
+                return false;
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+                using (SqlCommand cmd = new SqlCommand(@"
+                    SELECT COUNT(1)
+                    FROM acc_entries_header
+                    WHERE InvoiceNo = @invoice_no
+                      AND branch_id = @branch_id;", cn))
+                {
+                    cmd.Parameters.AddWithValue("@invoice_no", voucherNo.Trim());
+                    cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                    return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+                }
+            }
+        }
         public (JVHeaderModel Header, List<JVLineModel> Lines) GetVoucherWithLines(int voucherId)
         {
             DataTable headerTable = GetVoucherHeaderById(voucherId);

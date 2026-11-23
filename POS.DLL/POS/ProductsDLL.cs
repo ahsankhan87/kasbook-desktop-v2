@@ -1291,7 +1291,7 @@ namespace POS.DLL
                         {
                             cn.Open();
                             cmd.Connection = cn;
-                            cmd.CommandText = @"SELECT barcode FROM pos_products WHERE barcode = @barcode";
+                            cmd.CommandText = @"SELECT barcode FROM pos_products WHERE barcode = @barcode AND deleted <> 1";
                             cmd.Parameters.AddWithValue("@barcode", barcode);
                             //cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
 

@@ -498,6 +498,7 @@ namespace POS.DLL
         {
             Int32 newPurchaseID = 0;
             bool isAutoPostPurchases = false;
+            bool hadExistingJournalEntries = false;
 
             // Load inventory costing settings once (outside the transaction — read-only, no lock needed)
             // sp_Purchase_items is the WAC authority; we only need the method to decide FIFO layer creation.
@@ -687,7 +688,7 @@ namespace POS.DLL
             }
         }
 
-        private void PostPurchaseJournalsAndUpdatePostedFlag(List<PurchaseModalHeader> purchases)
+        private void PostPurchaseJournalsAndUpdatePostedFlag(List<PurchaseModalHeader> purchases, IDictionary<string, string> preferredVoucherNoByPurchaseInvoice = null)
         {
             if (purchases == null || purchases.Count == 0)
                 return;
@@ -703,6 +704,15 @@ namespace POS.DLL
                     AutoJVModel model = BuildPurchaseAutoJournalModel(purchaseHeader);
                     if (model != null && model.Lines != null && model.Lines.Count > 0)
                     {
+                        string preferredVoucherNo;
+                        if (preferredVoucherNoByPurchaseInvoice != null
+                            && !string.IsNullOrWhiteSpace(purchaseHeader.invoice_no)
+                            && preferredVoucherNoByPurchaseInvoice.TryGetValue(purchaseHeader.invoice_no, out preferredVoucherNo)
+                            && !string.IsNullOrWhiteSpace(preferredVoucherNo))
+                        {
+                            model.VoucherNo = preferredVoucherNo.Trim();
+                        }
+
                         PostResult result = journalsDal.PostAutoJournalEntry(model, UsersModal.logged_in_userid);
                         posted = result != null && result.Success;
                     }
@@ -1299,15 +1309,379 @@ END";
             if (purchase_detail == null || purchase_detail.Count == 0)
                 throw new ArgumentException("Purchase detail is required.", nameof(purchase_detail));
 
-            int deleteResult = DeletePurchases(oldInvoiceNo);
-            if (deleteResult <= 0)
-                throw new Exception("Unable to delete old purchase invoice before replacement.");
+            Int32 existingPurchaseId = 0;
+            bool isAutoPostPurchases = false;
+            bool hadExistingJournalEntries = false;
+            string preservedJournalVoucherNo = string.Empty;
 
-            int newPurchaseId = Insertpurchases(purchases, purchase_detail);
-            if (newPurchaseId <= 0)
-                throw new Exception("Unable to save replacement purchase invoice.");
+            string costingMethod = "WAC";
+            try
+            {
+                var valuationSettings = new InventoryValuationDLL().GetSettings(UsersModal.logged_in_branch_id);
+                if (!string.IsNullOrWhiteSpace(valuationSettings?.ValuationMethod))
+                    costingMethod = valuationSettings.ValuationMethod.ToUpperInvariant();
+            }
+            catch
+            {
+                costingMethod = "WAC";
+            }
 
-            return newPurchaseId;
+            if (costingMethod != "WAC" && costingMethod != "FIFO" && costingMethod != "STANDARD")
+                costingMethod = "WAC";
+
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            {
+                cn.Open();
+                SqlTransaction transaction = cn.BeginTransaction();
+
+                try
+                {
+                    using (SqlCommand findPurchaseCmd = new SqlCommand(
+                        "SELECT TOP 1 id FROM pos_purchases WHERE invoice_no = @invoice_no AND branch_id = @branch_id",
+                        cn, transaction))
+                    {
+                        findPurchaseCmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        findPurchaseCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+
+                        object purchaseIdObj = findPurchaseCmd.ExecuteScalar();
+                        if (purchaseIdObj == null || purchaseIdObj == DBNull.Value)
+                            throw new Exception("Existing purchase invoice was not found for update.");
+
+                        existingPurchaseId = Convert.ToInt32(purchaseIdObj);
+                    }
+
+                    // Reverse old stock quantities only (no 'Purchase Delete' inventory movement entries).
+                    using (SqlCommand reverseStockCmd = new SqlCommand(@"
+                        UPDATE ps
+                        SET ps.qty = ISNULL(ps.qty, 0) - x.total_qty
+                        FROM pos_product_stocks ps
+                        INNER JOIN (
+                            SELECT item_number, SUM(quantity) AS total_qty
+                            FROM pos_purchases_items
+                            WHERE invoice_no = @invoice_no AND branch_id = @branch_id
+                            GROUP BY item_number
+                        ) x ON x.item_number = ps.item_number
+                        WHERE ps.branch_id = @branch_id;", cn, transaction))
+                    {
+                        reverseStockCmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        reverseStockCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        reverseStockCmd.ExecuteNonQuery();
+                    }
+
+                    // Remove previous rows for this invoice so re-posting reflects only edited values.
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM pos_purchases_items WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM pos_inventory WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand checkCmd = new SqlCommand(@"
+                        SELECT CASE WHEN EXISTS (
+                            SELECT 1
+                            FROM acc_entries
+                            WHERE payment_ref_invoice_no = @invoice_no
+                              AND branch_id = @branch_id
+                        ) OR EXISTS (
+                            SELECT 1
+                            FROM acc_entries_header
+                            WHERE ReferenceNo = @invoice_no
+                              AND branch_id = @branch_id
+                        ) THEN 1 ELSE 0 END;", cn, transaction))
+                    {
+                        checkCmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        checkCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        hadExistingJournalEntries = Convert.ToInt32(checkCmd.ExecuteScalar()) == 1;
+                    }
+
+                    using (SqlCommand voucherNoCmd = new SqlCommand(@"
+                        SELECT TOP 1 invoice_no
+                        FROM acc_entries
+                        WHERE payment_ref_invoice_no = @invoice_no
+                          AND branch_id = @branch_id
+                          AND ISNULL(invoice_no, '') <> ''
+                        ORDER BY id DESC;", cn, transaction))
+                    {
+                        voucherNoCmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        voucherNoCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        object voucherNoObj = voucherNoCmd.ExecuteScalar();
+                        preservedJournalVoucherNo = voucherNoObj == null || voucherNoObj == DBNull.Value
+                            ? string.Empty
+                            : Convert.ToString(voucherNoObj);
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand(@"
+                        DECLARE @Vouchers TABLE (invoice_no NVARCHAR(100));
+
+                        INSERT INTO @Vouchers (invoice_no)
+                        SELECT DISTINCT invoice_no
+                        FROM acc_entries
+                        WHERE payment_ref_invoice_no = @invoice_no
+                          AND branch_id = @branch_id
+                          AND ISNULL(invoice_no, '') <> '';
+
+                        DELETE FROM acc_entries
+                        WHERE payment_ref_invoice_no = @invoice_no
+                          AND branch_id = @branch_id;
+
+                        DELETE h
+                        FROM acc_entries_header h
+                        INNER JOIN @Vouchers v ON v.invoice_no = h.InvoiceNo
+                        WHERE h.branch_id = @branch_id;
+
+                        DELETE FROM acc_entries_header
+                        WHERE ReferenceNo = @invoice_no
+                          AND branch_id = @branch_id;", cn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM pos_suppliers_payments WHERE invoice_no = @invoice_no AND branch_id = @branch_id", cn, transaction))
+                    {
+                        cmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    if (costingMethod == "FIFO")
+                    {
+                        // Prevent editing purchase lines that were already consumed by sales in FIFO.
+                        // Repricing historical consumed layers requires full recosting and is intentionally blocked.
+                        using (SqlCommand fifoConsumptionCheckCmd = new SqlCommand(@"
+                            IF OBJECT_ID('dbo.inv_fifo_layers', 'U') IS NOT NULL
+                            BEGIN
+                                IF COL_LENGTH('dbo.inv_fifo_layers', 'purchase_ref_id') IS NOT NULL
+                                   AND COL_LENGTH('dbo.inv_fifo_layers', 'original_qty') IS NOT NULL
+                                   AND COL_LENGTH('dbo.inv_fifo_layers', 'remaining_qty') IS NOT NULL
+                                BEGIN
+                                    SELECT CASE WHEN EXISTS (
+                                        SELECT 1
+                                        FROM dbo.inv_fifo_layers
+                                        WHERE purchase_ref_id = @purchase_id
+                                          AND branch_id = @branch_id
+                                          AND ISNULL(remaining_qty, 0) < ISNULL(original_qty, 0)
+                                    ) THEN 1 ELSE 0 END;
+                                END
+                                ELSE
+                                    SELECT 0;
+                            END
+                            ELSE
+                                SELECT 0;", cn, transaction))
+                        {
+                            fifoConsumptionCheckCmd.Parameters.AddWithValue("@purchase_id", existingPurchaseId);
+                            fifoConsumptionCheckCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            int hasConsumedLayers = Convert.ToInt32(fifoConsumptionCheckCmd.ExecuteScalar());
+                            if (hasConsumedLayers > 0)
+                                throw new InvalidOperationException("Cannot edit this purchase because FIFO layers have already been consumed by sales. Create an adjustment instead.");
+                        }
+
+                        // Remove old FIFO layers linked to this purchase so edited items can rebuild accurate layers.
+                        using (SqlCommand cleanupFifoCmd = new SqlCommand(@"
+                            IF OBJECT_ID('dbo.inv_fifo_layers', 'U') IS NOT NULL
+                            BEGIN
+                                IF COL_LENGTH('dbo.inv_fifo_layers', 'purchase_ref_id') IS NOT NULL
+                                    DELETE FROM dbo.inv_fifo_layers
+                                    WHERE purchase_ref_id = @purchase_id AND branch_id = @branch_id;
+                                ELSE IF COL_LENGTH('dbo.inv_fifo_layers', 'purchase_id') IS NOT NULL
+                                    DELETE FROM dbo.inv_fifo_layers
+                                    WHERE purchase_id = @purchase_id AND branch_id = @branch_id;
+                            END", cn, transaction))
+                        {
+                            cleanupFifoCmd.Parameters.AddWithValue("@purchase_id", existingPurchaseId);
+                            cleanupFifoCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            cleanupFifoCmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    foreach (PurchaseModalHeader purchase_header in purchases)
+                    {
+                        using (SqlCommand updateHeaderCmd = new SqlCommand(@"
+                            UPDATE pos_purchases
+                            SET employee_id = @employee_id,
+                                supplier_id = @supplier_id,
+                                purchase_type = @purchase_type,
+                                supplier_invoice_no = @supplier_invoice_no,
+                                invoice_no = @invoice_no,
+                                total_amount = @total_amount,
+                                total_tax = @total_tax,
+                                discount_value = @discount_value,
+                                discount_percent = @discount_percent,
+                                purchase_date = @purchase_date,
+                                description = @description,
+                                account = @account,
+    
+                                purchase_time = @purchase_time
+                            WHERE id = @id AND branch_id = @branch_id;
+
+                            IF COL_LENGTH('pos_purchases', 'shipping_cost') IS NOT NULL
+                                UPDATE pos_purchases SET shipping_cost = @shipping_cost WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'payment_method_id') IS NOT NULL
+                                UPDATE pos_purchases SET payment_method_id = @payment_method_id WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'payment_terms_id') IS NOT NULL
+                                UPDATE pos_purchases SET payment_terms_id = @payment_terms_id WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'currency_id') IS NOT NULL
+                                UPDATE pos_purchases SET currency_id = @currency_id WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'exchange_rate') IS NOT NULL
+                                UPDATE pos_purchases SET exchange_rate = @exchange_rate WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'foreign_total_amount') IS NOT NULL
+                                UPDATE pos_purchases SET foreign_total_amount = @foreign_total_amount WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'foreign_total_tax') IS NOT NULL
+                                UPDATE pos_purchases SET foreign_total_tax = @foreign_total_tax WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'foreign_total_discount') IS NOT NULL
+                                UPDATE pos_purchases SET foreign_total_discount = @foreign_total_discount WHERE id = @id AND branch_id = @branch_id;
+                            IF COL_LENGTH('pos_purchases', 'bank_id') IS NOT NULL
+                                UPDATE pos_purchases SET bank_id = @bank_id WHERE id = @id AND branch_id = @branch_id;", cn, transaction))
+                        {
+                            updateHeaderCmd.Parameters.AddWithValue("@id", existingPurchaseId);
+                            updateHeaderCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@employee_id", purchase_header.employee_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@supplier_id", purchase_header.supplier_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@purchase_type", purchase_header.purchase_type);
+                            updateHeaderCmd.Parameters.AddWithValue("@supplier_invoice_no", purchase_header.supplier_invoice_no ?? string.Empty);
+                            updateHeaderCmd.Parameters.AddWithValue("@invoice_no", purchase_header.invoice_no);
+                            updateHeaderCmd.Parameters.AddWithValue("@total_amount", purchase_header.total_amount);
+                            updateHeaderCmd.Parameters.AddWithValue("@total_tax", purchase_header.total_tax);
+                            updateHeaderCmd.Parameters.AddWithValue("@discount_value", purchase_header.total_discount);
+                            updateHeaderCmd.Parameters.AddWithValue("@discount_percent", purchase_header.total_discount_percent);
+                            updateHeaderCmd.Parameters.AddWithValue("@purchase_date", purchase_header.purchase_date);
+                            updateHeaderCmd.Parameters.AddWithValue("@description", purchase_header.description ?? string.Empty);
+                            updateHeaderCmd.Parameters.AddWithValue("@account", purchase_header.account ?? string.Empty);
+                           // updateHeaderCmd.Parameters.AddWithValue("@PO_invoice_no", purchase_header.po_invoice_no ?? string.Empty);
+                            updateHeaderCmd.Parameters.AddWithValue("@purchase_time", purchase_header.purchase_time);
+                            updateHeaderCmd.Parameters.AddWithValue("@shipping_cost", purchase_header.shipping_cost);
+                            updateHeaderCmd.Parameters.AddWithValue("@payment_method_id", purchase_header.payment_method_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@payment_terms_id", purchase_header.payment_terms_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@currency_id", purchase_header.currency_id);
+                            updateHeaderCmd.Parameters.AddWithValue("@exchange_rate", purchase_header.exchange_rate > 0 ? purchase_header.exchange_rate : 1m);
+                            updateHeaderCmd.Parameters.AddWithValue("@foreign_total_amount", purchase_header.foreign_total_amount);
+                            updateHeaderCmd.Parameters.AddWithValue("@foreign_total_tax", purchase_header.foreign_total_tax);
+                            updateHeaderCmd.Parameters.AddWithValue("@foreign_total_discount", purchase_header.foreign_total_discount);
+                            updateHeaderCmd.Parameters.AddWithValue("@bank_id", purchase_header.bank_id > 0 ? (object)purchase_header.bank_id : DBNull.Value);
+
+                            int headerUpdated = updateHeaderCmd.ExecuteNonQuery();
+                            if (headerUpdated <= 0)
+                                throw new Exception("Purchase header update failed.");
+                        }
+                    }
+
+                    var costingEngine = new InventoryCostingEngineDLL();
+                    var productIdMap = LoadProductIdMapForPurchaseDetails(cn, transaction, purchase_detail);
+
+                    foreach (PurchasesModal detail in purchase_detail)
+                    {
+                        cmd = new SqlCommand("sp_Purchase_items", cn, transaction);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                        cmd.Parameters.AddWithValue("@user_id", UsersModal.logged_in_userid);
+                        cmd.Parameters.AddWithValue("@serialNo", detail.serialNo);
+                        cmd.Parameters.AddWithValue("@item_number", detail.item_number);
+                        cmd.Parameters.AddWithValue("@item_id", detail.item_id);
+                        cmd.Parameters.AddWithValue("@item_code", detail.code);
+                        cmd.Parameters.AddWithValue("@invoice_no", detail.invoice_no);
+                        cmd.Parameters.AddWithValue("@purchase_id", existingPurchaseId);
+                        cmd.Parameters.AddWithValue("@tax_id", detail.tax_id);
+                        cmd.Parameters.AddWithValue("@unit_price", detail.unit_price);
+                        cmd.Parameters.AddWithValue("@quantity", detail.quantity);
+                        cmd.Parameters.AddWithValue("@packet_qty", detail.packet_qty);
+                        cmd.Parameters.AddWithValue("@discount_value", detail.discount);
+                        cmd.Parameters.AddWithValue("@discount_percent", detail.line_discount_percent);
+                        cmd.Parameters.AddWithValue("@tax_rate", detail.tax_rate);
+                        cmd.Parameters.AddWithValue("@cost_price", detail.cost_price);
+                        cmd.Parameters.AddWithValue("@supplier_id", detail.supplier_id);
+                        cmd.Parameters.AddWithValue("@purchase_date", detail.purchase_date);
+                        cmd.Parameters.AddWithValue("@PO_invoice_no", detail.po_invoice_no ?? string.Empty);
+                        cmd.Parameters.AddWithValue("@PO_status", detail.po_status);
+                        cmd.Parameters.AddWithValue("@location_code", (detail.location_code ?? string.Empty).ToUpper());
+                        cmd.Parameters.AddWithValue("@purchase_type", detail.purchase_type);
+                        cmd.Parameters.AddWithValue("@currency_id", detail.currency_id);
+                        cmd.Parameters.AddWithValue("@exchange_rate", detail.exchange_rate > 0 ? detail.exchange_rate : 1m);
+                        cmd.Parameters.AddWithValue("@foreign_unit_price", detail.foreign_unit_price);
+                        cmd.Parameters.AddWithValue("@foreign_cost_price", detail.foreign_cost_price);
+                        cmd.Parameters.AddWithValue("@foreign_discount_value", detail.foreign_discount_value);
+                        cmd.Parameters.AddWithValue("@OperationType", "1");
+
+                        cmd.ExecuteScalar();
+
+                        if (costingMethod == "FIFO"
+                            && detail.item_type != "Service"
+                            && detail.quantity > 0
+                            && !string.Equals(detail.purchase_type, "Return", StringComparison.OrdinalIgnoreCase))
+                        {
+                            int productId = detail.item_id;
+                            if (productId <= 0 && !string.IsNullOrWhiteSpace(detail.item_number))
+                            {
+                                productIdMap.TryGetValue(detail.item_number.Trim(), out productId);
+                            }
+
+                            if (productId > 0)
+                            {
+                                costingEngine.InsertFIFOLayer(
+                                    productId,
+                                    detail.item_number,
+                                    UsersModal.logged_in_branch_id,
+                                    existingPurchaseId,
+                                    detail.purchase_date,
+                                    detail.quantity,
+                                    detail.cost_price,
+                                    detail.currency_id,
+                                    detail.exchange_rate > 0 ? detail.exchange_rate : 1m,
+                                    cn,
+                                    transaction);
+                            }
+                        }
+                    }
+
+                    isAutoPostPurchases = GetBoolSetting(cn, transaction, SettingKeys.AutoPostPurchases, false);
+
+                    // Always mark edited purchases as unposted before commit.
+                    // They will be reposted after commit when required.
+                    foreach (PurchaseModalHeader purchase_header in purchases)
+                    {
+                        UpdatePurchasePostedFlag(cn, transaction, purchase_header.invoice_no, false);
+                    }
+
+                    transaction.Commit();
+
+                    foreach (PurchaseModalHeader purchase_header in purchases)
+                    {
+                        Log.LogAction("Update Purchase", $"InvoiceNo: {purchase_header.invoice_no}, Purchase Date: {purchase_header.purchase_date}, Total Amount: {((purchase_header.total_amount + purchase_header.total_tax) - purchase_header.total_discount)}", UsersModal.logged_in_userid, UsersModal.logged_in_branch_id);
+                    }
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+
+            bool shouldRepostOnEdit = hadExistingJournalEntries || isAutoPostPurchases;
+            if (shouldRepostOnEdit)
+            {
+                Dictionary<string, string> preferredVouchers = null;
+                if (!string.IsNullOrWhiteSpace(preservedJournalVoucherNo)
+                    && purchases != null
+                    && purchases.Count > 0
+                    && !string.IsNullOrWhiteSpace(purchases[0].invoice_no))
+                {
+                    preferredVouchers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                    {
+                        { purchases[0].invoice_no, preservedJournalVoucherNo.Trim() }
+                    };
+                }
+
+                PostPurchaseJournalsAndUpdatePostedFlag(purchases, preferredVouchers);
+            }
+
+            return existingPurchaseId;
         }
 
         public int InsertpurchasesItems(PurchasesModal obj)

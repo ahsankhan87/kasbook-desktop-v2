@@ -23,6 +23,9 @@
 - Ensure `acc_accounts` links to `acc_groups` via `group_id` foreign key, and `acc_entries` links to `acc_accounts` via `account_id` (not `account_code`).
 - Standard COA flow must create `acc_groups` hierarchy with top-level `parent_id=0` and nested groups using `parent_id`; only leaf nodes should be inserted into `acc_accounts`.
 - Do not use legacy company-table fallback for account resolution in inventory adjustment; use accounting settings only because the legacy path will be removed.
+- For purchase edit accounting, differentiate between purchase invoice number and journal voucher invoice number:
+  - Store purchase invoice number in `acc_entries_header.ReferenceNo` and `acc_entries.payment_ref_invoice_no`.
+  - Store journal voucher invoice number in `acc_entries.invoice_no`.
 
 ## UI/UX Conventions (use these, avoid ad-hoc variants)
 - Centralize styling through `pos/UI/AppTheme.cs`; call `AppTheme.Apply(this)` in form load.
