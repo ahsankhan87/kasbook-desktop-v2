@@ -1350,6 +1350,34 @@ END";
                         existingPurchaseId = Convert.ToInt32(purchaseIdObj);
                     }
 
+                    bool isRegularPurchaseEdit = purchases.All(p =>
+                            !string.Equals(p.purchase_type, "Return", StringComparison.OrdinalIgnoreCase))
+                        && purchase_detail.All(d => d.quantity >= 0m);
+                    HashSet<string> affectedWacProducts = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+
+                    if (costingMethod == "WAC" && isRegularPurchaseEdit)
+                    {
+                        // Capture old products in memory because edited purchase lines may remove one.
+                        using (SqlCommand captureWacProductsCmd = new SqlCommand(@"
+                            SELECT DISTINCT item_number
+                            FROM pos_purchases_items
+                            WHERE invoice_no = @invoice_no
+                              AND branch_id = @branch_id", cn, transaction))
+                        {
+                            captureWacProductsCmd.Parameters.AddWithValue("@invoice_no", oldInvoiceNo);
+                            captureWacProductsCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                            using (SqlDataReader reader = captureWacProductsCmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    string itemNumber = Convert.ToString(reader["item_number"]);
+                                    if (!string.IsNullOrWhiteSpace(itemNumber))
+                                        affectedWacProducts.Add(itemNumber.Trim());
+                                }
+                            }
+                        }
+                    }
+
                     // Reverse old stock quantities only (no 'Purchase Delete' inventory movement entries).
                     using (SqlCommand reverseStockCmd = new SqlCommand(@"
                         UPDATE ps
@@ -1636,6 +1664,64 @@ END";
                                     detail.exchange_rate > 0 ? detail.exchange_rate : 1m,
                                     cn,
                                     transaction);
+                            }
+                        }
+                    }
+
+                    if (costingMethod == "WAC" && isRegularPurchaseEdit)
+                    {
+                        foreach (PurchasesModal detail in purchase_detail)
+                        {
+                            if (!string.IsNullOrWhiteSpace(detail.item_number))
+                                affectedWacProducts.Add(detail.item_number.Trim());
+                        }
+
+                        if (affectedWacProducts.Count > 0)
+                        {
+                            var itemParameters = new List<string>();
+                            using (SqlCommand recalculateWacCmd = new SqlCommand())
+                            {
+                                recalculateWacCmd.Connection = cn;
+                                recalculateWacCmd.Transaction = transaction;
+
+                                int parameterIndex = 0;
+                                foreach (string itemNumber in affectedWacProducts)
+                                {
+                                    string parameterName = "@item_number_" + parameterIndex++;
+                                    itemParameters.Add(parameterName);
+                                    recalculateWacCmd.Parameters.AddWithValue(parameterName, itemNumber);
+                                }
+
+                                recalculateWacCmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);
+                                recalculateWacCmd.CommandText = @"
+                                    ;WITH AffectedProducts AS (
+                                        SELECT item_number
+                                        FROM (VALUES (" + string.Join("),(", itemParameters) + @")) v(item_number)
+                                    ),
+                                    PurchaseWac AS (
+                                        SELECT pi.item_number,
+                                               SUM(pi.quantity * pi.cost_price)
+                                                   / NULLIF(SUM(pi.quantity), 0) AS avg_cost
+                                        FROM pos_purchases_items pi
+                                        INNER JOIN pos_purchases ph
+                                            ON ph.id = pi.purchase_id
+                                           AND ph.branch_id = pi.branch_id
+                                        INNER JOIN AffectedProducts affected
+                                            ON affected.item_number = pi.item_number
+                                        WHERE pi.branch_id = @branch_id
+                                          AND pi.quantity > 0
+                                          AND ISNULL(ph.account, '') <> 'Return'
+                                        GROUP BY pi.item_number
+                                    )
+                                    UPDATE p
+                                    SET p.avg_cost = ISNULL(wac.avg_cost, 0)
+                                    FROM pos_products p
+                                    INNER JOIN AffectedProducts affected
+                                        ON affected.item_number = p.item_number
+                                    LEFT JOIN PurchaseWac wac
+                                        ON wac.item_number = p.item_number;";
+
+                                recalculateWacCmd.ExecuteNonQuery();
                             }
                         }
                     }

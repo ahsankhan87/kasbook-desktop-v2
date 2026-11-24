@@ -59,7 +59,10 @@ namespace POS.DLL
                     {
                         cn.Open();
 
-                        string query = "SELECT * FROM Logs WHERE BranchId = @branch_id AND CAST(Timestamp AS DATE) BETWEEN @fromDate AND @toDate ORDER BY id desc";
+                        string query = "SELECT * FROM Logs L, U.name as user_name, B.name as branch_name" +
+                            " Left JOIN pos_users U ON U.id = L.UserId " +
+                            " Left JOIN pos_branches B ON B.id = L.BranchId" +
+                            " WHERE L.BranchId = @branch_id AND CAST(L.Timestamp AS DATE) BETWEEN @fromDate AND @toDate ORDER BY L.id desc";
 
                         cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@branch_id", UsersModal.logged_in_branch_id);

@@ -2144,6 +2144,34 @@ namespace POS.DLL
             }
         }
 
+        public int SoftDeleteAsAdministrator(string item_number)
+        {
+            using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))
+            using (SqlCommand cmd = new SqlCommand(@"
+UPDATE pos_products
+SET deleted = 1,
+    status = 0,
+    date_updated = GETDATE()
+WHERE item_number = @item_number
+  AND (deleted = 0 OR deleted IS NULL);", cn))
+            {
+                cn.Open();
+                cmd.Parameters.AddWithValue("@item_number", item_number);
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    Log.LogAction(
+                        "Administrator Soft Delete Product",
+                        $"Product Number: {item_number}; existing sales, purchases, stock and transaction history preserved",
+                        UsersModal.logged_in_userid,
+                        UsersModal.logged_in_branch_id);
+                }
+
+                return result;
+            }
+        }
+
         public String GetMaxLocationTransferInvoiceNo()
         {
             using (SqlConnection cn = new SqlConnection(dbConnection.ConnectionString))

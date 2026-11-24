@@ -38,14 +38,14 @@ namespace pos.Master.Logs
             this.toDate = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
             this.GridLogs = new System.Windows.Forms.DataGridView();
-            this.BranchId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.branch_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Action = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Details = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Timestamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PcName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AdditionalInfo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridLogs)).BeginInit();
             this.panel2.SuspendLayout();
@@ -53,7 +53,6 @@ namespace pos.Master.Logs
             // 
             // panel1
             // 
-            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
             this.panel1.Controls.Add(this.BtnSearch);
             this.panel1.Controls.Add(this.label2);
@@ -61,6 +60,7 @@ namespace pos.Master.Logs
             this.panel1.Controls.Add(this.fromDate);
             this.panel1.Controls.Add(this.toDate);
             this.panel1.Controls.Add(this.label21);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             // 
             // BtnSearch
@@ -102,35 +102,41 @@ namespace pos.Master.Logs
             // 
             // GridLogs
             // 
-            resources.ApplyResources(this.GridLogs, "GridLogs");
             this.GridLogs.AllowUserToAddRows = false;
             this.GridLogs.AllowUserToDeleteRows = false;
             this.GridLogs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridLogs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.BranchId,
-            this.UserId,
+            this.branch_name,
+            this.user_name,
             this.Action,
             this.Details,
             this.Timestamp,
             this.PcName,
             this.AdditionalInfo});
+            resources.ApplyResources(this.GridLogs, "GridLogs");
             this.GridLogs.Name = "GridLogs";
             this.GridLogs.ReadOnly = true;
             this.GridLogs.RowTemplate.Height = 24;
             // 
-            // BranchId
+            // panel2
             // 
-            this.BranchId.DataPropertyName = "BranchId";
-            resources.ApplyResources(this.BranchId, "BranchId");
-            this.BranchId.Name = "BranchId";
-            this.BranchId.ReadOnly = true;
+            this.panel2.Controls.Add(this.GridLogs);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
             // 
-            // UserId
+            // branch_name
             // 
-            this.UserId.DataPropertyName = "UserId";
-            resources.ApplyResources(this.UserId, "UserId");
-            this.UserId.Name = "UserId";
-            this.UserId.ReadOnly = true;
+            this.branch_name.DataPropertyName = "branch_name";
+            resources.ApplyResources(this.branch_name, "branch_name");
+            this.branch_name.Name = "branch_name";
+            this.branch_name.ReadOnly = true;
+            // 
+            // user_name
+            // 
+            this.user_name.DataPropertyName = "user_name";
+            resources.ApplyResources(this.user_name, "user_name");
+            this.user_name.Name = "user_name";
+            this.user_name.ReadOnly = true;
             // 
             // Action
             // 
@@ -168,12 +174,6 @@ namespace pos.Master.Logs
             this.AdditionalInfo.Name = "AdditionalInfo";
             this.AdditionalInfo.ReadOnly = true;
             // 
-            // panel2
-            // 
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Controls.Add(this.GridLogs);
-            this.panel2.Name = "panel2";
-            // 
             // Logs
             // 
             resources.ApplyResources(this, "$this");
@@ -200,17 +200,17 @@ namespace pos.Master.Logs
         private System.Windows.Forms.DataGridView GridLogs;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BranchId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Details;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Timestamp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PcName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalInfo;
         private System.Windows.Forms.Button BtnSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker fromDate;
         private System.Windows.Forms.DateTimePicker toDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn branch_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn user_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Details;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Timestamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PcName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdditionalInfo;
     }
 }

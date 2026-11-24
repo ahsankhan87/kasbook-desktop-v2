@@ -498,6 +498,22 @@ namespace POS.BLL
             }
         }
 
+        public int DeleteAsAdministrator(string item_number)
+        {
+            string role = UsersModal.logged_in_user_role ?? string.Empty;
+            if (!role.Equals("Administrator", StringComparison.OrdinalIgnoreCase)
+                && !role.Equals("Admin", StringComparison.OrdinalIgnoreCase)
+                && !role.Equals("Owner", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new UnauthorizedAccessException("Only an administrator can delete a referenced product.");
+            }
+
+            if (string.IsNullOrWhiteSpace(item_number))
+                throw new ArgumentException("Item number is required.", "item_number");
+
+            return new ProductDLL().SoftDeleteAsAdministrator(item_number);
+        }
+
         public int UpdateProductLocationTransfer(ProductModal obj)
         {
             try

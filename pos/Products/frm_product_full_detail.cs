@@ -54,6 +54,7 @@ namespace pos
             _item_number = item_number;
             _keyword = keyword;
             this.searchsalesForm = searchsalesForm;
+            this.searchPurchaseForm = searchPurchaseForm;
             _loadMovementHistory = loadMovementHistory;
             InitializeComponent();
             
@@ -1189,26 +1190,51 @@ namespace pos
 
             if (!string.IsNullOrWhiteSpace(id))
             {
-                var confirm = UiMessages.ConfirmYesNo(
-                    "Delete this product? This action cannot be undone.",
-                    "هل تريد حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.",
-                    captionEn: "Confirm Delete",
-                    captionAr: "تأكيد الحذف"
-                );
+                bool isAdministrator = _currentUser != null
+                    && (_currentUser.Role == SystemRole.Administrator || _currentUser.Role == SystemRole.Owner);
+
+                var confirm = isAdministrator
+                    ? UiMessages.ConfirmYesNo(
+                        "Delete this product from active product lists? Existing sales, purchases, stock quantities, and transaction history will be preserved, but the product will no longer be selectable.",
+                        "هل تريد حذف هذا المنتج من قوائم المنتجات النشطة؟ سيتم الاحتفاظ بالمبيعات والمشتريات والكميات وسجل الحركات الحالية، لكن لن يكون المنتج متاحًا للاختيار.",
+                        captionEn: "Administrator Delete",
+                        captionAr: "حذف المسؤول")
+                    : UiMessages.ConfirmYesNo(
+                        "Delete this product? Products with sales, purchases, or stock cannot be deleted.",
+                        "هل تريد حذف هذا المنتج؟ لا يمكن حذف المنتجات التي لها مبيعات أو مشتريات أو مخزون.",
+                        captionEn: "Confirm Delete",
+                        captionAr: "تأكيد الحذف");
 
                 if (confirm == DialogResult.Yes)
                 {
                     try
                     {
                         ProductBLL objBLL = new ProductBLL();
-                        objBLL.Delete(txtItemNumber.Text);
+                        int deleteResult = isAdministrator
+                            ? objBLL.DeleteAsAdministrator(txtItemNumber.Text)
+                            : objBLL.Delete(txtItemNumber.Text);
+
+                        if (deleteResult <= 0)
+                        {
+                            UiMessages.ShowWarning(
+                                "The product was not deleted. It may already be inactive or no longer exist.",
+                                "لم يتم حذف المنتج. قد يكون غير نشط بالفعل أو لم يعد موجودًا.",
+                                "Not Deleted",
+                                "لم يتم الحذف");
+                            return;
+                        }
 
                         UiMessages.ShowInfo(
-                            "Product has been deleted successfully.",
-                            "تم حذف المنتج بنجاح.",
+                            isAdministrator
+                                ? "Product was removed from active product lists. Existing transaction history was preserved."
+                                : "Product has been deleted successfully.",
+                            isAdministrator
+                                ? "تم حذف المنتج من قوائم المنتجات النشطة مع الاحتفاظ بسجل المعاملات الحالية."
+                                : "تم حذف المنتج بنجاح.",
                             "Deleted",
                             "تم الحذف"
                         );
+                        RefreshParentProductLists();
                         clear_all();
                         txt_part_number.Focus();
                     }
@@ -1233,6 +1259,18 @@ namespace pos
                     "المنتج"
                 );
             }
+        }
+
+        private void RefreshParentProductLists()
+        {
+            if (salesForm != null && !salesForm.IsDisposed)
+                salesForm.load_products();
+            if (PurchaseForm != null && !PurchaseForm.IsDisposed)
+                PurchaseForm.load_products();
+            if (searchsalesForm != null && !searchsalesForm.IsDisposed)
+                searchsalesForm.load_Products_grid();
+            if (searchPurchaseForm != null && !searchPurchaseForm.IsDisposed)
+                searchPurchaseForm.load_Products_grid();
         }
 
         private void btn_refresh_Click(object sender, EventArgs e)

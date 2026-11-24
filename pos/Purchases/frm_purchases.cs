@@ -3761,7 +3761,7 @@ namespace pos
                             {
                                 SelectSupplierFromDataRow(exact[0]);
                                 suppliersDataGridView.Visible = false;
-                                grid_purchases.Focus();
+                                FocusSupplierInvoiceField();
                                 return;
                             }
                         }
@@ -3787,7 +3787,7 @@ namespace pos
                             ClearSelectedSupplier();
                     }
                     suppliersDataGridView.Visible = false;
-                    grid_purchases.Focus();
+                    FocusSupplierInvoiceField();
                 }
             }
 
@@ -3817,7 +3817,7 @@ namespace pos
                         SelectSupplierFromDataRow(dt.Rows[0]);
                 }
                 suppliersDataGridView.Visible = false;
-                grid_purchases.Focus();
+                FocusSupplierInvoiceField();
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -3839,9 +3839,17 @@ namespace pos
             }
 
             suppliersDataGridView.Visible = false;
-            grid_purchases.Focus();
+            FocusSupplierInvoiceField();
         }
 
+        private void FocusSupplierInvoiceField()
+        {
+            if (txt_supplier_invoice == null || txt_supplier_invoice.IsDisposed)
+                return;
+
+            txt_supplier_invoice.Focus();
+            txt_supplier_invoice.SelectAll();
+        }
 
         private void btn_search_products_Click(object sender, EventArgs e)
         {
